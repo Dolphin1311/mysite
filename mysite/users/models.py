@@ -57,7 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_activated = models.BooleanField(default=False)
     user_type = models.ForeignKey(UserType, on_delete=models.PROTECT)
 
-    objects = UserManager
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
