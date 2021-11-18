@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 
+from django.conf import settings
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -68,4 +70,4 @@ class Person(models.Model):
     last_name = models.CharField(max_length=255)
     phone = PhoneNumberField(unique=True)
     date_birthday = models.DateField()
-    user = models.OneToOneField(User, on_delete=models.PROTECT, primary_key=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, primary_key=True)

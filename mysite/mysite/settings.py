@@ -53,6 +53,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mysite.urls'
 
+# field for custom authorization
+AUTH_USER_MODEL = 'users.User'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
