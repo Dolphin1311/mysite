@@ -51,14 +51,14 @@ class UserType(models.Model):
 
 # Custom user model
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True)
-    username = models.CharField(unique=True, max_length=255)
-    last_login = models.DateTimeField(null=True)
-    date_joined = models.DateTimeField(default=timezone.now)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_activated = models.BooleanField(default=False)
-    user_type = models.ForeignKey(UserType, on_delete=models.PROTECT)
+    email = models.EmailField(unique=True, verbose_name='E-mail')
+    username = models.CharField(unique=True, max_length=255, verbose_name='Username')
+    last_login = models.DateTimeField(null=True, verbose_name='Last login time')
+    date_joined = models.DateTimeField(default=timezone.now, verbose_name='Date joined')
+    is_active = models.BooleanField(default=True, verbose_name='Online')
+    is_staff = models.BooleanField(default=False, verbose_name='Is stuff')
+    is_activated = models.BooleanField(default=False, verbose_name='Is activated account')
+    user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, verbose_name='User type')
 
     objects = UserManager()
 
@@ -67,8 +67,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Person(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    phone = PhoneNumberField(unique=True)
-    date_birthday = models.DateField()
+    first_name = models.CharField(max_length=255, verbose_name='First name')
+    last_name = models.CharField(max_length=255, verbose_name='Last name')
+    phone = PhoneNumberField(unique=True, verbose_name='Phone')
+    date_birthday = models.DateField(verbose_name='Date of birth')
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, primary_key=True)
