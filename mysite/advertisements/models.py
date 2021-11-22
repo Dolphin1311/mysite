@@ -8,7 +8,7 @@ import os
 
 class AdvertisingSpaceType(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length='255', unique=True, db_index=True, verbose_name='URL')
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
 
 
 class AdvertisingSpace(models.Model):
@@ -41,7 +41,7 @@ def path_and_rename(instance, filename, deep_level=3):
     filename = get_md5_file(filename)
 
     for i in range(deep_level):
-        path += filename[count_letters - 2:count_letters] + '/'
+        path += filename[count_letters-2:count_letters] + '/'
         count_letters += 2
 
     return os.path.join(path, filename)

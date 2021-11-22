@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'phonenumber_field',
     'users.apps.UsersConfig',
-    'advertisements.apps.AdvertisementsConfig'
+    'advertisements.apps.AdvertisementsConfig',
 ]
 
 MIDDLEWARE = [
