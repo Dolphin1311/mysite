@@ -11,4 +11,9 @@ class AdvertisingSpaceAdmin(admin.ModelAdmin):
     # prepopulated_fields = {'slug': ('title',)}
 
 
+class AdvertisingSpaceTypeAdmin(admin.ModelAdmin):
+    list_display = ('id',)
+
+
 admin.site.register(AdvertisingSpace, AdvertisingSpaceAdmin)
+admin.site.register(AdvertisingSpaceType, AdvertisingSpaceTypeAdmin)
