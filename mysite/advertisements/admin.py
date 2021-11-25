@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import AdvertisingSpace, AdvertisingSpaceType
 
 
 class AdvertisingSpaceAdmin(admin.ModelAdmin):
@@ -15,5 +15,5 @@ class AdvertisingSpaceTypeAdmin(admin.ModelAdmin):
     list_display = ('id',)
 
 
-admin.site.register(AdvertisingSpace, AdvertisingSpaceAdmin)
+admin.site.register(AdvertisingSpace)
 admin.site.register(AdvertisingSpaceType, AdvertisingSpaceTypeAdmin)

@@ -5,6 +5,8 @@ from django.conf import settings
 import hashlib
 import os
 
+from django.urls import reverse
+
 
 class AdvertisingSpaceType(models.Model):
     name = models.CharField(max_length=255)
@@ -59,9 +61,13 @@ def get_md5_file(filename):
 
 
 class AdvertisingSpaceImage(models.Model):
-    image = models.ImageField(upload_to=path_and_rename, verbose_name='Image')
-    adverting_space = models.ForeignKey(
+    image = models.ImageField(upload_to=path_and_rename, verbose_name='Image', null=True, blank=True)
+    advertising_space = models.ForeignKey(
         AdvertisingSpace,
         on_delete=models.PROTECT,
         verbose_name='Adverting space'
     )
+
+
+    def get_absolute_url(self):
+        return reverse('home')
