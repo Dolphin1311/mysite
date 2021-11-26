@@ -30,21 +30,24 @@ class AdvertisingSpace(models.Model):
 
 
 # functions for correctly storing images in AdvertisingSpaceImage model
-def path_and_rename(instance, filename, deep_level=3):
+def path_and_rename(instance, filename_base: str, deep_level=3):
     """
     Create whole filepath string to the storing image based on changed filename
     :param instance: instance of class
-    :param filename: filename before editing
+    :param filename_base: filename before editing
     :param deep_level: number of levels of nesting of folders
     :return: string of the whole path to the storing image
     """
+    file_name, file_extension = os.path.splitext(filename_base)
     path = 'photos/'
     count_letters = 2
-    filename = get_md5_file(filename)
+    filename = get_md5_file(file_name)
 
     for i in range(deep_level):
         path += filename[count_letters-2:count_letters] + '/'
         count_letters += 2
+
+    filename += file_extension
 
     return os.path.join(path, filename)
 
@@ -67,7 +70,6 @@ class AdvertisingSpaceImage(models.Model):
         on_delete=models.PROTECT,
         verbose_name='Adverting space'
     )
-
 
     def get_absolute_url(self):
         return reverse('home')

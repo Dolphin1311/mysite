@@ -13,18 +13,3 @@ def index(request: HttpRequest):
 class AddAdv(CreateView):
     form_class = AdvertisingSpaceForm
     template_name = 'advertisements/add_adv.html'
-
-
-# def add_adv(request: HttpRequest):
-#     if request.method == 'POST':
-#         form = AdvertisingSpaceForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#         else:
-#             print('Data is not valid')
-#         print(form.cleaned_data)
-#
-#     else:
-#         form = AdvertisingSpaceForm()
-#
-#     return render(request, 'advertisements/add_adv.html', {'title': 'Add adv', 'form': form})
