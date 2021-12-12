@@ -1,11 +1,10 @@
 from django.db import models
 from django.db.models import JSONField
 from django.conf import settings
+from django.urls import reverse
 
 import hashlib
 import os
-
-from django.urls import reverse
 
 
 class AdvertisingSpaceType(models.Model):
