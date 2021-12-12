@@ -14,17 +14,14 @@ h2{
 }
 
 .header{
-    /* TODO: shadow of header */
     height: 100px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; 
-
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    
     /* scrolling header */
     position: sticky;
       top: 0;
@@ -159,23 +156,11 @@ h2{
 }
 
 .banner-image{
-    /* position: absolute; */
-    /* background-image: url(../image/banner-image.png); */
-    /* display: block; */
-    /* width: 650px; */
-    /* height: 600px; */
-    /* background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center; */
-    /* margin-top: 50px; */
-
-
-
     /* image props to center display */ 
     /* if you need to change width of image you must change width of class wrapper  */
     position: absolute;
     right: 0%;
-     top: 50%;
+    top: 50%;
     transform: translateY(-50%);
 
     width: 60%;
@@ -198,16 +183,11 @@ h2{
 
 .triggers-elems{
     display: flex;
-    /* justify-content: space-between; */
     justify-content: space-between;
 }
 
 .triggers-elem{
     display: flex;
-    /* flex-direction: column; */
-    /* justify-content: space-between; */
-    /* align-items: center; */
-
     width: 30%;
 }
 
@@ -226,7 +206,6 @@ h2{
 
 .triggers-elem-desc{
     font-size: 16px;
-    /* text-align: justify; */
     display: block;
     width: 95%;
 }
@@ -239,19 +218,6 @@ h2{
     background-size: cover;
     background-position: center center;
 }
-
-/* .triggers-elem-01-image{
-    background-image: url(../image/trigger-1-icon.png);
-}
-
-.triggers-elem-02-image{
-    background-image: url(../image/trigger-2-icon.png);
-}
-
-.triggers-elem-03-image{
-    background-image: url(../image/trigger-3-icon.png);
-} */
-
 
 .catalog{
     height: 1120px;
@@ -306,9 +272,6 @@ h2{
 }
 
 .catalog-card-image{
-    /* width: 350px;
-    height: 180px; */
-    /* background-image: url(../image/car.svg); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;

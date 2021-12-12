@@ -11,6 +11,9 @@ class AdvertisingSpaceType(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
 
+    def get_absolute_url(self):
+        return reverse('space-type', kwargs={'type_slug': self.slug})
+
 
 class AdvertisingSpace(models.Model):
     title = models.CharField(max_length=255, verbose_name='Title')
