@@ -1,0 +1,182 @@
+{% extends 'advertisements/base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'advertisements/css/style.css' %}"/>
+<link rel="stylesheet" href="{% static 'advertisements/css/glider-css.css' %}"/>
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="wrapper">
+        <div class="header-items">
+            <div class="logo">
+                <span class="logo-image"></span>
+                <span class="logo-text">Advertising<br/>Space</span>
+            </div>
+            <div class="navigation">
+                <nav>
+                    <ul class="nav">
+                        <li><a href="#">Main</a></li>
+                        <li><a href="#">Advertising Space</a></li>
+                        <li><a href="#">Contact us</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="login-buttons">
+                <a href="#" type="button" id="sign-in">Sign in</a>
+                <a href="#" type="button" id="sign-up">Sign up</a>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="banner">
+    <div class="wrapper">
+        <div class="banner-items">
+            <div class="banner-left">
+                <h1 class="banner-title">
+                    Advertising space<br/>is the service for placing<br/>your
+                    advertisement
+                </h1>
+                <p class="banner-text">
+                    We helps people and companies<br/>to cooperate in questions of
+                    finding<br/>and placing advertisings
+                </p>
+                <a href="#" type="button">Begin work with us</a>
+            </div>
+            <img src="{% static 'advertisements/image/banner-image.png' %}" class="banner-image" alt="banner image "/>
+        </div>
+    </div>
+</div>
+<div class="triggers">
+    <div class="wrapper">
+        <div class="triggers-items">
+            <div class="triggers-title">
+                <h2>Why you should choose us</h2>
+            </div>
+            <div class="triggers-elems">
+                <div class="triggers-elem triggers-elem-01">
+                    <!-- <span class="triggers-image triggers-elem-01-image"></span> -->
+                    <img src="{% static 'advertisements/image/trigger-1-icon.png' %}" class="triggers-image triggers-elem-image" alt="">
+                    <div class="triggers-elem-text">
+                        <span class="triggers-elem-title">Everything in one place</span>
+                        <span class="triggers-elem-desc">Find ad space and rent your ad space with one
+                                service</span>
+                    </div>
+                </div>
+                <div class="triggers-elem triggers-elem-02">
+                    <!-- <span class="triggers-image triggers-elem-02-image"></span> -->
+                    <img src="{% static 'advertisements/image/trigger-2-icon.png' %}" class="triggers-image triggers-elem-image" alt="">
+                    <div class="triggers-elem-text">
+                        <span class="triggers-elem-title">It is comfortable</span>
+                        <span class="triggers-elem-desc">Ad placement has never been easier</span>
+                    </div>
+                </div>
+                <div class="triggers-elem triggers-elem-03">
+                    <!-- <span class="triggers-image triggers-elem-03-image"></span> -->
+                    <img src="{% static 'advertisements/image/trigger-3-icon.png' %}" class="triggers-image triggers-elem-image" alt="">
+                    <div class="triggers-elem-text">
+                        <span class="triggers-elem-title">Saves you time</span>
+                        <span class="triggers-elem-desc">Don't waste time looking for a client, just place your
+                                ad and he will find you himself.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="catalog">
+    <div class="wrapper">
+        <div class="catalog-items">
+            <div class="catalog-title">
+                <h2>Catalog of advertising spaces</h2>
+            </div>
+            <div class="catalog-buttons">
+                <button class="catalog-button-selected">All</button>
+                <button class="catalog-button">Cars</button>
+            </div>
+            <div class="glider-contain">
+                <div class="catalog-cards glider">
+                    <div class="catalog-card">
+                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image" alt=""/>
+                        <div class="catalog-card-items">
+                            <!-- <span ></span> -->
+                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image" alt="car image"/>
+                            <span class="catalog-card-title">Title</span>
+                            <span class="catalog-card-desc">Description</span>
+                            <a href="#" type="button" class="catalog-card-button">Show</a>
+                        </div>
+                    </div>
+                    <div class="catalog-card">
+                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image" alt=""/>
+                        <div class="catalog-card-items">
+                            <!-- <span ></span> -->
+                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image" alt="car image"/>
+                            <span class="catalog-card-title">Title</span>
+                            <span class="catalog-card-desc">Description</span>
+                            <a href="#" type="button" class="catalog-card-button">Show</a>
+                        </div>
+                    </div>
+                    <div class="catalog-card">
+                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image" alt=""/>
+                        <div class="catalog-card-items">
+                            <!-- <span ></span> -->
+                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image" alt="car image"/>
+                            <span class="catalog-card-title">Title</span>
+                            <span class="catalog-card-desc">Description</span>
+                            <a href="#" type="button" class="catalog-card-button">Show</a>
+                        </div>
+                    </div>
+                    <div class="catalog-card">
+                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image" alt=""/>
+                        <div class="catalog-card-items">
+                            <!-- <span ></span> -->
+                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image" alt="car image"/>
+                            <span class="catalog-card-title">Title</span>
+                            <span class="catalog-card-desc">Description</span>
+                            <a href="#" type="button" class="catalog-card-button">Show</a>
+                        </div>
+                    </div>
+                    <div class="catalog-card">
+                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image" alt=""/>
+                        <div class="catalog-card-items">
+                            <!-- <span ></span> -->
+                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image" alt="car image"/>
+                            <span class="catalog-card-title">Title</span>
+                            <span class="catalog-card-desc">Description</span>
+                            <a href="#" type="button" class="catalog-card-button">Show</a>
+                        </div>
+                    </div>
+                    <div class="catalog-card">
+                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image" alt=""/>
+                        <div class="catalog-card-items">
+                            <!-- <span ></span> -->
+                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image" alt="car image"/>
+                            <span class="catalog-card-title">Title</span>
+                            <span class="catalog-card-desc">Description</span>
+                            <a href="#" type="button" class="catalog-card-button">Show</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="catalog-buttons-slider">
+                <span class="catalog-button-prev"></span>
+                <div class="glider-dots" id="dots"></div>
+                <span class="catalog-button-next"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.6.6/glider.min.js"
+        integrity="sha512-RidPlemZ+Xtdq62dXb81kYFycgFQJ71CKg+YbKw+deBWB0TLIqCraOn6k0CWDH2rGvE1a8ruqMB+4E4OLVJ7Dg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'advertisements/script/script.js' %}"></script>
+{% endblock %}

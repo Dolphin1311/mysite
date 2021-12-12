@@ -1,9 +1,18 @@
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, TemplateView
 
+from .utils import DataMixin
 from .forms import AdvertisingSpaceForm
-from .models import AdvertisingSpace
+
+
+class HomeView(DataMixin, TemplateView):
+    template_name = 'advertisements/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        my_context = self.get_user_context(title='Main page')
+
+        return context | my_context
 
 
 def index(request: HttpRequest):
