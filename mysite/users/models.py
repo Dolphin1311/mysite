@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
 from phonenumber_field.modelfields import PhoneNumberField
 
 from django.conf import settings
@@ -48,6 +49,9 @@ class UserManager(BaseUserManager):
 class UserType(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f'{self.name=}'
+
 
 # Custom user model
 class User(AbstractBaseUser, PermissionsMixin):
@@ -62,7 +66,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+
+    def save(self, *args, **kwargs):
+        # set user type as person
+        person_user_type = UserType.objects.get(name='person')
+        self.user_type = person_user_type
+        super(User, self).save(*args, **kwargs)
 
 
 class Person(models.Model):

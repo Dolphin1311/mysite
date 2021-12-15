@@ -1,0 +1,74 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+}
+
+a{
+    text-decoration: none;
+    color: #333333;
+}
+
+.wrapper{
+    width: 1140px;
+    margin: 0 auto;
+
+    position: relative;
+}
+
+h2{
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.registration-form{
+    height: calc(100vh - 100px);
+    background: linear-gradient(90deg, rgba(200,135,227,1) 0%, rgba(241,137,137,1) 100%);
+}
+
+.registration-form-container{
+    margin: auto;
+    border-radius: 10px;
+    padding: 30px 65px;
+    width: 550px;
+    height: 665px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.registration-form-items{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+    align-items: center;
+}
+
+.registration-form-items form{
+    display: flex;
+    flex-direction: column;
+}
+
+.registration-form-items input{
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+    width: 420px;
+    align-items: center;
+    margin-bottom: 11px;
+}
+
+.registration-form-items input[type='submit']{
+    margin-top: 27px;
+    border-radius: 50px;
+    border: none;
+    background-color: #C887E3;
+    font-weight: 700;
+    color: white;
+    width: 140px;
+    padding: 10px 0;
+    align-self: center;
+    cursor: pointer;
+}
+
+
