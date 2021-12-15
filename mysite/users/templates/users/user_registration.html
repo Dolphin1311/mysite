@@ -16,10 +16,12 @@
                     {% csrf_token %}
 
                     {% for form_field in user_form %}
+                        <label for="{{ form_field.input_name.label }}">{{ form_field.label }}</label>
                         {{ form_field }}
                     {% endfor %}
 
                     {% for form_field in person_form %}
+                        <label for="{{ form_field.input_name.label }}">{{ form_field.label }}</label>
                         {{ form_field }}
                     {% endfor %}
 
