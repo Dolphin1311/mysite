@@ -8,26 +8,6 @@ a{
     color: #333333;
 }
 
-h2{
-    font-size: 36px;
-    margin: 0;
-}
-
-.header{
-    height: 100px;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; 
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    /* scrolling header */
-    position: sticky;
-      top: 0;
-      z-index: 10;
-}
-
 .wrapper{
     width: 1140px;
     margin: 0 auto;
@@ -35,83 +15,9 @@ h2{
     position: relative;
 }
 
-.header-items{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-}
-
-.logo-image{
-    display: block;
-    width: 60px;
-    height: 60px;
-    background-image: url(../image/Logo.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    border-radius: 15px;
-}
-
-.logo-text{
-    font-size: 18px;
-    font-weight: 700;
-    margin-left: 10px;
-}
-
-.nav{
-    list-style-type: none;
-    display: flex;
-    padding: 0;
-}
-
-.nav li{
-    padding: 0 16px;
-}
-
-.nav li a{
-    font-size: 20px;
-    text-decoration: none;
-    color: black;
-    transition: 0.2s ease;
-}
-
-.nav li a:hover{
-    color: #C887E3;
-}
-
-.login-buttons{
-    display: flex;
-    align-items: center;
-}
-
-.login-buttons a{
-    font-size: 20px;
-    transition: 0.2s ease;
-}
-
-#sign-in{
-    padding: 0 20px;
-}
-
-#sign-in:hover{
-    color: #C887E3;
-}
-
-#sign-up{
-    margin-left: 20px;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 50px;
-    background-color: #C887E3;
-}
-
-#sing-up:hover{
-    box-shadow: #b248df 0px 7px 29px 0px;
+h2{
+    font-size: 36px;
+    margin: 0;
 }
 
 .banner{
@@ -156,11 +62,23 @@ h2{
 }
 
 .banner-image{
-    /* image props to center display */ 
+    /* position: absolute; */
+    /* background-image: url(../image/banner-image.png); */
+    /* display: block; */
+    /* width: 650px; */
+    /* height: 600px; */
+    /* background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center; */
+    /* margin-top: 50px; */
+
+
+
+    /* image props to center display */
     /* if you need to change width of image you must change width of class wrapper  */
     position: absolute;
     right: 0%;
-    top: 50%;
+     top: 50%;
     transform: translateY(-50%);
 
     width: 60%;
@@ -183,11 +101,16 @@ h2{
 
 .triggers-elems{
     display: flex;
+    /* justify-content: space-between; */
     justify-content: space-between;
 }
 
 .triggers-elem{
     display: flex;
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+
     width: 30%;
 }
 
@@ -206,6 +129,7 @@ h2{
 
 .triggers-elem-desc{
     font-size: 16px;
+    /* text-align: justify; */
     display: block;
     width: 95%;
 }
@@ -218,6 +142,19 @@ h2{
     background-size: cover;
     background-position: center center;
 }
+
+/* .triggers-elem-01-image{
+    background-image: url(../image/trigger-1-icon.png);
+}
+
+.triggers-elem-02-image{
+    background-image: url(../image/trigger-2-icon.png);
+}
+
+.triggers-elem-03-image{
+    background-image: url(../image/trigger-3-icon.png);
+} */
+
 
 .catalog{
     height: 1120px;
@@ -373,7 +310,3 @@ h2{
 .about-desc{
     font-size: 24px;
 }
-
-
-
-

@@ -1,36 +1,9 @@
-{% extends 'advertisements/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
-
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'advertisements/css/style.css' %}"/>
 <link rel="stylesheet" href="{% static 'advertisements/css/glider-css.css' %}"/>
-{% endblock %}
-
-{% block header %}
-<header class="header">
-    <div class="wrapper">
-        <div class="header-items">
-            <div class="logo">
-                <span class="logo-image"></span>
-                <span class="logo-text">Advertising<br/>Space</span>
-            </div>
-            <div class="navigation">
-                <nav>
-                    <ul class="nav">
-                        <li><a href="#">Main</a></li>
-                        <li><a href="#">Advertising Spaces</a></li>
-                        <li><a href="#">Contact us</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="login-buttons">
-                <a href="#" type="button" id="sign-in">Sign in</a>
-                <a href="#" type="button" id="sign-up">Sign up</a>
-            </div>
-        </div>
-    </div>
-</header>
 {% endblock %}
 
 {% block content %}

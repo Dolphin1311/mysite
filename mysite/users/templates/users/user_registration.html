@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'users/css/user-registration-style.css' %}">
+<link rel="stylesheet" href="{% static 'css/header-style.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="registration-form">
+    <div class="wrapper">
+        <div class="registration-form-container">
+            <div class="registration-form-items">
+                <h2>Registration</h2>
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% for form_field in user_form %}
+                        <label for="{{ form_field.input_name.label }}">{{ form_field.label }}</label>
+                        {{ form_field }}
+                    {% endfor %}
+
+                    {% for form_field in person_form %}
+                        <label for="{{ form_field.input_name.label }}">{{ form_field.label }}</label>
+                        {{ form_field }}
+                    {% endfor %}
+
+                    <input type="submit" value="Sign up">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
