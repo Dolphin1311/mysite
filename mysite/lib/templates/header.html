@@ -14,10 +14,16 @@
                     </ul>
                 </nav>
             </div>
-            <div class="login-buttons">
+            {% if user.is_authenticated %}
+                <div class="account">
+                    <a href="#">Account</a>
+                </div>
+            {% else %}
+                <div class="login-buttons">
                 <a href="#" type="button" id="sign-in">Sign in</a>
                 <a href="#" type="button" id="sign-up">Sign up</a>
             </div>
+            {% endif %}
         </div>
     </div>
 </header>

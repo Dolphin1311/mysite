@@ -1,5 +1,6 @@
 from django.views.generic import CreateView, TemplateView
 
+
 from .utils import DataMixin
 from .forms import AdvertisingSpaceForm
 
@@ -9,8 +10,9 @@ class HomeView(DataMixin, TemplateView):
 
     # use DataMixin class and load to template custom context data
     def get_context_data(self, **kwargs):
+        user = self.request.user
         context = super().get_context_data(**kwargs)
-        my_context = self.get_user_context(title='Main page')
+        my_context = self.get_user_context(title='Main page', user=user)
 
         return context | my_context
 

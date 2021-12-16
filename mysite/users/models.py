@@ -2,7 +2,6 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils import timezone
-from django.core.exceptions import ObjectDoesNotExist
 from phonenumber_field.modelfields import PhoneNumberField
 
 from django.conf import settings
