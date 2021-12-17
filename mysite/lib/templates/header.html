@@ -1,3 +1,5 @@
+{% load static %}
+
 <header class="header">
     <div class="wrapper">
         <div class="header-items">
@@ -16,13 +18,14 @@
             </div>
             {% if user.is_authenticated %}
                 <div class="account">
-                    <a href="#">Account</a>
+                    <a href="{% url 'logout' %}">Log out</a>
+                    <a href="#"><img src="{% static 'image/user-icon.png' %}" alt="user_icon"></a>
                 </div>
             {% else %}
                 <div class="login-buttons">
-                <a href="#" type="button" id="sign-in">Sign in</a>
-                <a href="#" type="button" id="sign-up">Sign up</a>
-            </div>
+                    <a href="{% url 'login' %}" type="button" id="sign-in">Sign in</a>
+                    <a href="{% url 'registration' %}" type="button" id="sign-up">Sign up</a>
+                </div>
             {% endif %}
         </div>
     </div>

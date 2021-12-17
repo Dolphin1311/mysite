@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
-from django.template import RequestContext
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from .forms import NewUserForm, NewPersonForm
 
 
-def sign_up_user(request):
+def sign_up(request):
     if request.method == 'POST':
         user_form = NewUserForm(request.POST)
         person_form = NewPersonForm(request.POST)
@@ -17,7 +16,7 @@ def sign_up_user(request):
             person.save()
             login(request, user)
 
-            return render(request, 'users/user-registration.html')
+            return redirect('home')
     else:
         user_form = NewUserForm()
         person_form = NewPersonForm()
@@ -27,7 +26,7 @@ def sign_up_user(request):
                                                             'title': 'Sign up'})
 
 
-def sign_in_user(request):
+def log_in(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
 
@@ -49,3 +48,7 @@ def sign_in_user(request):
                                                              'title': 'Sign in'})
 
 
+def log_out(request):
+    logout(request)
+
+    return redirect('login')
