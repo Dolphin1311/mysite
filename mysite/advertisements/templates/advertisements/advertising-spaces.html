@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load generic_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'advertisements/css/adv-spaces-style.css' %}"/>
+{% endblock %}
+
+{% block header %}
+{% show_header user %}
+{% endblock %}
+
+{% block content %}
+<div class="catalog">
+    <div class="wrapper">
+        <div class="catalog-items">
+            <div class="catalog-item">
+                <a href="" class="catalog-item-link"><span></span></a>
+                <img src="{% static 'advertisements/image/car.svg' %}" alt="car">
+                <div class="catalog-item-right">
+                    <div class="catalog-item-right-head">
+                        <h3>Title</h3>
+                        <h3>Price</h3>
+                    </div>
+                    <p>Description</p>
+                </div>
+            </div>
+        </div>
+        <div class="catalog-item">
+            <a href="" class="catalog-item-link"><span></span></a>
+            <img src="{% static 'advertisements/image/car.svg' %}" alt="car">
+            <div class="catalog-item-right">
+                <div class="catalog-item-right-head">
+                    <h3>Title</h3>
+                    <h3>Price</h3>
+                </div>
+                <p>Description</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
