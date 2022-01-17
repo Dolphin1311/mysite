@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load generic_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'users/css/user-cabinet-sidebar-style.css'%}">
+<link rel="stylesheet" href="{% static 'users/css/user-cabinet-adv-spaces-style.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="page">
+    {% show_sidebar %}
+    <div class="content">
+        <div class="adv-spaces">
+            <div class="adv-spaces-items">
+                <div class="adv-spaces-item" onclick="location.href='#';">
+                    <img src="../image/car.svg" alt="car">
+                    <div class="adv-spaces-item-right">
+                        <div class="adv-spaces-item-right-head">
+                            <h3>Title</h3>
+                            <h3>Price</h3>
+                        </div>
+                        <p>Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="" type="button" id="add-adv-space">Add advertising space</a>
+    </div>
+</div>
+{% endblock %}
+
