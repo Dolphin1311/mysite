@@ -1,0 +1,52 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+}
+
+a{
+    text-decoration: none;
+    color: #333333;
+}
+
+.wrapper{
+    width: 1140px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.catalog{
+    margin-top: 100px;
+}
+
+.catalog-item{
+    padding: 15px;
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+.catalog-item-link span{
+    /* making div clickable for other links in div -> z-index > 1 */
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left: 0;
+
+    z-index: 1;
+}
+
+.catalog-item-right{
+    flex: 1 1 auto;
+}
+
+.catalog-item-right-head{
+    display: flex;
+    justify-content: space-between;
+}
+
+.catalog-item-right p{
+    margin-top: 0;
+}
+

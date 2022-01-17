@@ -1,4 +1,5 @@
 from django import template
+from users.models import Person, UserType
 
 register = template.Library()
 
@@ -10,4 +11,11 @@ def show_header(user):
 
 @register.inclusion_tag('user-cabinet-sidebar.html')
 def show_sidebar(user):
-    return {'user': user}
+    user_type = UserType.objects.get(pk=2)
+    
+    if user.user_type == user_type:
+        print('yes')
+        person = Person.objects.get(user=user)
+        return {'person_name': person.first_name, 'person_lastname': person.last_name}
+    else:
+        return {'user': user}

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
+from django.views.generic import ListView
 from .forms import NewUserForm, NewPersonForm
+from advertisements.models import AdvertisingSpace
 
 
 def sign_up(request):
@@ -52,3 +54,12 @@ def log_out(request):
     logout(request)
 
     return redirect('login')
+
+
+class UserCabinetAdvSpacesView(ListView):
+    template_name = 'users/user-cabinet-adv-spaces.html'
+    context_object_name = 'adv_spaces'
+
+    def get_queryset(self):
+        # get all adv spaces for current logged in user
+        return AdvertisingSpace.objects.filter(user=self.request.user)
