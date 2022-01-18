@@ -10,7 +10,7 @@ def sign_up(request):
     if request.method == 'POST':
         user_form = NewUserForm(request.POST)
         person_form = NewPersonForm(request.POST)
-
+        print(user_form)
         if all([user_form.is_valid(), person_form.is_valid()]):
             user = user_form.save()
             person = person_form.save(commit=False)

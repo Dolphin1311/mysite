@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e66c448-3524-49e9-909b-6a49163ca879" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="8830d142-f02d-440f-8d02-c1829fdfde83" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/templates/users/user-registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/templates/users/user-registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

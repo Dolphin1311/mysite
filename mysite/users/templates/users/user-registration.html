@@ -20,15 +20,45 @@
                 <form method="post">
                     {% csrf_token %}
 
-                    {% for form_field in user_form %}
-                        <label>{{ form_field.label }}</label>
-                        {{ form_field }}
-                    {% endfor %}
+                    <!--Form for data connected with User model-->
+                    {% if user_form.errors %}
+                        {% for form_field in user_form %}
+                            <label>{{ form_field.label }}</label>
+                            {{ form_field }}
 
-                    {% for form_field in person_form %}
-                        <label>{{ form_field.label }}</label>
-                        {{ form_field }}
-                    {% endfor %}
+                            <!--Show errors-->
+                            {% for error in form_field.errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+
+                        {% endfor %}
+                    {% else %}
+                    <!--If no errors-->
+                        {% for form_field in user_form %}
+                            <label>{{ form_field.label }}</label>
+                            {{ form_field }}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!--Form for data connected with Person model-->
+                    {% if person_form.errors %}
+                        {% for form_field in person_form %}
+                            <label>{{ form_field.label }}</label>
+                            {{ form_field }}
+
+                            <!--Show errors-->
+                            {% for error in form_field.errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+
+                        {% endfor %}
+                    {% else %}
+                    <!--If no errors-->
+                        {% for form_field in person_form %}
+                            <label>{{ form_field.label }}</label>
+                            {{ form_field }}
+                        {% endfor %}
+                    {% endif %}
 
                     <input type="submit" value="Sign up">
                 </form>
