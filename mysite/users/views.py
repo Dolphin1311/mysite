@@ -31,12 +31,12 @@ def sign_up(request):
 def log_in(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-
+        print(form.is_valid())
         if form.is_valid():
             email = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(email=email, password=password)
-
+            print(user.user_type)
             if user is not None:
                 login(request, user)
 
