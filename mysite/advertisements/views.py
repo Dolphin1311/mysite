@@ -9,9 +9,8 @@ class HomeView(DataMixin, TemplateView):
 
     # use DataMixin class and load to template custom context data
     def get_context_data(self, **kwargs):
-        user = self.request.user
         context = super().get_context_data(**kwargs)
-        my_context = self.get_user_context(title='Main page', user=user)
+        my_context = self.get_user_context(title='Main page')
 
         return context | my_context
 
