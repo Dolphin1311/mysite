@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8830d142-f02d-440f-8d02-c1829fdfde83" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/mysite/advertisements/templates/advertisements/add-adv-space.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/advertisements/templates/advertisements/add_adv.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/templates/advertisements/add_adv.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/advertisements/templates/advertisements/advertising-spaces.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/templates/advertisements/advertising-spaces.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/advertisements/templates/advertisements/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/templates/advertisements/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/lib/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/lib/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/advertisements/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/advertisements/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/advertisements/templates/advertisements/add_adv.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/advertisements/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

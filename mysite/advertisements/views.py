@@ -32,4 +32,4 @@ class AdvSpacesView(ListView, DataMixin):
 
 class AddAdv(CreateView):
     form_class = AdvertisingSpaceForm
-    template_name = 'advertisements/add_adv.html'
+    template_name = 'advertisements/add-adv-space.html'
