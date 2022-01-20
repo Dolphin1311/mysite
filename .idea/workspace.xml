@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8830d142-f02d-440f-8d02-c1829fdfde83" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/lib/static/css/header-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/lib/static/css/header-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/static/css/header-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/static/css/header-style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/static/users/css/user-cabinet-adv-spaces-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/static/users/css/user-cabinet-adv-spaces-style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/static/users/css/user-login-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/static/users/css/user-login-style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/static/users/css/user-registration-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/static/users/css/user-registration-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/static/users/css/user-cabinet-adv-spaces-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/static/users/css/user-cabinet-adv-spaces-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/static/users/css/user-login-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/static/users/css/user-login-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/static/users/css/user-registration-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/static/users/css/user-registration-style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
