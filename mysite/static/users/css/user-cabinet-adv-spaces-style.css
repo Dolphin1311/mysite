@@ -8,13 +8,6 @@ a{
     color: #333333;
 }
 
-.wrapper{
-    width: 1140px;
-    margin: 0 auto;
-
-    position: relative;
-}
-
 .page{
     display: flex;
     height: calc(100vh - 100px);
