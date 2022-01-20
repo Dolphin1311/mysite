@@ -7,12 +7,12 @@ import hashlib
 import os
 
 
-class AdvertisingSpaceType(models.Model):
+class AdvertisingSpaceCategory(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
 
     def get_absolute_url(self):
-        return reverse('space-type', kwargs={'type_slug': self.slug})
+        return reverse('space-type', kwargs={'category_slug': self.slug})
 
 
 class AdvertisingSpace(models.Model):
@@ -24,8 +24,8 @@ class AdvertisingSpace(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Date created')
     date_updated = models.DateTimeField(auto_now=True, verbose_name='Date updated')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name='User id')
-    advertising_space_type = models.ForeignKey(
-        AdvertisingSpaceType,
+    advertising_space_category = models.ForeignKey(
+        AdvertisingSpaceCategory,
         on_delete=models.PROTECT,
         verbose_name='Advertising space type'
     )

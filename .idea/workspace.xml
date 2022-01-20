@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8830d142-f02d-440f-8d02-c1829fdfde83" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/users/templates/users/user-cabinet-adv-spaces.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/templates/users/user-cabinet-adv-spaces.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/advertisements/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/advertisements/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/advertisements/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +22,9 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="23vKYTEK7qurazIbH2V4uyyKNIZ" />
   <component name="ProjectLevelVcsManager">

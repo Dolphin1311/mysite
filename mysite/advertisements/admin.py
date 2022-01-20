@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AdvertisingSpace, AdvertisingSpaceType
+from .models import AdvertisingSpace, AdvertisingSpaceCategory
 
 
 class AdvertisingSpaceAdmin(admin.ModelAdmin):
@@ -11,9 +11,9 @@ class AdvertisingSpaceAdmin(admin.ModelAdmin):
     # prepopulated_fields = {'slug': ('title',)}
 
 
-class AdvertisingSpaceTypeAdmin(admin.ModelAdmin):
+class AdvertisingSpaceCategoryAdmin(admin.ModelAdmin):
     list_display = ('id',)
 
 
 admin.site.register(AdvertisingSpace)
-admin.site.register(AdvertisingSpaceType, AdvertisingSpaceTypeAdmin)
+admin.site.register(AdvertisingSpaceCategory, AdvertisingSpaceCategoryAdmin)
