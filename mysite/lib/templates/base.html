@@ -1,4 +1,5 @@
 {% load static %}
+{% load generic_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,8 +20,7 @@
     <title>{{ title }}</title>
 </head>
 <body>
-{% block header %}
-{% endblock %}
+{% show_header user%}
 
 {% block content %}
 {% endblock %}
