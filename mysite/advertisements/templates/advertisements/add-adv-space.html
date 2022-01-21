@@ -12,50 +12,75 @@
         <div class="add-form-items">
             <h1>Add advertising space</h1>
             <form action="#" method="post">
+                {% csrf_token %}
                 <h2>General information</h2>
                 <div class="add-form-item-container">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="adv_title">
 
-                    <label for="category">Category</label>
-                    <select id="category" name="adv_category">
-                        <option value="Car">Car</option>
-                    </select>
+                    {{ adv_space_form.title }}
+                    {{ adv_space_form.title.error|escape }}
 
-                    <label for="model">Car model</label>
-                    <input type="text" name="car_model" id="model">
+                    {{ adv_space_form.advertising_space_category }}
+                    {{ adv_space_form.advertising_space_category.error|escape }}
 
-                    <label for="year">Production year</label>
-                    <input type="number" min="1900" max="2022" step="1" value="2022" name="car_year" id="year">
+                    {{ adv_space_form.car_model }}
+                    {{ adv_space_form.car_model.error|escape }}
 
-                    <label for="type">Car type</label>
-                    <select name="car_type" id="type">
-                        <option value="sedan">Sedan</option>
-                    </select>
+                    {{ adv_space_form.prod_year }}
+                    {{ adv_space_form.prod_year.error|escape }}
 
-                    <label for="place">Place for advertising on the car</label>
-                    <select name="car_place" id="place">
-                        <option value="top">Top</option>
-                        <option value="right_side">Right side</option>
-                    </select>
-                    
-                    <label for="description">Description</label>
-                    <textarea name="adv_description" id="description" cols="30" rows="10"></textarea>
+                    {{ adv_space_form.car_type }}
+                    {{ adv_space_form.car_type.error|escape }}
+
+                    {{ adv_space_form.adv_place }}
+                    {{ adv_space_form.adv_place.error|escape }}
+
+                    {{ adv_space_form.description }}
+                    {{ adv_space_form.description.error|escape }}
+
+                    {{ adv_space_form.price }}
+                    {{ adv_space_form.price.error|escape }}
+<!--                    <label for="title">Title</label>-->
+<!--                    <input type="text" id="title" name="adv_title">-->
+
+<!--                    <label for="category">Category</label>-->
+<!--                    <select id="category" name="adv_category">-->
+<!--                        <option value="Car">Car</option>-->
+<!--                    </select>-->
+
+<!--                    <label for="model">Car model</label>-->
+<!--                    <input type="text" name="car_model" id="model">-->
+
+<!--                    <label for="year">Production year</label>-->
+<!--                    <input type="number" min="1900" max="2022" step="1" value="2022" name="car_year" id="year">-->
+
+<!--                    <label for="type">Car type</label>-->
+<!--                    <select name="car_type" id="type">-->
+<!--                        <option value="sedan">Sedan</option>-->
+<!--                    </select>-->
+
+<!--                    <label for="place">Place for advertising on the car</label>-->
+<!--                    <select name="car_place" id="place">-->
+<!--                        <option value="top">Top</option>-->
+<!--                        <option value="right_side">Right side</option>-->
+<!--                    </select>-->
+
+<!--                    <label for="description">Description</label>-->
+<!--                    <textarea name="adv_description" id="description" cols="30" rows="10"></textarea>-->
                 </div>
 
-                <h2>Images</h2>
-                <div class="add-form-item-container">
-                    <input type="file" accept="image/png, image/jpeg" name="files" multiple>
-                </div>
+<!--                <h2>Images</h2>-->
+<!--                <div class="add-form-item-container">-->
+<!--                    <input type="file" accept="image/png, image/jpeg" name="files" multiple>-->
+<!--                </div>-->
 
-                <h2>Personal information</h2>
-                <div class="add-form-item-container">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="adv_email">
+<!--                <h2>Personal information</h2>-->
+<!--                <div class="add-form-item-container">-->
+<!--                    <label for="email">Email</label>-->
+<!--                    <input type="email" id="email" name="adv_email">-->
 
-                    <label for="category">Phone number</label>
-                    <input type="tel" id="phone" name="adv_phone">
-                </div>
+<!--                    <label for="category">Phone number</label>-->
+<!--                    <input type="tel" id="phone" name="adv_phone">-->
+<!--                </div>-->
 
                 <div class="button-holder">
                     <input type="submit" value="Add advertising space">
@@ -65,9 +90,9 @@
     </div>
 </div>
 {% endblock %}
-<form action="#" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
+<!--<form action="#" method="post" enctype="multipart/form-data">-->
+<!--    {% csrf_token %}-->
+<!--    {{ form.as_p }}-->
+<!--    <input type="submit" value="Submit">-->
+<!--</form>-->
 

@@ -14,6 +14,9 @@ class AdvertisingSpaceCategory(models.Model):
     def get_absolute_url(self):
         return reverse('space-type', kwargs={'category_slug': self.slug})
 
+    def __str__(self):
+        return f'{self.name=}'
+
 
 class AdvertisingSpace(models.Model):
     title = models.CharField(max_length=255, verbose_name='Title')
