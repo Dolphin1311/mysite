@@ -6,6 +6,8 @@ from django.urls import reverse
 import hashlib
 import os
 
+from django.utils.text import slugify
+
 
 class AdvertisingSpaceCategory(models.Model):
     name = models.CharField(max_length=255)
@@ -33,6 +35,10 @@ class AdvertisingSpace(models.Model):
         on_delete=models.PROTECT,
         verbose_name='Advertising space type'
     )
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(AdvertisingSpace, self).save(*args, **kwargs)
 
 
 # functions for correctly storing images in AdvertisingSpaceImage model

@@ -11,6 +11,7 @@
     <div class="wrapper">
         <div class="add-form-items">
             <h1>Add advertising space</h1>
+            {{ form.as_p }}
             <form action="#" method="post">
                 {% csrf_token %}
                 <h2>General information</h2>

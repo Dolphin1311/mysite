@@ -33,32 +33,16 @@ class AdvSpacesView(ListView, DataMixin):
 
 def add_adv_space(request):
     if request.method == 'POST':
-        adv_space_form = AdvertisingSpaceForm(request.POST)
-        print(adv_space_form.is_valid())
-        if adv_space_form.is_valid():
-            # data variables from form
-            car_model = adv_space_form.cleaned_data['car_model']
-            prod_year = adv_space_form.cleaned_data['prod_year']
-            car_type = adv_space_form.cleaned_data['car_type']
-            adv_place = adv_space_form.cleaned_data['adv_place']
-            user = request.user
+        adv_space_form = AdvertisingSpaceForm(data=request.POST, user=request.user)
 
-            json_data = {
-                'car_model': car_model,
-                'prod_year': prod_year,
-                'car_type': car_type,
-                'adv_place': adv_place
-            }
+        if adv_space_form.is_valid():
             try:
-                adv_space = adv_space_form.save(commit=False)
-                adv_space.user = user
-                adv_space.data = json_data
-                adv_space.save()
+                adv_space_form.save()
             except Exception as e:
                 print(e)
 
-            return redirect('home')
+            return redirect('add_adv_space')
 
-    adv_space_form = AdvertisingSpaceForm()
+    adv_space_form = AdvertisingSpaceForm(user=request.user)
 
     return render(request, 'advertisements/add-adv-space.html', context={'adv_space_form': adv_space_form})
