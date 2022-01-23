@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView, TemplateView, ListView
 from .utils import DataMixin
@@ -31,7 +32,8 @@ class AdvSpacesView(ListView, DataMixin):
         return AdvertisingSpace.objects.filter(is_published=True)
 
 
-def add_adv_space(request):
+@login_required
+def add_adv_space_view(request):
     if request.method == 'POST':
         adv_space_form = AdvertisingSpaceForm(data=request.POST, user=request.user)
         adv_space_image_form = AdvertisingSpaceImageForm(request.POST, request.FILES)
@@ -39,7 +41,6 @@ def add_adv_space(request):
         if all([adv_space_form.is_valid(), adv_space_image_form.is_valid()]):
             try:
                 adv_space = adv_space_form.save()
-                # adv_space_image = AdvertisingSpaceImage(image=request.FILES['image'], advertising_space=adv_space)
                 adv_space_image = adv_space_image_form.save(commit=False)
                 adv_space_image.advertising_space = adv_space
                 adv_space_image.save()
