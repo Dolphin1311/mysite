@@ -4,7 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="8830d142-f02d-440f-8d02-c1829fdfde83" name="Changes" comment="" />
+||||||| 05dd44d
+    <list default="true" id="8830d142-f02d-440f-8d02-c1829fdfde83" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/templates/users/user-cabinet-adv-spaces.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/templates/users/user-cabinet-adv-spaces.html" afterDir="false" />
+    </list>
+=======
+    <list default="true" id="8830d142-f02d-440f-8d02-c1829fdfde83" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/advertisements/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/advertisements/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/advertisements/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/users/views.py" afterDir="false" />
+    </list>
+>>>>>>> AddAdvSpace
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +33,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="23vKYTEK7qurazIbH2V4uyyKNIZ" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -27,10 +45,16 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kirill\PycharmProjects\mysite\mysite\advertisements\static\advertisements\css" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">

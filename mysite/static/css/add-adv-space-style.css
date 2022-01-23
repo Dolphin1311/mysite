@@ -1,0 +1,79 @@
+h1{
+    font-size: 32px;
+}
+
+h2{
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+label{
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+select{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.add-form-item-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+#title, #email, #category, #model, #year, #type, #place{
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+#title, #description{
+    width: 700px;
+}
+
+#email, #model{
+    width: 500px;
+}
+
+#phone, #category, #type, #place{
+    width: 300px;
+}
+
+#year{
+    width: 160px;
+}
+
+#description{
+    font-size: 24px;
+    resize: none;
+}
+
+input[type='text'], [type='email'], [type='tel'], [type='number'], textarea{
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 24px;
+    padding: 5px;
+}
+
+.button-holder{
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+input[type='submit']{
+    font-size: 22px;
+    margin-top: 27px;
+    border-radius: 20px;
+    border: none;
+    background-color: #C887E3;
+    font-weight: 700;
+    color: white;
+    padding: 17px 28px;
+    align-self: center;
+    cursor: pointer;
+}

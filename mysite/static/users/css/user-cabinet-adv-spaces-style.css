@@ -1,18 +1,10 @@
 body{
-    font-family: 'Montserrat', sans-serif;
     background-color: #fff;
 }
 
 a{
     text-decoration: none;
     color: #333333;
-}
-
-.wrapper{
-    width: 1140px;
-    margin: 0 auto;
-
-    position: relative;
 }
 
 .page{

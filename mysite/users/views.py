@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
@@ -6,11 +7,11 @@ from .forms import NewUserForm, NewPersonForm
 from advertisements.models import AdvertisingSpace
 
 
-def sign_up(request):
+def signup_view(request):
     if request.method == 'POST':
         user_form = NewUserForm(request.POST)
         person_form = NewPersonForm(request.POST)
-        print(user_form)
+
         if all([user_form.is_valid(), person_form.is_valid()]):
             user = user_form.save()
             person = person_form.save(commit=False)
@@ -28,7 +29,7 @@ def sign_up(request):
                                                             'title': 'Sign up'})
 
 
-def log_in(request):
+def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         print(form.is_valid())
@@ -50,13 +51,13 @@ def log_in(request):
                                                              'title': 'Sign in'})
 
 
-def log_out(request):
+def logout_view(request):
     logout(request)
 
     return redirect('login')
 
 
-class UserCabinetAdvSpacesView(ListView):
+class UserCabinetAdvSpacesView(ListView, LoginRequiredMixin):
     template_name = 'users/user-cabinet-adv-spaces.html'
     context_object_name = 'adv_spaces'
 
