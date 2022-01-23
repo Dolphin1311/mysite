@@ -3,7 +3,7 @@ from .views import signup_view, login_view, logout_view, UserCabinetAdvSpacesVie
 
 urlpatterns = [
     path('', UserCabinetAdvSpacesView.as_view(), name='user_adv_spaces'),
-    path('registration/', signup_view, name='signup'),
+    path('signup/', signup_view, name='signup'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout')
 ]
