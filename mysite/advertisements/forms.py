@@ -5,10 +5,27 @@ from .models import AdvertisingSpaceImage, AdvertisingSpace
 
 
 class AdvertisingSpaceForm(forms.ModelForm):
-    car_model = forms.CharField()
-    prod_year = forms.IntegerField()
-    car_type = forms.CharField()
-    adv_place = forms.CharField()
+    car_model = forms.CharField(
+        label='Model',
+        widget=forms.TextInput(attrs={'id': 'model'}))
+    prod_year = forms.IntegerField(
+        label='Production year',
+        widget=forms.NumberInput(attrs={
+            'id': 'year',
+            'min': 1900,
+            'max': 2022,
+            'step': 1,
+            'value': 2022
+        })
+    )
+    car_type = forms.CharField(
+        label='Car type',
+        widget=forms.TextInput(attrs={'id': 'type'})
+    )
+    adv_place = forms.CharField(
+        label='Place for advertising on the car',
+        widget=forms.TextInput(attrs={'id': 'place'})
+    )
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -18,6 +35,18 @@ class AdvertisingSpaceForm(forms.ModelForm):
         model = AdvertisingSpace
         fields = ['title', 'description', 'advertising_space_category', 'price']
         success_url = reverse_lazy('home')
+        labels = {
+            'title': 'Title',
+            'advertising_space_category': 'Category',
+            'description': 'Description',
+            'price': 'Price per month'
+        }
+        widgets = {
+            'title': forms.TextInput(attrs={'id': 'title'}),
+            'advertising_space_category': forms.Select(attrs={'id': 'category'}),
+            'description': forms.Textarea(attrs={'id': 'description', 'cols': 30, 'rows': 10}),
+            'price': forms.NumberInput(attrs={'id': 'price'})
+        }
 
     def save(self, commit=True):
         car_model = self.cleaned_data['car_model']

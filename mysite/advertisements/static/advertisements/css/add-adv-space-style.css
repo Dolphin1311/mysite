@@ -44,7 +44,7 @@ select{
     width: 300px;
 }
 
-#year{
+#year, #price{
     width: 160px;
 }
 
