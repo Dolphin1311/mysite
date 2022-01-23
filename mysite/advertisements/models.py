@@ -17,7 +17,7 @@ class AdvertisingSpaceCategory(models.Model):
         return reverse('space-type', kwargs={'category_slug': self.slug})
 
     def __str__(self):
-        return f'{self.name=}'
+        return f'{str(self.name).capitalize()}'
 
 
 class AdvertisingSpace(models.Model):
@@ -51,7 +51,7 @@ def path_and_rename(instance, filename_base: str, deep_level=3):
     :return: string of the whole path to the storing image
     """
     file_name, file_extension = os.path.splitext(filename_base)
-    path = 'photos/'
+    path = 'images/'
     count_letters = 2
     filename = get_md5_file(file_name)
 
@@ -60,7 +60,6 @@ def path_and_rename(instance, filename_base: str, deep_level=3):
         count_letters += 2
 
     filename += file_extension
-
     return os.path.join(path, filename)
 
 

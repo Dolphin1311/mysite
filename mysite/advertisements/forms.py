@@ -4,10 +4,17 @@ from django.urls import reverse_lazy
 from .models import AdvertisingSpaceImage, AdvertisingSpace
 
 
+class AdvertisingSpaceImageForm(forms.ModelForm):
+    class Meta:
+        model = AdvertisingSpaceImage
+        fields = ['image']
+        widgets = {
+            'image': forms.FileInput(attrs={'accept': 'image/png, image/jpeg'})
+        }
+
+
 class AdvertisingSpaceForm(forms.ModelForm):
-    car_model = forms.CharField(
-        label='Model',
-        widget=forms.TextInput(attrs={'id': 'model'}))
+    car_model = forms.CharField(label='Model', widget=forms.TextInput(attrs={'id': 'model'}))
     prod_year = forms.IntegerField(
         label='Production year',
         widget=forms.NumberInput(attrs={
@@ -18,14 +25,8 @@ class AdvertisingSpaceForm(forms.ModelForm):
             'value': 2022
         })
     )
-    car_type = forms.CharField(
-        label='Car type',
-        widget=forms.TextInput(attrs={'id': 'type'})
-    )
-    adv_place = forms.CharField(
-        label='Place for advertising on the car',
-        widget=forms.TextInput(attrs={'id': 'place'})
-    )
+    car_type = forms.CharField(label='Car type', widget=forms.TextInput(attrs={'id': 'type'}))
+    adv_place = forms.CharField(label='Place for advertising on the car', widget=forms.TextInput(attrs={'id': 'place'}))
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -34,7 +35,6 @@ class AdvertisingSpaceForm(forms.ModelForm):
     class Meta:
         model = AdvertisingSpace
         fields = ['title', 'description', 'advertising_space_category', 'price']
-        success_url = reverse_lazy('home')
         labels = {
             'title': 'Title',
             'advertising_space_category': 'Category',
