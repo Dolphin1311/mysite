@@ -70,7 +70,7 @@ TEMPLATES = [
             ],
             'libraries': {  # load generic tags for all apps in project
                 'generic_tags': 'lib.templatetags.generic_tags',
-                'users_tags': 'users.templatetags.users_tags'
+                'advertisements_tags': 'advertisements.templatetags.advertisements_tags'
             }
         },
     },
