@@ -40,6 +40,9 @@ class AdvertisingSpace(models.Model):
         self.slug = slugify(self.title)
         super(AdvertisingSpace, self).save(*args, **kwargs)
 
+    def get_image(self):
+        return self.images.first()
+
 
 # functions for correctly storing images in AdvertisingSpaceImage model
 def path_and_rename(instance, filename_base: str, deep_level=3):
@@ -79,7 +82,8 @@ class AdvertisingSpaceImage(models.Model):
     advertising_space = models.ForeignKey(
         AdvertisingSpace,
         on_delete=models.PROTECT,
-        verbose_name='Adverting space'
+        verbose_name='Adverting space',
+        related_name='images'
     )
 
     def get_absolute_url(self):

@@ -18,7 +18,7 @@
             <div class="adv-spaces-items">
                 {% for adv_space in adv_spaces %}
                     <div class="adv-spaces-item" onclick="location.href='#';">
-<!--                        <img src="" alt="">-->
+                        <img src="{{ MEDIA_URL }}{{ adv_space.get_image.image }}" alt="">
                         <div class="adv-spaces-item-right">
                             <div class="adv-spaces-item-right-head">
                                 <h3>{{ adv_space.title }}</h3>
@@ -30,18 +30,6 @@
                 {% endfor %}
             </div>
         </div>
-
-<!--                    <div class="adv-spaces-item" onclick="location.href='#';">-->
-<!--                        <img src="{% static 'advertisements/image/car.svg' %}" alt="car">-->
-<!--                        <div class="adv-spaces-item-right">-->
-<!--                            <div class="adv-spaces-item-right-head">-->
-<!--                                <h3>Title</h3>-->
-<!--                                <h3>Price</h3>-->
-<!--                            </div>-->
-<!--                            <p>Description</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
         {% endif %}
         <a href="" type="button" id="add-adv-space">Add advertising space</a>
     </div>

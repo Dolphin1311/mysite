@@ -66,9 +66,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media'
             ],
             'libraries': {  # load generic tags for all apps in project
                 'generic_tags': 'lib.templatetags.generic_tags',
+                'users_tags': 'users.templatetags.users_tags'
             }
         },
     },

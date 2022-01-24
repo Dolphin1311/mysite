@@ -23,6 +23,11 @@ a{
     width: calc(100vw - 388px);
 }
 
+img{
+    width: 200px;
+    height: 150px;
+}
+
 .adv-spaces-item{
     margin: 50px auto;
     width: 1000px;

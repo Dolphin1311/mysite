@@ -65,7 +65,3 @@ class UserCabinetAdvSpacesView(ListView, LoginRequiredMixin):
         # get all adv spaces for current logged in user
         return AdvertisingSpace.objects.filter(user=self.request.user)
 
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['adv_space_images']
-
