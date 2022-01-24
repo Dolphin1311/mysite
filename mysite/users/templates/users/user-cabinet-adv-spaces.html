@@ -12,7 +12,9 @@
     {% show_sidebar user %}
     <div class="content">
         {% if not adv_spaces %}
-
+            <div class="no-adv-spaces">
+                <h1>You have no advertising space yet.</h1>
+            </div>
         {% else %}
         <div class="adv-spaces">
             <div class="adv-spaces-items">
@@ -31,7 +33,9 @@
             </div>
         </div>
         {% endif %}
-        <a href="" type="button" id="add-adv-space">Add advertising space</a>
+        <div class="button-holder">
+            <a href="" type="button" id="add-adv-space">Add advertising space</a>
+        </div>
     </div>
 </div>
 {% endblock %}

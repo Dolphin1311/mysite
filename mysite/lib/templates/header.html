@@ -19,7 +19,7 @@
             {% if user.is_authenticated %}
                 <div class="account">
                     <a href="{% url 'logout' %}">Log out</a>
-                    <a href="#"><img src="{% static 'image/user-icon.png' %}" alt="user_icon"></a>
+                    <a href="#"><img class="account-image" src="{% static 'image/user-icon.png' %}" alt="user_icon"></a>
                 </div>
             {% else %}
                 <div class="login-buttons">
