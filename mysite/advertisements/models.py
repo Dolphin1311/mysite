@@ -17,7 +17,7 @@ class AdvertisingSpaceCategory(models.Model):
         return reverse('space-type', kwargs={'category_slug': self.slug})
 
     def __str__(self):
-        return f'{str(self.name).capitalize()}'
+        return str(self.name).capitalize()
 
 
 class AdvertisingSpace(models.Model):
@@ -36,8 +36,11 @@ class AdvertisingSpace(models.Model):
         verbose_name='Advertising space type'
     )
 
+    # def get_absolute_url(self):
+    #     return reverse()
+
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.title) + '-' + self.id
         super(AdvertisingSpace, self).save(*args, **kwargs)
 
     def get_image(self):
@@ -59,7 +62,7 @@ def path_and_rename(instance, filename_base: str, deep_level=3):
     filename = get_md5_file(file_name)
 
     for i in range(deep_level):
-        path += filename[count_letters-2:count_letters] + '/'
+        path += filename[count_letters - 2:count_letters] + '/'
         count_letters += 2
 
     filename += file_extension

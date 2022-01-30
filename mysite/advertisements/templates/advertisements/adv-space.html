@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load generic_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'advertisements/css/adv-space-style.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="wrapper">
+        <div class="content">
+            <div class="images-with-info">
+                <div class="images-with-info-items">
+                    <div class="images container">
+                        <div class="images-items">
+                            <div class="adv-space-image">
+                                <img src="../image/car.svg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info container">
+                        <div class="info-items">
+                            <h1 class="title">Title</h1>
+                            <h2 class="price">Price</h2>
+                            <div class="description">Description</div>
+                            <div class="general-info">
+                                <div class="user-type">
+                                    <span>User type</span>
+                                </div>
+                                <div class="category">
+                                    <span>Category: Car</span>
+                                </div>
+                                <div class="car-model">
+                                    <span>Car model: model</span>
+                                </div>
+                                <div class="car-type">
+                                    <span>Car type: type</span>
+                                </div>
+                                <div class="car-year">
+                                    <span>Production year: 2000</span>
+                                </div>
+                                <div class="car-place">
+                                    <span>Place for advertising space: top</span>
+                                </div>
+                            </div>
+                            <div class="date-created">Date created</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact container">
+                <div class="contact-items">
+                    <div class="user-items">
+                        <div class="user-image">
+                            <img src="../image/user-icon.png" alt="">
+                        </div>
+                        <div class="user-info">
+                            <h2 class="user-name">Name Surname</h2>
+                            <div class="user-date-enter">On AdvSpaces from date</div>
+                            <div class="user-last-login">Last online date</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
