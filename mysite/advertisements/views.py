@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, TemplateView, ListView
+from django.views.generic import CreateView, TemplateView, ListView, DetailView
 from .utils import DataMixin
 from .forms import AdvertisingSpaceForm, AdvertisingSpaceImageForm
 from .models import AdvertisingSpace, AdvertisingSpaceImage
+from users.models import Person
 
 
 class HomeView(DataMixin, TemplateView):
@@ -17,7 +18,7 @@ class HomeView(DataMixin, TemplateView):
         return context | my_context
 
 
-class AdvSpacesView(ListView, DataMixin):
+class AdvSpacesListView(ListView, DataMixin):
     template_name = 'advertisements/advertising-spaces.html'
     model = AdvertisingSpace
     context_object_name = 'adv_spaces'
@@ -30,6 +31,19 @@ class AdvSpacesView(ListView, DataMixin):
 
     def get_queryset(self):
         return AdvertisingSpace.objects.filter(is_published=True)
+
+
+class AdvSpaceDetailView(DetailView, DataMixin):
+    model = AdvertisingSpace
+    context_object_name = 'adv_space'
+    template_name = 'advertisements/adv-space.html'
+    slug_url_kwarg = 'adv_space_slug'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        my_context = self.get_user_context(title=self.object.title, person=Person.objects.get(user=self.request.user))
+
+        return context | my_context
 
 
 @login_required

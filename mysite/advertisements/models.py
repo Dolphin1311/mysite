@@ -36,8 +36,8 @@ class AdvertisingSpace(models.Model):
         verbose_name='Advertising space type'
     )
 
-    # def get_absolute_url(self):
-    #     return reverse()
+    def get_absolute_url(self):
+        return reverse('adv_space', kwargs={'adv_space_slug': self.slug})
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title) + '-' + self.id

@@ -12,7 +12,6 @@ def show_header(user):
 @register.inclusion_tag('user-cabinet-sidebar.html')
 def show_sidebar(user):
     # check if user is person type
-    print(user.user_type)
     if user.user_type == UserType.objects.get(pk=2):
         person = Person.objects.get(user=user)
         return {'person_name': person.first_name, 'person_lastname': person.last_name}

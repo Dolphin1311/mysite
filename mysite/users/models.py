@@ -49,7 +49,7 @@ class UserType(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
-        return f'{self.name=}'
+        return str(self.name).capitalize()
 
 
 # Custom user model
@@ -78,4 +78,8 @@ class Person(models.Model):
     last_name = models.CharField(max_length=255, verbose_name='Last name')
     phone = PhoneNumberField(unique=True, verbose_name='Phone')
     date_birthday = models.DateField(verbose_name='Date of birth')
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, primary_key=True)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        primary_key=True,
+    )

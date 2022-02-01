@@ -19,7 +19,7 @@
         <div class="adv-spaces">
             <div class="adv-spaces-items">
                 {% for adv_space in adv_spaces %}
-                    <div class="adv-spaces-item" onclick="location.href='#';">
+                    <div class="adv-spaces-item" onclick="location.href='{{ adv_space.get_absolute_url }}';">
                         <img src="{{ MEDIA_URL }}{{ adv_space.get_image.image }}" alt="">
                         <div class="adv-spaces-item-right">
                             <div class="adv-spaces-item-right-head">

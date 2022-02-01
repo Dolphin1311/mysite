@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load generic_tags %}
+{% load advertisements_tags %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'advertisements/css/adv-space-style.css' %}"/>
@@ -15,36 +15,38 @@
                     <div class="images container">
                         <div class="images-items">
                             <div class="adv-space-image">
-                                <img src="../image/car.svg" alt="">
+                                <img src="{{ MEDIA_URL }}{{ adv_space.get_image.image }}" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="info container">
                         <div class="info-items">
-                            <h1 class="title">Title</h1>
-                            <h2 class="price">Price</h2>
-                            <div class="description">Description</div>
+                            <h1 class="title">{{ adv_space.title }}</h1>
+                            <h2 class="price">{{ adv_space.price }}</h2>
+                            <div class="description">{{ adv_space.description }}</div>
                             <div class="general-info">
                                 <div class="user-type">
-                                    <span>User type</span>
+                                    <span>{{ adv_space.user.user_type }}</span>
                                 </div>
                                 <div class="category">
-                                    <span>Category: Car</span>
+                                    <span>Category: {{ adv_space.advertising_space_category }}</span>
                                 </div>
                                 <div class="car-model">
-                                    <span>Car model: model</span>
+                                    <span>Car model: {{ adv_space.data|get_data_from_json:"car_model" }}</span>
                                 </div>
                                 <div class="car-type">
-                                    <span>Car type: type</span>
+                                    <span>Car type: {{ adv_space.data|get_data_from_json:"car_type" }}</span>
                                 </div>
                                 <div class="car-year">
-                                    <span>Production year: 2000</span>
+                                    <span>Production year: {{ adv_space.data|get_data_from_json:"prod_year" }}</span>
                                 </div>
                                 <div class="car-place">
-                                    <span>Place for advertising space: top</span>
+                                    <span>
+                                        Place for advertising space: {{ adv_space.data|get_data_from_json:"adv_place" }}
+                                    </span>
                                 </div>
                             </div>
-                            <div class="date-created">Date created</div>
+                            <div class="date-created">Date created: {{ adv_space.date_created|date:"d-m-Y" }}</div>
                         </div>
                     </div>
                 </div>
@@ -56,9 +58,11 @@
                             <img src="../image/user-icon.png" alt="">
                         </div>
                         <div class="user-info">
-                            <h2 class="user-name">Name Surname</h2>
-                            <div class="user-date-enter">On AdvSpaces from date</div>
-                            <div class="user-last-login">Last online date</div>
+                            <h2 class="user-name">{{ person.first_name}} {{ person.last_name}}</h2>
+                            <div class="user-date-enter">On AdvSpaces from {{ user.date_joined|date:"d-m-Y" }}</div>
+                            <div class="user-last-login">
+                                Last login {{ user.last_login|date:"d-m-Y" }} {{ user.last_login|time:"H:i" }}
+                            </div>
                         </div>
                     </div>
                 </div>
