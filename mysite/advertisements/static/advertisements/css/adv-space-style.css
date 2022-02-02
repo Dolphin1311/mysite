@@ -73,8 +73,11 @@ h2{
     margin-bottom: 10px;
 }
 
+.contact-with-buttons{
+    flex: 1;
+}
+
 .contact{
-    width: 360px;
     align-self: flex-start;
     margin-top: 70px;
 }
@@ -98,4 +101,31 @@ h2{
 .user-info div{
     font-size: 14px;
     color: #7F9799;
+}
+
+.creator-buttons{
+    margin-top: 15px;
+    align-self: flex-start;
+}
+
+.creator-buttons-items{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.button-holder{
+    align-self: center;
+}
+
+.button-holder a{
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    background-color: #C887E3;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    padding: 10px 0;
 }
