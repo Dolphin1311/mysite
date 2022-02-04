@@ -84,7 +84,7 @@ class AdvertisingSpaceImage(models.Model):
     image = models.ImageField(upload_to=path_and_rename, verbose_name='Image', null=True, blank=True)
     advertising_space = models.ForeignKey(
         AdvertisingSpace,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         verbose_name='Adverting space',
         related_name='images'
     )
