@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, TemplateView, ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, DetailView, DeleteView
 from .utils import DataMixin
 from .forms import AdvertisingSpaceForm, AdvertisingSpaceImageForm
 from .models import AdvertisingSpace, AdvertisingSpaceImage
@@ -46,6 +48,13 @@ class AdvSpaceDetailView(DetailView, DataMixin):
             my_context['person'] = Person.objects.get(user=self.request.user)
 
         return context | my_context
+
+
+def adv_space_delete_view(request, adv_space_id):
+    adv_space = AdvertisingSpace.objects.get(id=adv_space_id)
+    adv_space.delete()
+
+    return render(request, '/user/')
 
 
 @login_required
