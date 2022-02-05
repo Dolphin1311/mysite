@@ -1,3 +1,12 @@
+@keyframes smooth {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
 img{
     width: 100%;
     height: 100%;
@@ -11,6 +20,60 @@ h1{
 h2{
     font-size: 20px;
     font-weight: 700;
+}
+
+.gray-screen{
+    animation: smooth 0.5s ease;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(80, 80, 80, 0.42);
+    z-index: 99;
+}
+
+.delete-div{
+    animation: smooth 0.5s ease;
+    display: none;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    padding: 50px;
+    z-index: 100;
+    border-radius: 10px;
+}
+
+.delete-div-items{
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+.delete-div-items span{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.buttons-holder{
+    display: flex;
+    gap: 50px;
+    align-self: center;
+}
+
+.buttons-holder a, .buttons-holder input{
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    background-color: #C887E3;
+    text-decoration: none;
+    padding: 10px 50px;
+    cursor: pointer;
 }
 
 .content{
@@ -118,7 +181,8 @@ h2{
     align-self: center;
 }
 
-.button-holder a{
+.button-holder a, .button-holder input{
+    border: none;
     font-size: 18px;
     font-weight: 700;
     color: white;
@@ -128,4 +192,5 @@ h2{
     width: 200px;
     text-align: center;
     padding: 10px 0;
+    cursor: pointer;
 }

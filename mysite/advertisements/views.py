@@ -54,7 +54,7 @@ def adv_space_delete_view(request, adv_space_id):
     adv_space = AdvertisingSpace.objects.get(id=adv_space_id)
     adv_space.delete()
 
-    return render(request, '/user/')
+    return redirect('user_adv_spaces')
 
 
 @login_required
