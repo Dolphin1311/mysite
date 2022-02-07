@@ -10,7 +10,7 @@
 <div class="gray-screen"></div>
 <div class="delete-div">
     <div class="delete-div-items">
-        <span>Are you sure you want to delete this item?</span>
+        <h3>Are you sure you want to delete this item?</h3>
         <div class="buttons-holder">
             <a href="{% url 'delete_adv_space' adv_space.id %}">Delete</a>
             <input type="button" id="cancel-button" onclick="hideDeleteDiv()" value="Cancel">
@@ -31,8 +31,8 @@
                     </div>
                     <div class="info container">
                         <div class="info-items">
-                            <h1 class="title">{{ adv_space.title }}</h1>
-                            <h2 class="price">{{ adv_space.price }}</h2>
+                            <h3 class="title">{{ adv_space.title }}</h3>
+                            <h3 class="price">{{ adv_space.price }}</h3>
                             <div class="description">{{ adv_space.description }}</div>
                             <div class="general-info">
                                 <div class="user-type">
@@ -71,7 +71,7 @@
                                 </div>
                                 {% if user.user_type.name == 'person' %}
                                 <div class="user-info">
-                                    <h2 class="user-name">{{ person.first_name }} {{ person.last_name }}</h2>
+                                    <h3 class="user-name">{{ person.first_name }} {{ person.last_name }}</h3>
                                     <div class="user-date-enter">On AdvSpaces from {{ user.date_joined|date:"d-m-Y" }}
                                     </div>
                                     <div class="user-last-login">

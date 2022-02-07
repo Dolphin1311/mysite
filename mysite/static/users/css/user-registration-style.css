@@ -7,6 +7,10 @@ a{
     color: #333333;
 }
 
+label{
+    font-size: 22px;
+}
+
 h2{
     font-size: 34px;
     font-weight: 700;
@@ -31,7 +35,6 @@ h2{
     flex-direction: column;
     border-radius: 10px;
     padding: 30px 65px;
-    font-size: 20px;
     align-items: center;
 }
 

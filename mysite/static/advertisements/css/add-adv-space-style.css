@@ -1,15 +1,16 @@
-h1{
-    font-size: 32px;
+h2{
+    font-size: 34px;
+
 }
 
-h2{
-    font-size: 28px;
+h3{
+    font-size: 26px;
     font-weight: 400;
     margin-bottom: 10px;
 }
 
 label{
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 5px;
 }
 
@@ -29,7 +30,7 @@ select{
 
 #title, #email, #category, #model, #year, #type, #place{
     margin-bottom: 10px;
-    font-size: 24px;
+    font-size: 22px;
 }
 
 #title, #description{
@@ -49,14 +50,14 @@ select{
 }
 
 #description{
-    font-size: 24px;
+    font-size: 22px;
     resize: none;
 }
 
 input[type='text'], [type='email'], [type='tel'], [type='number'], textarea{
     border: 1px solid black;
     border-radius: 10px;
-    font-size: 24px;
+    font-size: 22px;
     padding: 5px;
 }
 
@@ -73,7 +74,7 @@ input[type='submit']{
     background-color: #C887E3;
     font-weight: 700;
     color: white;
-    padding: 17px 28px;
+    padding: 10px 30px;
     align-self: center;
     cursor: pointer;
 }

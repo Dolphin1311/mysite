@@ -3,40 +3,40 @@
 {% load generic_tags %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/user-cabinet-sidebar-style.css'%}">
+<link rel="stylesheet" href="{% static 'css/user-cabinet-navigation-style.css'%}">
 <link rel="stylesheet" href="{% static 'users/css/user-cabinet-adv-spaces-style.css'%}">
 {% endblock %}
 
 {% block content %}
-<div class="page">
-    {% show_sidebar user %}
-    <div class="content">
-        {% if not adv_spaces %}
-            <div class="no-adv-spaces">
-                <h1>You have no advertising space yet.</h1>
-            </div>
-        {% else %}
-        <div class="adv-spaces">
-            <div class="adv-spaces-items">
-                {% for adv_space in adv_spaces %}
-                    <div class="adv-spaces-item" onclick="location.href='{{ adv_space.get_absolute_url }}';">
-                        <img src="{{ MEDIA_URL }}{{ adv_space.get_image.image }}" alt="">
-                        <div class="adv-spaces-item-right">
-                            <div class="adv-spaces-item-right-head">
-                                <h3>{{ adv_space.title }}</h3>
-                                <h3>{{ adv_space.price }}</h3>
-                            </div>
-                            <p>{{ adv_space.description }}</p>
-                        </div>
+{% show_cabinet_navigation %}
+{% if adv_spaces %}
+<div class="adv-spaces">
+    <div class="wrapper">
+        <div class="adv-spaces-items">
+            {% for adv_space in adv_spaces %}
+            <div class="adv-spaces-item" onclick="location.href='{{ adv_space.get_absolute_url }}';">
+                {% if adv_space.get_image.image %}
+                <img src="{{ MEDIA_URL }}{{ adv_space.get_image.image }}" alt="">
+                {% else %}
+                <img src="{% static 'image/no-img.png' %}" alt="">
+                {% endif %}
+                <div class="adv-spaces-item-right">
+                    <div class="adv-spaces-item-right-head">
+                        <h3>{{ adv_space.title }}</h3>
+                        <h3>{{ adv_space.price }}</h3>
                     </div>
-                {% endfor %}
+                    <p>{{ adv_space.description }}</p>
+                </div>
             </div>
-        </div>
-        {% endif %}
-        <div class="button-holder">
-            <a href="{% url 'add_adv_space' %}" type="button" id="add-adv-space">Add advertising space</a>
+            {% endfor %}
         </div>
     </div>
+</div>
+{% else %}
+<h2>You have no advertising spaces yet.</h2>
+{% endif %}
+<div class="button-holder">
+    <a href="{% url 'add_adv_space' %}" type="button">Add advertising space</a>
 </div>
 {% endblock %}
 
