@@ -1,5 +1,5 @@
 body{
-    background-color: #fff;
+    background: linear-gradient(90deg, rgba(200,135,227,1) 0%, rgba(241,137,137,1) 100%);
 }
 
 a{
@@ -7,28 +7,21 @@ a{
     color: #333333;
 }
 
-.wrapper{
-    width: 1140px;
-    margin: 0 auto;
-
-    position: relative;
-}
-
 h2{
-    font-size: 36px;
+    font-size: 34px;
     font-weight: 700;
+    margin: 0 0 25px 0;
 }
 
 .login-form{
-    height: calc(100vh - 100px);
-    background: linear-gradient(90deg, rgba(200,135,227,1) 0%, rgba(241,137,137,1) 100%);
+    margin-top: 75px;
 }
 
 .login-form-container{
-    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
     border-radius: 10px;
-    padding: 30px 65px;
-    width: 550px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -37,7 +30,7 @@ h2{
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    padding: 5px;
+    padding: 30px 65px;
     font-size: 20px;
     align-items: center;
 }
@@ -50,14 +43,14 @@ h2{
 .login-form-items input{
     border-radius: 10px;
     padding: 5px;
-    font-size: 20px;
+    font-size: 22px;
     width: 420px;
     align-items: center;
     margin-bottom: 11px;
 }
 
 .login-form-items input[type='submit']{
-    margin-top: 27px;
+    margin-top: 30px;
     border-radius: 50px;
     border: none;
     background-color: #C887E3;
