@@ -65,14 +65,18 @@ def edit_adv_space_view(request, adv_space_slug):
         "car_model": adv_space_json_data["car_model"],
         "prod_year": adv_space_json_data["prod_year"],
         "car_type": adv_space_json_data["car_type"],
-        "adv_place": adv_space_json_data["adv_place"]
+        "adv_place": adv_space_json_data["adv_place"],
     }
 
     if request.method == "POST":
-        adv_space_form = AdvertisingSpaceForm(data=request.POST, initial=initial_dict, instance=adv_space)
+        adv_space_form = AdvertisingSpaceForm(
+            data=request.POST, initial=initial_dict, instance=adv_space
+        )
         # adv_space_image_form = AdvertisingSpaceImageForm(request.POST, request.FILES)
 
-        if adv_space_form.is_valid():  #all([adv_space_form.is_valid(), adv_space_image_form.is_valid()]):
+        if (
+            adv_space_form.is_valid()
+        ):  # all([adv_space_form.is_valid(), adv_space_image_form.is_valid()]):
             try:
                 adv_space_form.save()
                 # adv_space_image = adv_space_image_form.save(commit=False)
@@ -80,6 +84,7 @@ def edit_adv_space_view(request, adv_space_slug):
                 # adv_space_image.save()
             except Exception as e:
                 import traceback
+
                 print(traceback.format_exc())
 
             return redirect("add_adv_space")
@@ -112,6 +117,7 @@ def add_adv_space_view(request):
                 adv_space_image.save()
             except Exception as e:
                 import traceback
+
                 print(traceback.format_exc())
 
             return redirect("add_adv_space")

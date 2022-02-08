@@ -1,15 +1,9 @@
-import string
-import random
-
 from django.db import models
 from django.db.models import JSONField
 from django.conf import settings
 from django.urls import reverse
-
-import hashlib
-import os
-
 from django.utils.text import slugify
+from .utils import random_string_generator, path_and_rename
 
 
 class AdvertisingSpaceCategory(models.Model):
@@ -52,11 +46,6 @@ class AdvertisingSpace(models.Model):
         self.slug = self.unique_slug_generator()
         super(AdvertisingSpace, self).save(*args, **kwargs)
 
-
-    @staticmethod
-    def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
-        return ''.join(random.choice(chars) for _ in range(size))
-
     def unique_slug_generator(self, new_slug=None):
         """
         This is for a Django project and it assumes your instance
@@ -67,51 +56,17 @@ class AdvertisingSpace(models.Model):
         else:
             slug = slugify(self.title)
 
-        Klass = self.__class__
-        qs_exists = Klass.objects.filter(slug=slug).exists()
+        class_obj = self.__class__
+        qs_exists = class_obj.objects.filter(slug=slug).exists()
         if qs_exists:
             new_slug = "{slug}-{randstr}".format(
-                slug=slug,
-                randstr=self.random_string_generator(size=4)
+                slug=slug, randstr=random_string_generator(size=4)
             )
             return self.unique_slug_generator(new_slug=new_slug)
         return slug
 
     def get_image(self):
         return self.images.first()
-
-
-# functions for correctly storing images in AdvertisingSpaceImage model
-def path_and_rename(instance, filename_base: str, deep_level=3):
-    """
-    Create whole filepath string to the storing image based on changed filename
-    :param instance: instance of class
-    :param filename_base: filename before editing
-    :param deep_level: number of levels of nesting of folders
-    :return: string of the whole path to the storing image
-    """
-    file_name, file_extension = os.path.splitext(filename_base)
-    path = "images/"
-    count_letters = 2
-    filename = get_md5_file(file_name)
-
-    for i in range(deep_level):
-        path += filename[count_letters - 2 : count_letters] + "/"
-        count_letters += 2
-
-    filename += file_extension
-    return os.path.join(path, filename)
-
-
-def get_md5_file(filename):
-    """
-    Create md5 hash string based on filename
-    :param filename: filename
-    :return: string of md5 hash
-    """
-    result = hashlib.md5(filename.encode()).hexdigest()
-
-    return result
 
 
 class AdvertisingSpaceImage(models.Model):
