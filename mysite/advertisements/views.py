@@ -62,10 +62,6 @@ def edit_adv_space_view(request, adv_space_slug):
     adv_space_json_data = adv_space.data
 
     initial_dict = {
-        # "title": adv_space.title,
-        # "advertising_space_category": adv_space.advertising_space_category,
-        # "description": adv_space.description,
-        # "price": adv_space.price,
         "car_model": adv_space_json_data["car_model"],
         "prod_year": adv_space_json_data["prod_year"],
         "car_type": adv_space_json_data["car_type"],
@@ -83,7 +79,8 @@ def edit_adv_space_view(request, adv_space_slug):
                 # adv_space_image.advertising_space = adv_space
                 # adv_space_image.save()
             except Exception as e:
-                print(e)
+                import traceback
+                print(traceback.format_exc())
 
             return redirect("add_adv_space")
 

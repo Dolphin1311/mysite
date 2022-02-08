@@ -63,14 +63,10 @@ class AdvertisingSpaceForm(forms.ModelForm):
         instance = super(AdvertisingSpaceForm, self).save(commit=False)
         instance.data = json_data
 
-        if self.user:
+        if hasattr(self, "user"):
             instance.user = self.user
 
         if commit:
             instance.save()
 
         return instance
-
-
-class AdvertisingSpaceEditForm(forms.ModelForm):
-    pass
