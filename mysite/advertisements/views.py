@@ -107,13 +107,15 @@ def add_adv_space_view(request):
         adv_space_image_form = AdvertisingSpaceImageForm(request.POST, request.FILES)
 
         if all([adv_space_form.is_valid(), adv_space_image_form.is_valid()]):
+            print(adv_space_form.cleaned_data)
             try:
                 adv_space = adv_space_form.save()
                 adv_space_image = adv_space_image_form.save(commit=False)
                 adv_space_image.advertising_space = adv_space
                 adv_space_image.save()
             except Exception as e:
-                print(e)
+                import traceback
+                print(traceback.format_exc())
 
             return redirect("add_adv_space")
 

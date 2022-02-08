@@ -46,7 +46,13 @@ class AdvertisingSpace(models.Model):
         return reverse("adv_space", kwargs={"adv_space_slug": self.slug})
 
     def save(self, *args, **kwargs):
+<<<<<<< HEAD
         self.slug = slugify(self.title) + "-" + self.id
+||||||| 2b61d79
+        self.slug = slugify(self.title) + '-' + self.id
+=======
+        self.slug = slugify(self.title) + '-' + str(self.id)
+>>>>>>> master
         super(AdvertisingSpace, self).save(*args, **kwargs)
 
     def get_image(self):
