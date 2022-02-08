@@ -8,7 +8,7 @@ from advertisements.models import AdvertisingSpace
 
 
 def signup_view(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         user_form = NewUserForm(request.POST)
         person_form = NewPersonForm(request.POST)
 
@@ -19,46 +19,48 @@ def signup_view(request):
             person.save()
             login(request, user)
 
-            return redirect('home')
+            return redirect("home")
     else:
         user_form = NewUserForm()
         person_form = NewPersonForm()
 
-    return render(request, 'users/user-registration.html', {'user_form': user_form,
-                                                            'person_form': person_form,
-                                                            'title': 'Sign up'})
+    return render(
+        request,
+        "users/user-registration.html",
+        {"user_form": user_form, "person_form": person_form, "title": "Sign up"},
+    )
 
 
 def login_view(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data['username']
-            password = form.cleaned_data['password']
+            email = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
             user = authenticate(email=email, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect("home")
             else:
-                print('Invalid email or password')
+                print("Invalid email or password")
 
     form = AuthenticationForm()
 
-    return render(request, 'users/user-login.html', context={'form': form,
-                                                             'title': 'Sign in'})
+    return render(
+        request, "users/user-login.html", context={"form": form, "title": "Sign in"}
+    )
 
 
 def logout_view(request):
     logout(request)
 
-    return redirect('login')
+    return redirect("login")
 
 
 class UserCabinetAdvSpacesView(ListView, LoginRequiredMixin):
-    template_name = 'users/user-cabinet-adv-spaces.html'
-    context_object_name = 'adv_spaces'
+    template_name = "users/user-cabinet-adv-spaces.html"
+    context_object_name = "adv_spaces"
 
     def get_queryset(self):
         # get all adv spaces for current logged in user
         return AdvertisingSpace.objects.filter(user=self.request.user)
-

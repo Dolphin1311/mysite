@@ -3,7 +3,7 @@ from .models import AdvertisingSpace, AdvertisingSpaceCategory
 
 
 class AdvertisingSpaceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'description', 'slug', 'data', 'user')
+    list_display = ("id", "title", "description", "slug", "data", "user")
     # list_display_links = ('id', 'title')
     # search_fields = ('title', 'content')
     # list_editable = ('is_published',)
@@ -12,7 +12,7 @@ class AdvertisingSpaceAdmin(admin.ModelAdmin):
 
 
 class AdvertisingSpaceCategoryAdmin(admin.ModelAdmin):
-    list_display = ('id',)
+    list_display = ("id",)
 
 
 admin.site.register(AdvertisingSpace)

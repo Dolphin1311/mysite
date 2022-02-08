@@ -7,11 +7,10 @@ class PersonInline(admin.TabularInline):
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'email', 'last_login', 'date_joined', 'is_active')
+    list_display = ("id", "email", "last_login", "date_joined", "is_active")
     inlines = [
         PersonInline,
     ]
 
 
 admin.site.register(User, UserAdmin)
-

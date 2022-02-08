@@ -17,7 +17,7 @@ class UserManager(BaseUserManager):
         # check if all fields are set
         for field_name, value in field_value_map.items():
             if not value:
-                raise ValueError(f'The {field_name} must be set.')
+                raise ValueError(f"The {field_name} must be set.")
 
             email = self.normalize_email(email)
             user = self.model(email=email, **extra_fields)
@@ -26,21 +26,21 @@ class UserManager(BaseUserManager):
             return user
 
     def create_user(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault("is_staff", False)
+        extra_fields.setdefault("is_superuser", False)
 
         return self._create_user(email, password, **extra_fields)
 
     def create_superuser(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-        extra_fields.setdefault('user_type_id', 1)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("user_type_id", 1)
 
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError("Superuser must have is_staff=True.")
 
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError("Superuser must have is_superuser=True.")
 
         return self._create_user(email, password, **extra_fields)
 
@@ -54,30 +54,34 @@ class UserType(models.Model):
 
 # Custom user model
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True, verbose_name='E-mail')
-    last_login = models.DateTimeField(null=True, verbose_name='Last login time')
-    date_joined = models.DateTimeField(default=timezone.now, verbose_name='Date joined')
-    is_active = models.BooleanField(default=True, verbose_name='Online')
-    is_staff = models.BooleanField(default=False, verbose_name='Is stuff')
-    is_activated = models.BooleanField(default=False, verbose_name='Is activated account')
-    user_type = models.ForeignKey(UserType, on_delete=models.PROTECT, verbose_name='User type')
+    email = models.EmailField(unique=True, verbose_name="E-mail")
+    last_login = models.DateTimeField(null=True, verbose_name="Last login time")
+    date_joined = models.DateTimeField(default=timezone.now, verbose_name="Date joined")
+    is_active = models.BooleanField(default=True, verbose_name="Online")
+    is_staff = models.BooleanField(default=False, verbose_name="Is stuff")
+    is_activated = models.BooleanField(
+        default=False, verbose_name="Is activated account"
+    )
+    user_type = models.ForeignKey(
+        UserType, on_delete=models.PROTECT, verbose_name="User type"
+    )
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
 
     def save(self, *args, **kwargs):
         # set user type as person
-        person_user_type = UserType.objects.get(name='person')
+        person_user_type = UserType.objects.get(name="person")
         self.user_type = person_user_type
         super(User, self).save(*args, **kwargs)
 
 
 class Person(models.Model):
-    first_name = models.CharField(max_length=255, verbose_name='First name')
-    last_name = models.CharField(max_length=255, verbose_name='Last name')
-    phone = PhoneNumberField(unique=True, verbose_name='Phone')
-    date_birthday = models.DateField(verbose_name='Date of birth')
+    first_name = models.CharField(max_length=255, verbose_name="First name")
+    last_name = models.CharField(max_length=255, verbose_name="Last name")
+    phone = PhoneNumberField(unique=True, verbose_name="Phone")
+    date_birthday = models.DateField(verbose_name="Date of birth")
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.PROTECT,
