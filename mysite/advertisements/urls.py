@@ -20,6 +20,6 @@ urlpatterns = [
     ),
     path("delete/<int:adv_space_id>", adv_space_delete_view, name="delete_adv_space"),
     path(
-        "adv-space/<slug:adv_space_slug>/edit",
+        "adv-space/<slug:adv_space_slug>/edit", edit_adv_space_view, name="edit_adv_space"
     ),
 ]

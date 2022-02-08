@@ -30,7 +30,8 @@ class AdvertisingSpaceForm(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop("user")
+        if kwargs.get("user"):
+            self.user = kwargs.pop("user")
         super(AdvertisingSpaceForm, self).__init__(*args, **kwargs)
 
     class Meta:
@@ -52,23 +53,24 @@ class AdvertisingSpaceForm(forms.ModelForm):
         }
 
     def save(self, commit=True):
-        car_model = self.cleaned_data["car_model"]
-        prod_year = self.cleaned_data["prod_year"]
-        car_type = self.cleaned_data["car_type"]
-        adv_place = self.cleaned_data["adv_place"]
-
         json_data = {
-            "car_model": car_model,
-            "prod_year": prod_year,
-            "car_type": car_type,
-            "adv_place": adv_place,
+            "car_model": self.cleaned_data["car_model"],
+            "prod_year": self.cleaned_data["prod_year"],
+            "car_type": self.cleaned_data["car_type"],
+            "adv_place": self.cleaned_data["adv_place"],
         }
 
         instance = super(AdvertisingSpaceForm, self).save(commit=False)
         instance.data = json_data
-        instance.user = self.user
+
+        if self.user:
+            instance.user = self.user
 
         if commit:
             instance.save()
 
         return instance
+
+
+class AdvertisingSpaceEditForm(forms.ModelForm):
+    pass

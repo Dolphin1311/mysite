@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, DeleteView
 from .utils import DataMixin
@@ -57,8 +57,47 @@ def adv_space_delete_view(request, adv_space_id):
     return redirect("user_adv_spaces")
 
 
-def edit_adv_space_view(request):
-    pass
+def edit_adv_space_view(request, adv_space_slug):
+    adv_space = get_object_or_404(AdvertisingSpace, slug=adv_space_slug)
+    adv_space_json_data = adv_space.data
+
+    initial_dict = {
+        # "title": adv_space.title,
+        # "advertising_space_category": adv_space.advertising_space_category,
+        # "description": adv_space.description,
+        # "price": adv_space.price,
+        "car_model": adv_space_json_data["car_model"],
+        "prod_year": adv_space_json_data["prod_year"],
+        "car_type": adv_space_json_data["car_type"],
+        "adv_place": adv_space_json_data["adv_place"]
+    }
+
+    if request.method == "POST":
+        adv_space_form = AdvertisingSpaceForm(data=request.POST, initial=initial_dict, instance=adv_space)
+        # adv_space_image_form = AdvertisingSpaceImageForm(request.POST, request.FILES)
+
+        if adv_space_form.is_valid():  #all([adv_space_form.is_valid(), adv_space_image_form.is_valid()]):
+            try:
+                adv_space_form.save()
+                # adv_space_image = adv_space_image_form.save(commit=False)
+                # adv_space_image.advertising_space = adv_space
+                # adv_space_image.save()
+            except Exception as e:
+                print(e)
+
+            return redirect("add_adv_space")
+
+    adv_space_form = AdvertisingSpaceForm(initial=initial_dict, instance=adv_space)
+    # adv_space_image_form = AdvertisingSpaceImageForm()
+
+    return render(
+        request,
+        "advertisements/edit-adv-space.html",
+        context={
+            "adv_space_form": adv_space_form,
+            # "adv_space_image_form": adv_space_image_form,
+        },
+    )
 
 
 @login_required
