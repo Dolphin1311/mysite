@@ -59,9 +59,10 @@ def adv_space_delete_view(request, adv_space_id):
 
 def edit_adv_space_view(request, adv_space_slug):
     adv_space = get_object_or_404(AdvertisingSpace, slug=adv_space_slug)
+    adv_space_images = AdvertisingSpaceImage.objects.filter(advertising_space=adv_space)
     adv_space_json_data = adv_space.data
 
-    initial_dict = {
+    adv_space_initial_dict = {
         "car_model": adv_space_json_data["car_model"],
         "prod_year": adv_space_json_data["prod_year"],
         "car_type": adv_space_json_data["car_type"],
@@ -70,7 +71,7 @@ def edit_adv_space_view(request, adv_space_slug):
 
     if request.method == "POST":
         adv_space_form = AdvertisingSpaceForm(
-            data=request.POST, initial=initial_dict, instance=adv_space
+            data=request.POST, initial=adv_space_initial_dict, instance=adv_space
         )
         # adv_space_image_form = AdvertisingSpaceImageForm(request.POST, request.FILES)
 
@@ -89,7 +90,7 @@ def edit_adv_space_view(request, adv_space_slug):
 
             return redirect("add_adv_space")
 
-    adv_space_form = AdvertisingSpaceForm(initial=initial_dict, instance=adv_space)
+    adv_space_form = AdvertisingSpaceForm(initial=adv_space_initial_dict, instance=adv_space)
     # adv_space_image_form = AdvertisingSpaceImageForm()
 
     return render(
@@ -131,5 +132,5 @@ def add_adv_space_view(request):
         context={
             "adv_space_form": adv_space_form,
             "adv_space_image_form": adv_space_image_form,
-        },
+        }
     )
