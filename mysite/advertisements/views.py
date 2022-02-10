@@ -48,8 +48,8 @@ class AdvSpaceDetailView(DetailView, DataMixin):
         return context | my_context
 
 
-def adv_space_delete_view(request, adv_space_id):
-    adv_space = AdvertisingSpace.objects.get(id=adv_space_id)
+def adv_space_delete_view(request, adv_space_slug):
+    adv_space = AdvertisingSpace.objects.get(slug=adv_space_slug)
     adv_space.delete()
 
     return redirect("user_adv_spaces")
@@ -86,7 +86,7 @@ def edit_adv_space_view(request, adv_space_slug):
 
                 print(traceback.format_exc())
 
-            return redirect("add_adv_space")
+            return redirect("user_adv_spaces")
 
     adv_space_form = AdvertisingSpaceForm(initial=adv_space_initial_dict, instance=adv_space)
     # adv_space_image_form = AdvertisingSpaceImageForm()
@@ -119,7 +119,7 @@ def add_adv_space_view(request):
 
                 print(traceback.format_exc())
 
-            return redirect("add_adv_space")
+            return redirect("user_adv_spaces")
 
     adv_space_form = AdvertisingSpaceForm(user=request.user)
     adv_space_image_form = AdvertisingSpaceImageForm()

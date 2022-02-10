@@ -18,7 +18,7 @@ urlpatterns = [
         AdvSpaceDetailView.as_view(),
         name="adv_space",
     ),
-    path("delete/<int:adv_space_id>", adv_space_delete_view, name="delete_adv_space"),
+    path("adv_space/<slug:adv_space_slug>/delete/", adv_space_delete_view, name="delete_adv_space"),
     path(
         "adv-space/<slug:adv_space_slug>/edit",
         edit_adv_space_view,
