@@ -5,7 +5,7 @@ register = template.Library()
 
 
 @register.filter
-def get_image(item, count="all"):
+def get_images(item, count="all"):
     """
     Get images for selected adv space
     :param item: object of adv space

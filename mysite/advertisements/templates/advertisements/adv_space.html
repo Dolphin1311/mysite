@@ -24,9 +24,16 @@
                 <div class="images-with-info-items">
                     <div class="images container">
                         <div class="images-items">
+                            {% for image in adv_space|get_images %}
                             <div class="adv-space-image">
-                                <img src="{{ MEDIA_URL }}{{ adv_space.get_image.image }}" alt="">
+                                <div class="number-text">
+                                    {{ forloop.counter }} / {{ adv_space|get_images|length }}
+                                </div>
+                                <img src="{{ MEDIA_URL }}{{ image.image }}" alt="">
                             </div>
+                            {% endfor %}
+                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
                         </div>
                     </div>
                     <div class="info container">
