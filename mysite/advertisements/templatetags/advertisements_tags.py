@@ -27,3 +27,12 @@ def get_image(item, count="all"):
 @register.filter
 def get_data_from_json(item, data):
     return item[data]
+
+
+@register.inclusion_tag("advertisements/adv-space-form.html")
+def show_adv_space_form(adv_space_form, adv_space_image_form, action):
+    return {
+        "adv_space_form": adv_space_form,
+        "adv_space_image_form": adv_space_image_form,
+        "action": action.capitalize
+    }
