@@ -21,7 +21,7 @@ class HomeView(DataMixin, TemplateView):
 
 
 class AdvSpacesListView(ListView, DataMixin):
-    template_name = "advertisements/advertising-spaces.html"
+    template_name = "advertisements/advertising_spaces.html"
     model = AdvertisingSpace
     context_object_name = "adv_spaces"
 
@@ -38,7 +38,7 @@ class AdvSpacesListView(ListView, DataMixin):
 class AdvSpaceDetailView(DetailView, DataMixin):
     model = AdvertisingSpace
     context_object_name = "adv_space"
-    template_name = "advertisements/adv-space.html"
+    template_name = "advertisements/adv_space.html"
     slug_url_kwarg = "adv_space_slug"
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -95,7 +95,7 @@ def edit_adv_space_view(request, adv_space_slug):
 
     return render(
         request,
-        "advertisements/edit-adv-space.html",
+        "advertisements/edit_adv_space.html",
         context={
             "adv_space_form": adv_space_form,
             # "adv_space_image_form": adv_space_image_form,
@@ -128,7 +128,7 @@ def add_adv_space_view(request):
 
     return render(
         request,
-        "advertisements/add-adv-space.html",
+        "advertisements/add-adv_space.html",
         context={
             "adv_space_form": adv_space_form,
             "adv_space_image_form": adv_space_image_form,

@@ -26,7 +26,7 @@ def signup_view(request):
 
     return render(
         request,
-        "users/user-registration.html",
+        "users/user_registration.html",
         {"user_form": user_form, "person_form": person_form, "title": "Sign up"},
     )
 
@@ -47,7 +47,7 @@ def login_view(request):
     form = AuthenticationForm()
 
     return render(
-        request, "users/user-login.html", context={"form": form, "title": "Sign in"}
+        request, "users/user_login.html", context={"form": form, "title": "Sign in"}
     )
 
 
@@ -58,7 +58,7 @@ def logout_view(request):
 
 
 class UserCabinetAdvSpacesView(ListView, LoginRequiredMixin):
-    template_name = "users/user-cabinet-adv-spaces.html"
+    template_name = "users/user_cabinet_adv_spaces.html"
     context_object_name = "adv_spaces"
 
     def get_queryset(self):

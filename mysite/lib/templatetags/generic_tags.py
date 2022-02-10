@@ -10,7 +10,7 @@ def show_header(user):
     return {'user': user}
 
 
-@register.inclusion_tag('user-cabinet-navigation.html')
+@register.inclusion_tag('user_cabinet_navigation.html')
 def show_cabinet_navigation(nav_selected=0):
     cabinet_navigation = [
         {'title': 'Advertising Spaces', 'url': 'user_adv_spaces'},
