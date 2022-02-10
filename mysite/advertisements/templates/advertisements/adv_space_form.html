@@ -1,12 +1,12 @@
-<div class="add-form">
+<div class="form">
     <div class="wrapper">
-        <div class="add-form-items">
+        <div class="form-items">
             <h2>{{ action }} advertising space</h2>
             {{ form.as_p }}
             <form action="#" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <h3>General information</h3>
-                <div class="add-form-item-container">
+                <div class="form-item-container">
                     <label for="{{ adv_space_form.title.id_for_label }}">
                         {{ adv_space_form.title.label }}
                     </label>
@@ -57,7 +57,7 @@
                 </div>
 
                 <h3>Images</h3>
-                <div class="add-form-item-container">
+                <div class="form-item-container">
                     {{ adv_space_image_form.image }}
                     <!--                    <input type="file" accept="image/png, image/jpeg" name="files" multiple>-->
                 </div>

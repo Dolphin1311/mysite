@@ -29,10 +29,10 @@ def get_data_from_json(item, data):
     return item[data]
 
 
-@register.inclusion_tag("advertisements/adv-space-form.html")
-def show_adv_space_form(adv_space_form, adv_space_image_form, action):
+@register.inclusion_tag("advertisements/adv_space_form.html", takes_context=True)
+def show_adv_space_form(context, action):
     return {
-        "adv_space_form": adv_space_form,
-        "adv_space_image_form": adv_space_image_form,
+        "adv_space_form": context["adv_space_form"],
+        "adv_space_image_form": context["adv_space_image_form"],
         "action": action.capitalize
     }
