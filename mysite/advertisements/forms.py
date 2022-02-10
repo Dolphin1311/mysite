@@ -8,7 +8,7 @@ class AdvertisingSpaceImageForm(forms.ModelForm):
     class Meta:
         model = AdvertisingSpaceImage
         fields = ["image"]
-        widgets = {"image": forms.FileInput(attrs={"accept": "image/png, image/jpeg"})}
+        widgets = {"image": forms.FileInput(attrs={"accept": "image/png, image/jpeg", "multiple": True})}
 
 
 class AdvertisingSpaceForm(forms.ModelForm):

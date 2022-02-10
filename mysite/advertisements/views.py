@@ -1,7 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, DetailView, DeleteView
 from .utils import DataMixin
 from .forms import AdvertisingSpaceForm, AdvertisingSpaceImageForm
@@ -108,15 +106,15 @@ def add_adv_space_view(request):
     if request.method == "POST":
         adv_space_form = AdvertisingSpaceForm(data=request.POST, user=request.user)
         adv_space_image_form = AdvertisingSpaceImageForm(request.POST, request.FILES)
+        images = request.FILES.getlist('image')
 
         if all([adv_space_form.is_valid(), adv_space_image_form.is_valid()]):
-            print(adv_space_form.cleaned_data)
             try:
                 adv_space = adv_space_form.save()
-                adv_space_image = adv_space_image_form.save(commit=False)
-                adv_space_image.advertising_space = adv_space
-                adv_space_image.save()
-            except Exception as e:
+                for image in images:
+                    adv_space_image = AdvertisingSpaceImage.objects.create(image=image, advertising_space=adv_space)
+                    adv_space_image.save()
+            except Exception:
                 import traceback
 
                 print(traceback.format_exc())
@@ -128,7 +126,7 @@ def add_adv_space_view(request):
 
     return render(
         request,
-        "advertisements/add-adv_space.html",
+        "advertisements/add_adv_space.html",
         context={
             "adv_space_form": adv_space_form,
             "adv_space_image_form": adv_space_image_form,
