@@ -102,15 +102,16 @@ def edit_adv_space_view(request, adv_space_slug):
 def add_adv_space_view(request):
     if request.method == "POST":
         adv_space_form = AdvertisingSpaceForm(data=request.POST, user=request.user)
-        adv_space_image_form = AdvertisingSpaceImageForm(request.POST, request.FILES)
+        adv_space_images_formset = AdvertisingSpaceImagesFormSet(request.POST, request.FILES)
         images = request.FILES.getlist('image')
 
-        if all([adv_space_form.is_valid(), adv_space_image_form.is_valid()]):
+        if all([adv_space_form.is_valid(), adv_space_images_formset.is_valid()]):
             try:
                 adv_space = adv_space_form.save()
+                images = adv_space_images_formset.save(commit=False)
                 for image in images:
-                    adv_space_image = AdvertisingSpaceImage.objects.create(image=image, advertising_space=adv_space)
-                    adv_space_image.save()
+                    image.advertising_space = adv_space
+                    image.save()
             except Exception:
                 import traceback
 
@@ -119,13 +120,13 @@ def add_adv_space_view(request):
             return redirect("user_adv_spaces")
 
     adv_space_form = AdvertisingSpaceForm(user=request.user)
-    adv_space_image_form = AdvertisingSpaceImageForm()
+    adv_space_images_formset = AdvertisingSpaceImagesFormSet()
 
     return render(
         request,
         "advertisements/add_adv_space.html",
         context={
             "adv_space_form": adv_space_form,
-            "adv_space_image_form": adv_space_image_form,
+            "adv_space_image_form": adv_space_images_formset,
         }
     )
