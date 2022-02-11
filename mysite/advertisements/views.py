@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView, ListView, DetailView, DeleteView
+from django.views.generic import TemplateView, ListView, DetailView
+from django.forms import inlineformset_factory
 from .utils import DataMixin
 from .forms import AdvertisingSpaceForm, AdvertisingSpaceImageForm
 from .models import AdvertisingSpace, AdvertisingSpaceImage
@@ -55,11 +56,12 @@ def adv_space_delete_view(request, adv_space_slug):
     return redirect("user_adv_spaces")
 
 
+@login_required
 def edit_adv_space_view(request, adv_space_slug):
     adv_space = get_object_or_404(AdvertisingSpace, slug=adv_space_slug)
-    adv_space_images = AdvertisingSpaceImage.objects.filter(advertising_space=adv_space)
-    adv_space_json_data = adv_space.data
+    adv_space_images_formset = inlineformset_factory(AdvertisingSpace, AdvertisingSpaceImage, fields=["image"], extra=8)
 
+    adv_space_json_data = adv_space.data
     adv_space_initial_dict = {
         "car_model": adv_space_json_data["car_model"],
         "prod_year": adv_space_json_data["prod_year"],
@@ -71,16 +73,12 @@ def edit_adv_space_view(request, adv_space_slug):
         adv_space_form = AdvertisingSpaceForm(
             data=request.POST, initial=adv_space_initial_dict, instance=adv_space
         )
-        # adv_space_image_form = AdvertisingSpaceImageForm(request.POST, request.FILES)
+        images_formset = adv_space_images_formset(request.POST, request.FILES, instance=adv_space)
 
-        if (
-            adv_space_form.is_valid()
-        ):  # all([adv_space_form.is_valid(), adv_space_image_form.is_valid()]):
+        if all([adv_space_form.is_valid(), images_formset.is_valid()]):
             try:
                 adv_space_form.save()
-                # adv_space_image = adv_space_image_form.save(commit=False)
-                # adv_space_image.advertising_space = adv_space
-                # adv_space_image.save()
+                images_formset.save()
             except Exception as e:
                 import traceback
 
@@ -89,14 +87,14 @@ def edit_adv_space_view(request, adv_space_slug):
             return redirect("user_adv_spaces")
 
     adv_space_form = AdvertisingSpaceForm(initial=adv_space_initial_dict, instance=adv_space)
-    # adv_space_image_form = AdvertisingSpaceImageForm()
+    images_formset = adv_space_images_formset(instance=adv_space)
 
     return render(
         request,
         "advertisements/edit_adv_space.html",
         context={
             "adv_space_form": adv_space_form,
-            # "adv_space_image_form": adv_space_image_form,
+            "adv_space_image_form": images_formset,
         },
     )
 

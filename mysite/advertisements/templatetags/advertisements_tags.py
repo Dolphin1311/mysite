@@ -36,3 +36,5 @@ def show_adv_space_form(context, action):
         "adv_space_image_form": context["adv_space_image_form"],
         "action": action.capitalize
     }
+
+

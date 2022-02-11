@@ -58,8 +58,12 @@
 
                 <h3>Images</h3>
                 <div class="form-item-container">
-                    {{ adv_space_image_form.image }}
-                    <!--                    <input type="file" accept="image/png, image/jpeg" name="files" multiple>-->
+                    {% if action == "add" %}
+                        {{ adv_space_image_form.image }}
+                    {% else %}
+                        {{ adv_space_image_form.as_p }}
+                    {% endif %}
+
                 </div>
 
                 <!--                <h2>Personal information</h2>-->
