@@ -2,7 +2,6 @@
     <div class="wrapper">
         <div class="form-items">
             <h2>{{ action }} advertising space</h2>
-            {{ form.as_p }}
             <form action="#" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <h3>General information</h3>
@@ -58,11 +57,12 @@
 
                 <h3>Images</h3>
                 <div class="form-item-container">
-                    {% if action == "add" %}
-                        {{ adv_space_image_form.image }}
-                    {% else %}
-                        {{ adv_space_image_form.as_p }}
-                    {% endif %}
+<!--                    {% if action == "edit" %}-->
+<!--                        {{ adv_space_images_formset.image }}-->
+<!--                    {% else %}-->
+<!--                        {{ adv_space_images_formset.as_p }}-->
+<!--                    {% endif %}-->
+                    {{ adv_space_images_formset.as_p }}
 
                 </div>
 

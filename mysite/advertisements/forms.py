@@ -1,15 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory
-from django.urls import reverse_lazy
-
 from .models import AdvertisingSpaceImage, AdvertisingSpace
-
-
-class AdvertisingSpaceImageForm(forms.ModelForm):
-    class Meta:
-        model = AdvertisingSpaceImage
-        fields = ["image"]
-        widgets = {"image": forms.FileInput(attrs={"accept": "image/png, image/jpeg", "multiple": True})}
 
 
 class AdvertisingSpaceForm(forms.ModelForm):
@@ -77,5 +68,6 @@ AdvertisingSpaceImagesFormSet = inlineformset_factory(
     AdvertisingSpace,
     AdvertisingSpaceImage,
     fields=["image"],
-    extra=8
+    extra=8,
+    max_num=8
 )

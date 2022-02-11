@@ -33,7 +33,7 @@ def get_data_from_json(item, data):
 def show_adv_space_form(context, action):
     return {
         "adv_space_form": context["adv_space_form"],
-        "adv_space_image_form": context["adv_space_image_form"],
+        "adv_space_images_formset": context["adv_space_images_formset"],
         "action": action.capitalize
     }
 
