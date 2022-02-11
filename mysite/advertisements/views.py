@@ -1,7 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView, ListView, DetailView, UpdateView, CreateView
+from django.views.generic import (
+    TemplateView,
+    ListView,
+    DetailView,
+    UpdateView,
+    CreateView,
+)
 from .utils import DataMixin
 from .forms import AdvertisingSpaceForm, AdvertisingSpaceImagesFormSet
 from .models import AdvertisingSpace
@@ -59,7 +65,7 @@ def adv_space_delete_view(request, adv_space_slug):
 class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
     model = AdvertisingSpace
     form_class = AdvertisingSpaceForm
-    template_name = 'advertisements/edit_adv_space.html'
+    template_name = "advertisements/edit_adv_space.html"
     context_object_name = "adv_space"
     slug_url_kwarg = "adv_space_slug"
 
@@ -78,20 +84,23 @@ class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
             "car_type": object_json_data["car_type"],
             "adv_place": object_json_data["adv_place"],
         }
-        context["adv_space_images_formset"] = AdvertisingSpaceImagesFormSet(instance=self.object)
-        context["adv_space_form"] = AdvertisingSpaceForm(initial=self.object_initial_data, instance=self.object)
+        context["adv_space_images_formset"] = AdvertisingSpaceImagesFormSet(
+            instance=self.object
+        )
+        context["adv_space_form"] = AdvertisingSpaceForm(
+            initial=self.object_initial_data, instance=self.object
+        )
         my_context = self.get_user_context(title="Edit advertising space")
 
         return context | my_context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = self.form_class(data=request.POST, initial=self.object_initial_data,
-                               instance=self.object)
+        form = self.form_class(
+            data=request.POST, initial=self.object_initial_data, instance=self.object
+        )
         images_formset = AdvertisingSpaceImagesFormSet(
-            self.request.POST,
-            self.request.FILES,
-            instance=self.object
+            self.request.POST, self.request.FILES, instance=self.object
         )
 
         if all([form.is_valid(), images_formset.is_valid]):
@@ -134,7 +143,9 @@ class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
 def add_adv_space_view(request):
     if request.method == "POST":
         adv_space_form = AdvertisingSpaceForm(data=request.POST, user=request.user)
-        adv_space_images_formset = AdvertisingSpaceImagesFormSet(request.POST, request.FILES)
+        adv_space_images_formset = AdvertisingSpaceImagesFormSet(
+            request.POST, request.FILES
+        )
 
         if all([adv_space_form.is_valid(), adv_space_images_formset.is_valid()]):
             try:
@@ -159,5 +170,5 @@ def add_adv_space_view(request):
         context={
             "adv_space_form": adv_space_form,
             "adv_space_images_formset": adv_space_images_formset,
-        }
+        },
     )

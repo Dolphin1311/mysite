@@ -65,9 +65,5 @@ class AdvertisingSpaceForm(forms.ModelForm):
 
 
 AdvertisingSpaceImagesFormSet = inlineformset_factory(
-    AdvertisingSpace,
-    AdvertisingSpaceImage,
-    fields=["image"],
-    extra=8,
-    max_num=8
+    AdvertisingSpace, AdvertisingSpaceImage, fields=["image"], extra=8, max_num=8
 )
