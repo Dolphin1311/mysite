@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
 
 from .models import AdvertisingSpaceImage, AdvertisingSpace
@@ -70,3 +71,11 @@ class AdvertisingSpaceForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+AdvertisingSpaceImagesFormSet = inlineformset_factory(
+    AdvertisingSpace,
+    AdvertisingSpaceImage,
+    fields=["image"],
+    extra=8
+)
