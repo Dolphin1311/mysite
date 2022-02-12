@@ -1,6 +1,10 @@
+import os
+
 from django.db import models
 from django.db.models import JSONField
 from django.conf import settings
+from django.db.models.signals import post_delete, pre_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.text import slugify
 from .utils import random_string_generator, path_and_rename
@@ -78,3 +82,22 @@ class AdvertisingSpaceImage(models.Model):
 
     def get_absolute_url(self):
         return reverse("home")
+
+
+@receiver(post_delete, sender=AdvertisingSpaceImage)
+def post_delete_image(sender, instance, **kwargs):
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
+
+
+@receiver(pre_save, sender=AdvertisingSpaceImage)
+def pre_delete_image_on_update(sender, instance, **kwargs):
+    if not instance.pk:
+        return False
+
+    old_image = AdvertisingSpaceImage.objects.get(pk=instance.pk).image
+    new_image = instance.image
+    if not old_image == new_image:
+        if os.path.isfile(old_image.path):
+            os.remove(old_image.path)
