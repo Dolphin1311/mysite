@@ -1,6 +1,5 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -25,7 +24,7 @@ class HomeView(DataMixin, TemplateView):
         return context | my_context
 
 
-class AdvSpacesListView(ListView, DataMixin):
+class AdvSpaceListView(ListView, DataMixin):
     template_name = "advertisements/advertising_spaces.html"
     model = AdvertisingSpace
     context_object_name = "adv_spaces"
@@ -138,37 +137,4 @@ class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
                 image.advertising_space = adv_space
                 image.save()
 
-
-@login_required
-def add_adv_space_view(request):
-    if request.method == "POST":
-        adv_space_form = AdvertisingSpaceForm(data=request.POST, user=request.user)
-        adv_space_images_formset = AdvertisingSpaceImagesFormSet(
-            request.POST, request.FILES
-        )
-
-        if all([adv_space_form.is_valid(), adv_space_images_formset.is_valid()]):
-            try:
-                adv_space = adv_space_form.save()
-                adv_space_images = adv_space_images_formset.save(commit=False)
-                for image in adv_space_images:
-                    image.advertising_space = adv_space
-                    image.save()
-            except Exception:
-                import traceback
-
-                print(traceback.format_exc())
-
             return redirect("user_adv_spaces")
-
-    adv_space_form = AdvertisingSpaceForm(user=request.user)
-    adv_space_images_formset = AdvertisingSpaceImagesFormSet()
-
-    return render(
-        request,
-        "advertisements/add_adv_space.html",
-        context={
-            "adv_space_form": adv_space_form,
-            "adv_space_images_formset": adv_space_images_formset,
-        },
-    )
