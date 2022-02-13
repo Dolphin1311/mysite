@@ -58,7 +58,7 @@ def adv_space_delete_view(request, adv_space_slug):
     adv_space = AdvertisingSpace.objects.get(slug=adv_space_slug)
     adv_space.delete()
 
-    return redirect("user_adv_spaces")
+    return redirect("user_cabinet")
 
 
 class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
@@ -106,14 +106,13 @@ class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
             form.save()
             images_formset.save()
 
-            return redirect("user_adv_spaces")
+            return redirect("user_cabinet")
 
 
 class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
     model = AdvertisingSpace
     form_class = AdvertisingSpaceForm
     template_name = "advertisements/create_adv_space.html"
-    context_object_name = "adv_space"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -137,4 +136,4 @@ class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
                 image.advertising_space = adv_space
                 image.save()
 
-            return redirect("user_adv_spaces")
+            return redirect("user_cabinet")
