@@ -23,7 +23,7 @@ class AdvertisingSpaceForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         if kwargs.get("user"):
-            self.user = kwargs.pop("user")
+            self._user = kwargs.pop("user")
         super(AdvertisingSpaceForm, self).__init__(*args, **kwargs)
 
     class Meta:
@@ -56,7 +56,7 @@ class AdvertisingSpaceForm(forms.ModelForm):
         instance.data = json_data
 
         if hasattr(self, "user"):
-            instance.user = self.user
+            instance.user = self._user
 
         if commit:
             instance.save()
