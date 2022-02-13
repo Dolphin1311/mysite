@@ -228,12 +228,12 @@ h3{
     color: #7F9799;
 }
 
-.creator-buttons{
+.buttons{
     margin-top: 15px;
     align-self: flex-start;
 }
 
-.creator-buttons-items{
+.buttons-items{
     display: flex;
     flex-direction: column;
     gap: 15px;

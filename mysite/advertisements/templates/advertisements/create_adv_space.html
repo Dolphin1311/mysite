@@ -4,8 +4,11 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'advertisements/css/adv_space_form_style.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/form_style.css' %}"/>
 {% endblock %}
 
 {% block content %}
-{% show_adv_space_form "edit" %}
+{% show_adv_space_form "add" %}
 {% endblock %}
+
+
