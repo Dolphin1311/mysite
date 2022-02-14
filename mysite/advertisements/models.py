@@ -19,6 +19,10 @@ class AdvertisingSpaceCategory(models.Model):
     def get_absolute_url(self):
         return reverse("space-type", kwargs={"category_slug": self.slug})
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(AdvertisingSpaceCategory, self).save(*args, **kwargs)
+
     def __str__(self):
         return str(self.name).capitalize()
 
@@ -79,9 +83,6 @@ class AdvertisingSpaceImage(models.Model):
         verbose_name="Adverting space",
         related_name="images",
     )
-
-    def get_absolute_url(self):
-        return reverse("home")
 
 
 @receiver(post_delete, sender=AdvertisingSpaceImage)
