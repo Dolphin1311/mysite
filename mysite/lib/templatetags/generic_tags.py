@@ -13,7 +13,7 @@ def show_header(user):
 @register.inclusion_tag('user_cabinet_navigation.html')
 def show_cabinet_navigation(nav_selected=0):
     cabinet_navigation = [
-        {'title': 'Advertising Spaces', 'url': 'user_adv_spaces'},
+        {'title': 'Advertising Spaces', 'url': 'user_cabinet'},
         {'title': 'Messages', 'url': 'user_messages'},
         {'title': 'Personal data', 'url': 'user_data'},
         {'title': 'Change password', 'url': 'user_change_pass'}
