@@ -12,7 +12,9 @@ class OrderCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["order_item_form"] = OrderItemForm(adv_space=self._get_adv_space(self.kwargs.pop("adv_space_id")))
+        context["order_item_form"] = OrderItemForm(
+            adv_space=self._get_adv_space(self.kwargs.pop("adv_space_id"))
+        )
         context["title"] = "Create order"
 
         return context
@@ -24,9 +26,7 @@ class OrderCreateView(CreateView):
         if form.is_valid():
             order_item = form.save()
             order = Order.objects.create(
-                order_item=order_item,
-                owner=adv_space.user,
-                client=self.request.user
+                order_item=order_item, owner=adv_space.user, client=self.request.user
             )
             order.save()
 

@@ -14,12 +14,12 @@ class OrderItemForm(forms.ModelForm):
         labels = {
             "date_from": "Date from",
             "date_to": "Date to",
-            "price": "Price per month"
+            "price": "Price per month",
         }
         widgets = {
             "date_from": forms.DateInput(attrs={"id": "date-from"}),
             "date_to": forms.DateInput(attrs={"id": "date-to"}),
-            "price": forms.NumberInput(attrs={"id": "price"})
+            "price": forms.NumberInput(attrs={"id": "price"}),
         }
 
     def save(self, commit=True):
@@ -30,4 +30,3 @@ class OrderItemForm(forms.ModelForm):
             instance.save()
 
         return instance
-
