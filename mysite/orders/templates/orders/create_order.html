@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'orders/css/order_form_style.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/form_style.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="form">
+    <div class="wrapper">
+        <div class="form-items">
+            <h2>Create order on advertising space</h2>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <h3>General information</h3>
+                <div class="form-item-container">
+                    <label for="{{ order_item_form.date_from.id_for_label }}">
+                        {{ order_item_form.date_from.label }}
+                    </label>
+                    {{ order_item_form.date_from }}
+                    {{ order_item_form.date_from.error|escape }}
+
+                    <label for="{{ order_item_form.date_to.id_for_label }}">
+                        {{ order_item_form.date_to.label }}
+                    </label>
+                    {{ order_item_form.date_to }}
+                    {{ order_item_form.date_to.error|escape }}
+
+                    <label for="{{ order_item_form.price.id_for_label }}">
+                        {{ order_item_form.price.label }}
+                    </label>
+                    {{ order_item_form.price }}
+                    {{ order_item_form.price.error|escape }}
+                </div>
+
+                <div class="button-holder">
+                    <input type="submit" value="Create order">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
