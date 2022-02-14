@@ -5,39 +5,32 @@ from .models import Order, OrderItem
 from advertisements.models import AdvertisingSpace
 
 
-class OrderItemCreateView(CreateView):
+class OrderCreateView(CreateView):
     model = OrderItem
     form_class = OrderItemForm
     template_name = "orders/create_order.html"
 
-    def __init__(self):
-        self._adv_space = None
-        self._owner = None
-
-        super(OrderItemCreateView, self).__init__()
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # get adv space and client for order item
-        self._adv_space = self._get_adv_space(kwargs["adv_space_id"])
-        self._owner = self._adv_space.user
-        context["order_item_form"] = OrderItemForm(self._adv_space)
+        context["order_item_form"] = OrderItemForm(adv_space=self._get_adv_space(self.kwargs.pop("adv_space_id")))
         context["title"] = "Create order"
 
+        return context
+
     def post(self, request, *args, **kwargs):
-        form = self.form_class(data=request.POST, adv_space=self._adv_space)
+        adv_space = self._get_adv_space(self.kwargs.pop("adv_space_id"))
+        form = self.form_class(data=request.POST, adv_space=adv_space)
 
         if form.is_valid():
             order_item = form.save()
             order = Order.objects.create(
                 order_item=order_item,
-                owner=self._owner,
+                owner=adv_space.user,
                 client=self.request.user
             )
+            order.save()
 
             return redirect("user_cabinet")
-
-
 
     def _get_adv_space(self, adv_space_id):
         return AdvertisingSpace.objects.get(pk=adv_space_id)

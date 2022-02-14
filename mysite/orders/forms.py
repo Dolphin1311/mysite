@@ -3,9 +3,10 @@ from .models import OrderItem
 
 
 class OrderItemForm(forms.ModelForm):
-    def __init__(self, adv_space, **kwargs):
-        self._adv_space = adv_space
-        super(OrderItemForm, self).__init__(**kwargs)
+    def __init__(self, *args, **kwargs):
+        if kwargs.get("adv_space"):
+            self._adv_space = kwargs.pop("adv_space")
+        super(OrderItemForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = OrderItem

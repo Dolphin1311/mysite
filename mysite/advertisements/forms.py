@@ -54,8 +54,8 @@ class AdvertisingSpaceForm(forms.ModelForm):
 
         instance = super(AdvertisingSpaceForm, self).save(commit=False)
         instance.data = json_data
-
-        if hasattr(self, "user"):
+        print(f"*****************************************User id: {self._user.pk}")
+        if hasattr(self, "_user"):
             instance.user = self._user
 
         if commit:
