@@ -48,8 +48,11 @@ class AdvSpaceDetailView(DetailView, DataMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         my_context = self.get_user_context(title=self.object.title)
-        if self.request.user.user_type.name == "person":
-            my_context["person"] = Person.objects.get(user=self.request.user)
+        # check if it is anonymous user or logged in
+        if not self.request.user.is_anonymous:
+            # check user_type
+            if self.request.user.user_type.name == "person":
+                my_context["person"] = Person.objects.get(user=self.request.user)
 
         return context | my_context
 

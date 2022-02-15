@@ -104,9 +104,13 @@
                                 <input type="button" id="delete-button" value="Delete" onclick="showDeleteDiv()"/>
                             </div>
                             {% else %}
-                            <div class="button-holder">
-                                <a href="{% url 'make_order' adv_space.id user.id %}" type="button" id="order">Make order</a>
-                            </div>
+                                <div class="button-holder">
+                                    {% if user.is_anonymous %}
+                                        <a href="{% url 'login' %}" type="button" id="order">Make order</a>
+                                    {% else %}
+                                        <a href="{% url 'make_order' adv_space.id user.id %}" type="button" id="order">Make order</a>
+                                    {% endif %}
+                                </div>
                             {% endif %}
                         </div>
                     </div>

@@ -2,6 +2,7 @@ import tempfile
 import os
 
 from django.test import TestCase, override_settings
+from django.urls import reverse
 from django.utils.text import slugify
 from django.utils import timezone
 from django.db.models import ObjectDoesNotExist
@@ -14,11 +15,11 @@ from users.models import UserType
 class TestModels(TestCase):
     def setUp(self):
         user_model = get_user_model()
-        user_type = UserType.objects.create(name="test user")
+        UserType.objects.create(name="test user")
         self.user = user_model.objects.create(
             email="test_email@email.com",
             password="test_Pass1234",
-            user_type=user_type
+            user_type=UserType.objects.get(name="test user")
         )
 
     def get_temporary_image(self, temp_file):
@@ -33,7 +34,12 @@ class TestModels(TestCase):
         return AdvertisingSpace.objects.create(
             title="Test title",
             description="Test description",
-            data=dict(data1="test data 1", data2="test data 2", data3="test data 3"),
+            data={
+                "car_model": "test data 1",
+                "prod_year": "test data 2",
+                "car_type": "test data 3",
+                "adv_place": "test data 3"
+            },
             is_published=True,
             date_created=timezone.now(),
             date_updated=timezone.now(),
@@ -58,11 +64,13 @@ class TestModels(TestCase):
             advertising_space=_adv_space
         )
 
+    # AdvertisingSpace model
     def test_advertising_space_creation(self):
         adv_space = self.create_advertising_space()
 
         self.assertTrue(isinstance(adv_space, AdvertisingSpace))
         self.assertEqual(adv_space.slug, slugify(adv_space.title))
+        self.assertEqual(reverse("adv_space", kwargs={"adv_space_slug": adv_space.slug}), adv_space.get_absolute_url())
 
     def test_advertising_space_deletion(self):
         adv_space = self.create_advertising_space()
@@ -75,6 +83,7 @@ class TestModels(TestCase):
 
         self.assertEqual(adv_space.get_image().image, adv_space_image.image)
 
+    # AdvertisingSpaceImage model
     def test_advertising_space_image_creation(self):
         adv_space_image = self.create_advertising_space_image()
 
