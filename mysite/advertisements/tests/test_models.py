@@ -1,25 +1,32 @@
-import init_test_env
+import tempfile
 import os
 
-init_test_env.init_test_env()
-
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils.text import slugify
-from advertisements.models import AdvertisingSpace, AdvertisingSpaceCategory, AdvertisingSpaceImage
-from users.models import User, UserType
 from django.utils import timezone
 from django.db.models import ObjectDoesNotExist
-from django.core.files.uploadedfile import SimpleUploadedFile
+from django.contrib.auth import get_user_model
+from PIL import Image
+from advertisements.models import AdvertisingSpace, AdvertisingSpaceCategory, AdvertisingSpaceImage
+from users.models import UserType
 
 
-class AdvertisingSpaceTest(TestCase):
-    def create_user(self):
-        UserType.objects.create(name="Test user type")
-        return User.objects.create(
+class TestModels(TestCase):
+    def setUp(self):
+        user_model = get_user_model()
+        user_type = UserType.objects.create(name="test user")
+        self.user = user_model.objects.create(
             email="test_email@email.com",
             password="test_Pass1234",
-            user_type=UserType.objects.get(name="Test user type")
+            user_type=user_type
         )
+
+    def get_temporary_image(self, temp_file):
+        size = (200, 200)
+        color = (255, 0, 0, 0)
+        image = Image.new("RGBA", size, color)
+        image.save(temp_file, 'png')
+        return temp_file
 
     def create_advertising_space(self):
         AdvertisingSpaceCategory.objects.create(name="Test category")
@@ -30,29 +37,24 @@ class AdvertisingSpaceTest(TestCase):
             is_published=True,
             date_created=timezone.now(),
             date_updated=timezone.now(),
-            user=self.create_user(),
+            user=self.user,
             price="12",
             advertising_space_category=AdvertisingSpaceCategory.objects.get(name="Test category")
         )
 
-    def create_advertising_space_image(self, adv_space=None, image_path=None):
+    def create_advertising_space_image(self, adv_space=None):
         # if no adv_space in args, then create new
         if adv_space:
             _adv_space = adv_space
         else:
             _adv_space = self.create_advertising_space()
 
-        if image_path:
-            _image_path = image_path
-        else:
-            _image_path = "images/test_image.jpg"
+        # create test image
+        temp_file = tempfile.NamedTemporaryFile()
+        test_image = self.get_temporary_image(temp_file)
 
         return AdvertisingSpaceImage.objects.create(
-            image=SimpleUploadedFile(
-                name="test_image.jpg",
-                content=open(_image_path, "rb").read(),
-                content_type="image/jpeg"
-            ),
+            image=test_image.name,
             advertising_space=_adv_space
         )
 
@@ -61,7 +63,6 @@ class AdvertisingSpaceTest(TestCase):
 
         self.assertTrue(isinstance(adv_space, AdvertisingSpace))
         self.assertEqual(adv_space.slug, slugify(adv_space.title))
-        adv_space.delete()
 
     def test_advertising_space_deletion(self):
         adv_space = self.create_advertising_space()
@@ -78,14 +79,15 @@ class AdvertisingSpaceTest(TestCase):
         adv_space_image = self.create_advertising_space_image()
 
         self.assertTrue(isinstance(adv_space_image, AdvertisingSpaceImage))
-        adv_space_image.delete()
 
+    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
     def test_advertising_space_image_deletion(self):
         adv_space_image = self.create_advertising_space_image()
         adv_space_image.delete()
 
         self.assertRaises(ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=adv_space_image.pk)
 
+    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
     def test_deletion_advertising_space_image_when_advertising_space_deleting(self):
         adv_space = self.create_advertising_space()
         adv_space_image = self.create_advertising_space_image(adv_space)
@@ -93,9 +95,9 @@ class AdvertisingSpaceTest(TestCase):
 
         self.assertRaises(ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=adv_space_image.pk)
 
-    def test_delete_image_from_os_lib(self):
-        image_path = "images/test_image_delete.jpg"
-        adv_space_image = self.create_advertising_space_image(image_path=image_path)
+    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
+    def test_delete_image_from_os_lib_when_advertising_space_image_deleting(self):
+        adv_space_image = self.create_advertising_space_image()
         image_path_md5 = adv_space_image.image.path
         adv_space_image.delete()
 
