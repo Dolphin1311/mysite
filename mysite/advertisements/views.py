@@ -42,7 +42,7 @@ class AdvSpaceListView(ListView, DataMixin):
 class AdvSpaceDetailView(DetailView, DataMixin):
     model = AdvertisingSpace
     context_object_name = "adv_space"
-    template_name = "advertisements/adv_space.html"
+    template_name = "advertisements/advertising_space.html"
     slug_url_kwarg = "adv_space_slug"
 
     def get_context_data(self, **kwargs):
@@ -64,7 +64,7 @@ def adv_space_delete_view(request, adv_space_slug):
 class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
     model = AdvertisingSpace
     form_class = AdvertisingSpaceForm
-    template_name = "advertisements/update_adv_space.html"
+    template_name = "advertisements/update_advertising_space.html"
     context_object_name = "adv_space"
     slug_url_kwarg = "adv_space_slug"
 
@@ -112,7 +112,7 @@ class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
 class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
     model = AdvertisingSpace
     form_class = AdvertisingSpaceForm
-    template_name = "advertisements/create_adv_space.html"
+    template_name = "advertisements/create_advertising_space.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
