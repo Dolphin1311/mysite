@@ -3,14 +3,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.views.generic import ListView
-from .forms import NewUserForm, NewPersonForm
+from .forms import UserForm, PersonForm
 from advertisements.models import AdvertisingSpace
 
 
 def signup_view(request):
     if request.method == "POST":
-        user_form = NewUserForm(request.POST)
-        person_form = NewPersonForm(request.POST)
+        user_form = UserForm(request.POST)
+        person_form = PersonForm(request.POST)
 
         if all([user_form.is_valid(), person_form.is_valid()]):
             user = user_form.save()
@@ -21,8 +21,8 @@ def signup_view(request):
 
             return redirect("home")
     else:
-        user_form = NewUserForm()
-        person_form = NewPersonForm()
+        user_form = UserForm()
+        person_form = PersonForm()
 
     return render(
         request,

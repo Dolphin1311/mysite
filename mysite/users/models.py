@@ -10,7 +10,7 @@ from django.conf import settings
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, email, password, **extra_fields):
+    def _create_user(self, email, password, user_type, **extra_fields):
         values = [email]
         field_value_map = dict(zip(self.model.REQUIRED_FIELDS, values))
 
@@ -20,16 +20,16 @@ class UserManager(BaseUserManager):
                 raise ValueError(f"The {field_name} must be set.")
 
             email = self.normalize_email(email)
-            user = self.model(email=email, **extra_fields)
+            user = self.model(email=email, user_type=user_type, **extra_fields)
             user.set_password(password)
             user.save(using=self._db)
             return user
 
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email, password=None, user_type=None, **extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
 
-        return self._create_user(email, password, **extra_fields)
+        return self._create_user(email, password, user_type, **extra_fields)
 
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
@@ -69,12 +69,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-
-    def save(self, *args, **kwargs):
-        # set user type as person
-        person_user_type = UserType.objects.get(name="person")
-        self.user_type = person_user_type
-        super(User, self).save(*args, **kwargs)
 
 
 class Person(models.Model):
