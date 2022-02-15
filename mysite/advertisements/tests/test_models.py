@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from advertisements.models import AdvertisingSpace, AdvertisingSpaceCategory, AdvertisingSpaceImage
 from users.models import User, UserType
 from django.utils import timezone
+from django.db.models import ObjectDoesNotExist
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
@@ -42,14 +43,14 @@ class AdvertisingSpaceTest(TestCase):
             _adv_space = self.create_advertising_space()
 
         if image_path:
-            image_path_ = image_path
+            _image_path = image_path
         else:
-            image_path_ = "images/test_image.jpg"
+            _image_path = "images/test_image.jpg"
 
         return AdvertisingSpaceImage.objects.create(
             image=SimpleUploadedFile(
                 name="test_image.jpg",
-                content=open("images/test_image.jpg", "rb").read(),
+                content=open(_image_path, "rb").read(),
                 content_type="image/jpeg"
             ),
             advertising_space=_adv_space
@@ -60,11 +61,12 @@ class AdvertisingSpaceTest(TestCase):
 
         self.assertTrue(isinstance(adv_space, AdvertisingSpace))
         self.assertEqual(adv_space.slug, slugify(adv_space.title))
+        adv_space.delete()
 
-    def test_advertising_space_image_creation(self):
-        adv_space_image = self.create_advertising_space_image()
-
-        self.assertTrue(isinstance(adv_space_image, AdvertisingSpaceImage))
+    def test_advertising_space_deletion(self):
+        adv_space = self.create_advertising_space()
+        adv_space.delete()
+        self.assertRaises(ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=adv_space.pk)
 
     def test_advertising_space_get_image(self):
         adv_space = self.create_advertising_space()
@@ -72,13 +74,29 @@ class AdvertisingSpaceTest(TestCase):
 
         self.assertEqual(adv_space.get_image().image, adv_space_image.image)
 
-    # def test_delete_image_from_os_lib(self, mock):
-    #     image_path = "images/test_image_delete.jpg"
-    #     adv_space_image = self.create_advertising_space_image(image_path=image_path)
-    #     adv_space_image.delete()
-    #     print(adv_space_image)
-    #
-    #     self.assertTrue(mock.called)
+    def test_advertising_space_image_creation(self):
+        adv_space_image = self.create_advertising_space_image()
 
+        self.assertTrue(isinstance(adv_space_image, AdvertisingSpaceImage))
+        adv_space_image.delete()
 
+    def test_advertising_space_image_deletion(self):
+        adv_space_image = self.create_advertising_space_image()
+        adv_space_image.delete()
 
+        self.assertRaises(ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=adv_space_image.pk)
+
+    def test_deletion_advertising_space_image_when_advertising_space_deleting(self):
+        adv_space = self.create_advertising_space()
+        adv_space_image = self.create_advertising_space_image(adv_space)
+        adv_space_image.delete()
+
+        self.assertRaises(ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=adv_space_image.pk)
+
+    def test_delete_image_from_os_lib(self):
+        image_path = "images/test_image_delete.jpg"
+        adv_space_image = self.create_advertising_space_image(image_path=image_path)
+        image_path_md5 = adv_space_image.image.path
+        adv_space_image.delete()
+
+        self.assertFalse(os.path.exists(image_path_md5))

@@ -89,6 +89,7 @@ class AdvertisingSpaceImage(models.Model):
 def post_delete_image(sender, instance, **kwargs):
     if instance.image:
         if os.path.isfile(instance.image.path):
+            print(instance.image.path)
             os.remove(instance.image.path)
 
 
