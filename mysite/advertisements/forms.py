@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory
-from .models import AdvertisingSpaceImage, AdvertisingSpace
+from .models import AdvertisingSpaceImage, AdvertisingSpace, AdvertisingSpaceCategory
 
 
 class AdvertisingSpaceForm(forms.ModelForm):
@@ -22,9 +22,10 @@ class AdvertisingSpaceForm(forms.ModelForm):
     )
 
     def __init__(self, *args, **kwargs):
-        if kwargs.get("user"):
+        if kwargs.get("user") is not None:
             self._user = kwargs.pop("user")
         super(AdvertisingSpaceForm, self).__init__(*args, **kwargs)
+        self.fields["advertising_space_category"].queryset = AdvertisingSpaceCategory.objects.all()
 
     class Meta:
         model = AdvertisingSpace
@@ -54,7 +55,7 @@ class AdvertisingSpaceForm(forms.ModelForm):
 
         instance = super(AdvertisingSpaceForm, self).save(commit=False)
         instance.data = json_data
-        print(f"*****************************************User id: {self._user.pk}")
+
         if hasattr(self, "_user"):
             instance.user = self._user
 

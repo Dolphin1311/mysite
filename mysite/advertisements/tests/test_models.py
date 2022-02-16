@@ -1,4 +1,3 @@
-import tempfile
 import os
 
 from django.test import TestCase, override_settings
@@ -7,27 +6,20 @@ from django.utils.text import slugify
 from django.utils import timezone
 from django.db.models import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
-from PIL import Image
 from advertisements.models import AdvertisingSpace, AdvertisingSpaceCategory, AdvertisingSpaceImage
+from advertisements.tests import helper_utils
 from users.models import UserType
 
 
 class TestModels(TestCase):
     def setUp(self):
         user_model = get_user_model()
-        UserType.objects.create(name="test user")
+        user_type = UserType.objects.create(name="test user")
         self.user = user_model.objects.create(
             email="test_email@email.com",
             password="test_Pass1234",
-            user_type=UserType.objects.get(name="test user")
+            user_type=user_type
         )
-
-    def get_temporary_image(self, temp_file):
-        size = (200, 200)
-        color = (255, 0, 0, 0)
-        image = Image.new("RGBA", size, color)
-        image.save(temp_file, 'png')
-        return temp_file
 
     def create_advertising_space(self):
         AdvertisingSpaceCategory.objects.create(name="Test category")
@@ -56,8 +48,7 @@ class TestModels(TestCase):
             _adv_space = self.create_advertising_space()
 
         # create test image
-        temp_file = tempfile.NamedTemporaryFile()
-        test_image = self.get_temporary_image(temp_file)
+        test_image = helper_utils.get_temporary_image()
 
         return AdvertisingSpaceImage.objects.create(
             image=test_image.name,
@@ -89,14 +80,14 @@ class TestModels(TestCase):
 
         self.assertTrue(isinstance(adv_space_image, AdvertisingSpaceImage))
 
-    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
+    @override_settings(MEDIA_ROOT=helper_utils.get_temp_dir())
     def test_advertising_space_image_deletion(self):
         adv_space_image = self.create_advertising_space_image()
         adv_space_image.delete()
 
         self.assertRaises(ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=adv_space_image.pk)
 
-    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
+    @override_settings(MEDIA_ROOT=helper_utils.get_temp_dir())
     def test_deletion_advertising_space_image_when_advertising_space_deleting(self):
         adv_space = self.create_advertising_space()
         adv_space_image = self.create_advertising_space_image(adv_space)
@@ -104,7 +95,7 @@ class TestModels(TestCase):
 
         self.assertRaises(ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=adv_space_image.pk)
 
-    @override_settings(MEDIA_ROOT=tempfile.gettempdir())
+    @override_settings(MEDIA_ROOT=helper_utils.get_temp_dir())
     def test_delete_image_from_os_lib_when_advertising_space_image_deleting(self):
         adv_space_image = self.create_advertising_space_image()
         image_path_md5 = adv_space_image.image.path

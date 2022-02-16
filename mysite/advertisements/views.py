@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -140,3 +140,5 @@ class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
                 image.save()
 
             return redirect("user_cabinet")
+        else:
+            return render(self.request, "users/user_cabinet_adv_spaces.html")
