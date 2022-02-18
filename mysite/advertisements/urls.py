@@ -6,7 +6,6 @@ from .views import (
     AdvSpaceUpdateView,
     AdvSpaceCreateView,
     AdvSpaceDeleteView,
-    adv_space_delete_view,
 )
 
 
