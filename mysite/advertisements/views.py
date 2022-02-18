@@ -1,11 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.generic import (
     TemplateView,
     ListView,
     DetailView,
     UpdateView,
-    CreateView,
+    CreateView, DeleteView,
 )
 from .utils import DataMixin
 from .forms import AdvertisingSpaceForm, AdvertisingSpaceImagesFormSet
@@ -48,7 +49,7 @@ class AdvSpaceDetailView(DetailView, DataMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         my_context = self.get_user_context(title=self.object.title)
-        # check if it is anonymous user or logged in
+        # check if it is an anonymous user or logged-in user
         if not self.request.user.is_anonymous:
             # check user_type
             if self.request.user.user_type.name == "person":
@@ -57,11 +58,13 @@ class AdvSpaceDetailView(DetailView, DataMixin):
         return context | my_context
 
 
-def adv_space_delete_view(request, adv_space_slug):
-    adv_space = AdvertisingSpace.objects.get(slug=adv_space_slug)
-    adv_space.delete()
+class AdvSpaceDeleteView(DeleteView):
+    model = AdvertisingSpace
+    success_url = reverse_lazy("user_cabinet")
+    slug_url_kwarg = "adv_space_slug"
 
-    return redirect("user_cabinet")
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
 
 
 class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):

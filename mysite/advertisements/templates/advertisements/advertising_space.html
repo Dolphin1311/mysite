@@ -13,8 +13,11 @@
     <div class="delete-div-items">
         <h3>Are you sure you want to delete this item?</h3>
         <div class="buttons-holder">
-            <a href="{% url 'delete_adv_space' adv_space.slug %}">Delete</a>
-            <input type="button" id="cancel-button" onclick="hideDeleteDiv()" value="Cancel">
+            <form action="{% url 'delete_adv_space' adv_space.slug %}" method="post">
+                {% csrf_token %}
+                <input type="submit" id="delete-confirmation-button" value="Delete">
+                <input type="button" id="cancel-button" onclick="hideDeleteDiv()" value="Cancel">
+            </form>
         </div>
     </div>
 </div>
