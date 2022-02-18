@@ -16,9 +16,6 @@ class AdvertisingSpaceCategory(models.Model):
         max_length=255, unique=True, db_index=True, verbose_name="URL"
     )
 
-    def get_absolute_url(self):
-        return reverse("space-type", kwargs={"category_slug": self.slug})
-
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(AdvertisingSpaceCategory, self).save(*args, **kwargs)
