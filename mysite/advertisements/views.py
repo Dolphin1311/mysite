@@ -144,4 +144,4 @@ class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
 
             return redirect("user_cabinet")
         else:
-            return render(self.request, "users/user_cabinet_adv_spaces.html")
+            return render(self.request, "advertisements/create_advertising_space.html", {"adv_space_form": form, "adv_space_images_formset": images_formset})
