@@ -3,7 +3,6 @@ import os
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from django.utils.text import slugify
-from django.utils import timezone
 from django.db.models import ObjectDoesNotExist
 from django.contrib.auth import get_user_model
 from advertisements.models import AdvertisingSpace, AdvertisingSpaceCategory, AdvertisingSpaceImage
@@ -22,7 +21,7 @@ class TestModels(TestCase):
         )
 
     def create_advertising_space(self):
-        AdvertisingSpaceCategory.objects.create(name="Test category")
+        adv_space_category = AdvertisingSpaceCategory.objects.create(name="Test category")
         return AdvertisingSpace.objects.create(
             title="Test title",
             description="Test description",
@@ -33,11 +32,9 @@ class TestModels(TestCase):
                 "adv_place": "test data 3"
             },
             is_published=True,
-            date_created=timezone.now(),
-            date_updated=timezone.now(),
             user=self.user,
             price="12",
-            advertising_space_category=AdvertisingSpaceCategory.objects.get(name="Test category")
+            advertising_space_category=adv_space_category
         )
 
     def create_advertising_space_image(self, adv_space=None):
@@ -66,6 +63,7 @@ class TestModels(TestCase):
     def test_advertising_space_deletion(self):
         adv_space = self.create_advertising_space()
         adv_space.delete()
+
         self.assertRaises(ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=adv_space.pk)
 
     def test_advertising_space_get_image(self):

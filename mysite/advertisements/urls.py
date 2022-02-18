@@ -5,6 +5,7 @@ from .views import (
     AdvSpaceDetailView,
     AdvSpaceUpdateView,
     AdvSpaceCreateView,
+    AdvSpaceDeleteView,
     adv_space_delete_view,
 )
 
@@ -20,7 +21,7 @@ urlpatterns = [
     ),
     path(
         "adv_space/<slug:adv_space_slug>/delete/",
-        adv_space_delete_view,
+        AdvSpaceDeleteView.as_view(),
         name="delete_adv_space",
     ),
     path(
