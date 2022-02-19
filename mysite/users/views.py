@@ -20,6 +20,12 @@ def signup_view(request):
             login(request, user)
 
             return redirect("home")
+        else:
+            return render(
+                request,
+                "users/user_registration.html",
+                {"user_form": user_form, "person_form": person_form, "title": "Sign up"},
+            )
     else:
         user_form = UserForm()
         person_form = PersonForm()
@@ -43,6 +49,11 @@ def login_view(request):
                 return redirect("home")
             else:
                 print("Invalid email or password")
+        else:
+            return render(
+                request, "users/user_login.html", context={"form": form, "title": "Sign in"}
+            )
+
 
     form = AuthenticationForm()
 

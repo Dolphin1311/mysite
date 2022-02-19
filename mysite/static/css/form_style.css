@@ -1,6 +1,5 @@
 h2{
     font-size: 34px;
-
 }
 
 h3{
@@ -14,10 +13,16 @@ label{
     margin-bottom: 5px;
 }
 
-select{
+textarea{
+    resize: none
+}
+
+input:not([type="file"]):not([type="submit"]), select, textarea{
     border: 1px solid black;
     border-radius: 10px;
     padding: 5px;
+    font-size: 22px;
+    margin-bottom: 10px;
 }
 
 .button-holder{

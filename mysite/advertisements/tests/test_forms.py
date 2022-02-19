@@ -2,8 +2,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from advertisements.models import (
     AdvertisingSpaceCategory,
-    AdvertisingSpace,
-    AdvertisingSpaceImage,
+    AdvertisingSpace
 )
 from advertisements.forms import AdvertisingSpaceForm, AdvertisingSpaceImagesFormSet
 from advertisements.tests import helper_utils
