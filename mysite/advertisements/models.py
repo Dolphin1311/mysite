@@ -37,7 +37,7 @@ class AdvertisingSpace(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, verbose_name="Date created")
     date_updated = models.DateTimeField(auto_now=True, verbose_name="Date updated")
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name="User id"
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="User id"
     )
     price = models.DecimalField(
         max_digits=8,
@@ -47,7 +47,7 @@ class AdvertisingSpace(models.Model):
     )
     advertising_space_category = models.ForeignKey(
         AdvertisingSpaceCategory,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         verbose_name="Advertising space type",
     )
 
