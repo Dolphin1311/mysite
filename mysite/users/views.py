@@ -1,9 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
+from django.urls import reverse_lazy
 from django.views.generic import ListView
-from .forms import UserForm, PersonForm
+from .forms import UserForm, PersonForm# , LoginForm
 from advertisements.models import AdvertisingSpace
 
 
@@ -37,29 +39,10 @@ def signup_view(request):
     )
 
 
-def login_view(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            email = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            user = authenticate(email=email, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("home")
-            else:
-                print("Invalid email or password")
-        else:
-            return render(
-                request, "users/user_login.html", context={"form": form, "title": "Sign in"}
-            )
-
-
-    form = AuthenticationForm()
-
-    return render(
-        request, "users/user_login.html", context={"form": form, "title": "Sign in"}
-    )
+class UserLoginView(LoginView):
+    template_name = "users/user_login.html"
+    next_page = reverse_lazy("user_cabinet")
+    # form_class = LoginForm
 
 
 def logout_view(request):
