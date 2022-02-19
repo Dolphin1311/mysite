@@ -4,7 +4,7 @@ select{
     padding: 5px;
 }
 
-#title, #email, #category, #model, #year, #type, #place, #description{
+#title, #email, #category, #model, #year, #type, #price, #description{
     margin-bottom: 10px;
     font-size: 22px;
 }
@@ -17,11 +17,11 @@ select{
     width: 500px;
 }
 
-#phone, #category, #type, #place{
+#phone, #type{
     width: 300px;
 }
 
-#year, #price{
+#year, #price, #place, #category{
     width: 160px;
 }
 
