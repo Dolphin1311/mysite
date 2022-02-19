@@ -34,7 +34,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
-        extra_fields.setdefault("user_type_id", 1)
+        extra_fields.setdefault("user_type", 1)
 
         if extra_fields.get("is_staff") is not True:
             raise ValueError("Superuser must have is_staff=True.")
@@ -57,9 +57,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, verbose_name="E-mail")
     last_login = models.DateTimeField(null=True, verbose_name="Last login time")
     date_joined = models.DateTimeField(default=timezone.now, verbose_name="Date joined")
-    is_active = models.BooleanField(default=True, verbose_name="Online")
     is_staff = models.BooleanField(default=False, verbose_name="Is stuff")
-    is_activated = models.BooleanField(
+    is_active = models.BooleanField(
         default=False, verbose_name="Is activated account"
     )
     user_type = models.ForeignKey(
@@ -78,6 +77,6 @@ class Person(models.Model):
     date_birthday = models.DateField(verbose_name="Date of birth")
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         primary_key=True,
     )
