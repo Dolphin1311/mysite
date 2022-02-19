@@ -1,3 +1,5 @@
+from django.core.validators import MinValueValidator
+from datetime import datetime
 from django import forms
 from django.forms import inlineformset_factory
 from .models import AdvertisingSpaceImage, AdvertisingSpace, AdvertisingSpaceCategory
@@ -10,8 +12,15 @@ class AdvertisingSpaceForm(forms.ModelForm):
     prod_year = forms.IntegerField(
         label="Production year",
         widget=forms.NumberInput(
-            attrs={"id": "year", "min": 1900, "max": 2022, "step": 1, "value": 2022}
+            attrs={
+                "id": "year",
+                "min": 1900,
+                "max": datetime.now().year,
+                "step": 1,
+                "value": datetime.now().year,
+            }
         ),
+        validators=[MinValueValidator(1900)],
     )
     car_type = forms.CharField(
         label="Car type", widget=forms.TextInput(attrs={"id": "type"})
@@ -20,12 +29,24 @@ class AdvertisingSpaceForm(forms.ModelForm):
         label="Place for advertising on the car",
         widget=forms.TextInput(attrs={"id": "place"}),
     )
+    field_order = [
+        "title",
+        "description",
+        "price",
+        "advertising_space_category",
+        "car_model",
+        "car_type",
+        "prod_year",
+        "adv_place",
+    ]
 
     def __init__(self, *args, **kwargs):
         if kwargs.get("user") is not None:
             self._user = kwargs.pop("user")
         super(AdvertisingSpaceForm, self).__init__(*args, **kwargs)
-        self.fields["advertising_space_category"].queryset = AdvertisingSpaceCategory.objects.all()
+        self.fields[
+            "advertising_space_category"
+        ].queryset = AdvertisingSpaceCategory.objects.all()
 
     class Meta:
         model = AdvertisingSpace
@@ -42,7 +63,7 @@ class AdvertisingSpaceForm(forms.ModelForm):
             "description": forms.Textarea(
                 attrs={"id": "description", "cols": 30, "rows": 10}
             ),
-            "price": forms.NumberInput(attrs={"id": "price"}),
+            "price": forms.NumberInput(attrs={"id": "price", "min": 0.01}),
         }
 
     def save(self, commit=True):
