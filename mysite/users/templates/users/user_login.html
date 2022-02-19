@@ -3,25 +3,30 @@
 {% load generic_tags %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'users/css/user-login-style.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/user-authentication-style.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_style.css' %}"/>
 {% endblock %}
 
 {% block content %}
-<div class="login-form">
-        <div class="wrapper">
-            <div class="login-form-container">
-                <div class="login-form-items">
-                    <h2>Login</h2>
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        {% for form_field in form %}
-                            <label>{{ form_field.label }}</label>
-                            {{ form_field }}
+<div class="form">
+    <div class="wrapper">
+        <div class="form-items">
+            <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    <!--Show errors-->
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            {{ error|escape }}
                         {% endfor %}
-                        <input type="submit" value="Sign in">
-                    </form>
-                </div>
-            </div>
+                    {% endif %}
+                {% endfor %}
+                <input type="submit" value="Sign in">
+            </form>
         </div>
     </div>
+</div>
 {% endblock %}

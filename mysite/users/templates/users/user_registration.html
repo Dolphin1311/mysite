@@ -3,61 +3,46 @@
 {% load generic_tags %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'users/css/user-registration-style.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/user-authentication-style.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_style.css' %}"/>
 {% endblock %}
 
 {% block content %}
-<div class="registration-form">
+<div class="form">
     <div class="wrapper">
-        <div class="registration-form-container">
-            <div class="registration-form-items">
-                <h2>Registration</h2>
-                <form method="post">
-                    {% csrf_token %}
+        <div class="form-items">
+            <h2>Registration</h2>
+            <form method="post">
+                {% csrf_token %}
+                <!--Form for data connected with User model-->
+                {% for field in user_form %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
 
-                    <!--Form for data connected with User model-->
-                    {% if user_form.errors %}
-                        {% for form_field in user_form %}
-                            <label>{{ form_field.label }}</label>
-                            {{ form_field }}
-
-                            <!--Show errors-->
-                            {% for error in form_field.errors %}
-                                {{ error|escape }}
-                            {% endfor %}
-
-                        {% endfor %}
-                    {% else %}
-                    <!--If no errors-->
-                        {% for form_field in user_form %}
-                            <label>{{ form_field.label }}</label>
-                            {{ form_field }}
+                    <!--Show errors-->
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            {{ error|escape }}
                         {% endfor %}
                     {% endif %}
 
-                    <!--Form for data connected with Person model-->
-                    {% if person_form.errors %}
-                        {% for form_field in person_form %}
-                            <label>{{ form_field.label }}</label>
-                            {{ form_field }}
+                {% endfor %}
 
-                            <!--Show errors-->
-                            {% for error in form_field.errors %}
-                                {{ error|escape }}
-                            {% endfor %}
+                <!--Form for data connected with Person model-->
+                {% for field in person_form %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
 
-                        {% endfor %}
-                    {% else %}
-                    <!--If no errors-->
-                        {% for form_field in person_form %}
-                            <label>{{ form_field.label }}</label>
-                            {{ form_field }}
+                    <!--Show errors-->
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            {{ error|escape }}
                         {% endfor %}
                     {% endif %}
 
-                    <input type="submit" value="Sign up">
-                </form>
-            </div>
+                {% endfor %}
+                <input type="submit" value="Sign up">
+            </form>
         </div>
     </div>
 </div>
