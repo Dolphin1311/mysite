@@ -58,9 +58,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_login = models.DateTimeField(null=True, verbose_name="Last login time")
     date_joined = models.DateTimeField(default=timezone.now, verbose_name="Date joined")
     is_staff = models.BooleanField(default=False, verbose_name="Is stuff")
-    is_active = models.BooleanField(
-        default=False, verbose_name="Is activated account"
-    )
+    is_active = models.BooleanField(default=False, verbose_name="Is activated account")
     user_type = models.ForeignKey(
         UserType, on_delete=models.PROTECT, verbose_name="User type"
     )

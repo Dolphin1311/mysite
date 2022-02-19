@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse_lazy
 from django.views.generic import ListView
-from .forms import UserForm, PersonForm# , LoginForm
+from .forms import UserForm, PersonForm  # , LoginForm
 from advertisements.models import AdvertisingSpace
 
 
@@ -26,7 +26,11 @@ def signup_view(request):
             return render(
                 request,
                 "users/user_registration.html",
-                {"user_form": user_form, "person_form": person_form, "title": "Sign up"},
+                {
+                    "user_form": user_form,
+                    "person_form": person_form,
+                    "title": "Sign up",
+                },
             )
     else:
         user_form = UserForm()
