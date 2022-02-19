@@ -14,13 +14,13 @@ class TestViews(TestCase):
         user_model = get_user_model()
         user_type = UserType.objects.create(name="test user")
         self.user = user_model.objects.create(
-            email="test_email@email.com",
-            password="test_Pass1234",
-            user_type=user_type
+            email="test_email@email.com", password="test_Pass1234", user_type=user_type
         )
 
         # set advertising space object
-        self.adv_space_category = AdvertisingSpaceCategory.objects.create(name="Test category")
+        self.adv_space_category = AdvertisingSpaceCategory.objects.create(
+            name="Test category"
+        )
         self.adv_space = AdvertisingSpace.objects.create(
             title="Test title",
             description="Test description",
@@ -28,12 +28,12 @@ class TestViews(TestCase):
                 "car_model": "test data 1",
                 "prod_year": "test data 2",
                 "car_type": "test data 3",
-                "adv_place": "test data 3"
+                "adv_place": "test data 3",
             },
             is_published=True,
             user=self.user,
             price="12",
-            advertising_space_category=self.adv_space_category
+            advertising_space_category=self.adv_space_category,
         )
         self.post_data = {
             "title": "test title updated",
@@ -49,7 +49,7 @@ class TestViews(TestCase):
             "images-INITIAL_FORMS": 0,
             "images-MIN_NUM_FORMS": 0,
             "images-MAX_NUM_FORMS": 1,
-            "images-0-image": helper_utils.get_temporary_image().name
+            "images-0-image": helper_utils.get_temporary_image().name,
         }
 
         # set necessary vars for testing
@@ -57,10 +57,16 @@ class TestViews(TestCase):
         self.request_factory = RequestFactory()
         self.home_url = reverse("home")
         self.list_url = reverse("adv_spaces")
-        self.detail_url = reverse("adv_space", kwargs={"adv_space_slug": self.adv_space.slug})
+        self.detail_url = reverse(
+            "adv_space", kwargs={"adv_space_slug": self.adv_space.slug}
+        )
         self.create_url = reverse("add_adv_space")
-        self.update_url = reverse("edit_adv_space", kwargs={"adv_space_slug": self.adv_space.slug})
-        self.delete_url = reverse("delete_adv_space", kwargs={"adv_space_slug": self.adv_space.slug})
+        self.update_url = reverse(
+            "edit_adv_space", kwargs={"adv_space_slug": self.adv_space.slug}
+        )
+        self.delete_url = reverse(
+            "delete_adv_space", kwargs={"adv_space_slug": self.adv_space.slug}
+        )
 
     def test_home_view_GET(self):
         response = self.client.get(self.home_url)
@@ -84,7 +90,9 @@ class TestViews(TestCase):
         response = self.client.get(self.create_url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "advertisements/create_advertising_space.html")
+        self.assertTemplateUsed(
+            response, "advertisements/create_advertising_space.html"
+        )
 
     def test_adv_space_create_context_data(self):
         request = self.request_factory.get(self.create_url)
@@ -97,7 +105,9 @@ class TestViews(TestCase):
 
     def test_adv_space_create_POST(self):
         self.client.force_login(user=self.user)  # login user
-        request = self.request_factory.post(self.create_url, data=self.post_data, format="multipart")
+        request = self.request_factory.post(
+            self.create_url, data=self.post_data, format="multipart"
+        )
         request.user = self.user
         response = AdvSpaceCreateView.as_view()(request)
         response.client = self.client
@@ -108,11 +118,15 @@ class TestViews(TestCase):
         response = self.client.get(self.update_url)
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "advertisements/update_advertising_space.html")
+        self.assertTemplateUsed(
+            response, "advertisements/update_advertising_space.html"
+        )
 
     def test_adv_space_update_POST(self):
         self.post_data["title"] = "test title updated"  # set new value for title
-        response = self.client.post(self.update_url, data=self.post_data, format="multipart")
+        response = self.client.post(
+            self.update_url, data=self.post_data, format="multipart"
+        )
 
         self.assertEqual(response.status_code, 302)
         self.adv_space.refresh_from_db()
@@ -122,6 +136,6 @@ class TestViews(TestCase):
         response = self.client.post(self.delete_url)
 
         self.assertEqual(response.status_code, 302)
-        self.assertRaises(ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=self.adv_space.pk)
-
-
+        self.assertRaises(
+            ObjectDoesNotExist, AdvertisingSpace.objects.get, pk=self.adv_space.pk
+        )

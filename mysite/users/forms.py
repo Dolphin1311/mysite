@@ -8,10 +8,7 @@ class UserForm(UserCreationForm):
         model = User
         fields = ["email", "user_type"]
         widgets = {"password": forms.PasswordInput()}
-        labels = {
-            "email": "E-mail",
-            "user_type": "User type"
-        }
+        labels = {"email": "E-mail", "user_type": "User type"}
 
 
 class PersonForm(forms.ModelForm):
@@ -23,5 +20,5 @@ class PersonForm(forms.ModelForm):
             "first_name": "First name",
             "last_name": "Last name",
             "phone": "Phone",
-            "date_birthday": "Date of birthday"
+            "date_birthday": "Date of birthday",
         }

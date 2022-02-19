@@ -1,5 +1,7 @@
 import os
+from decimal import Decimal
 
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.db.models import JSONField
 from django.conf import settings
@@ -37,7 +39,12 @@ class AdvertisingSpace(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name="User id"
     )
-    price = models.DecimalField(max_digits=8, decimal_places=2, default=0.00)
+    price = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=0.01,
+        validators=[MinValueValidator(0.01)],
+    )
     advertising_space_category = models.ForeignKey(
         AdvertisingSpaceCategory,
         on_delete=models.PROTECT,
