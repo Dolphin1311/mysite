@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse_lazy
 from django.views.generic import ListView
-from .forms import UserForm, PersonForm  # , LoginForm
+from .forms import UserForm, PersonForm, LoginForm
 from advertisements.models import AdvertisingSpace
 
 
@@ -46,7 +46,7 @@ def signup_view(request):
 class UserLoginView(LoginView):
     template_name = "users/user_login.html"
     next_page = reverse_lazy("user_cabinet")
-    # form_class = LoginForm
+    form_class = LoginForm
 
 
 def logout_view(request):
