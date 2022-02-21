@@ -44,6 +44,7 @@ class AdvertisingSpaceForm(forms.ModelForm):
         if kwargs.get("user") is not None:
             self._user = kwargs.pop("user")
         super(AdvertisingSpaceForm, self).__init__(*args, **kwargs)
+        # set queryset for select advertising_space_category
         self.fields[
             "advertising_space_category"
         ].queryset = AdvertisingSpaceCategory.objects.all()
