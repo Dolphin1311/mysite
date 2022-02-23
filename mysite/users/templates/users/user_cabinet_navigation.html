@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="user-cabinet-navigation">
+    <div class="wrapper">
+        <div class="user-cabinet-navigation-items">
+            <nav>
+                <ul class="cabinet-nav">
+                    {% for cabinet_nav_item in cabinet_nav %}
+                        {% if forloop.counter0 == cabinet_nav_selected %}
+                            <li><a href="{% url cabinet_nav_item.url %}" class="underline">{{ cabinet_nav_item.title }}</a></li>
+                        {% else %}
+                            <li><a href="{% url cabinet_nav_item.url %}">{{ cabinet_nav_item.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
