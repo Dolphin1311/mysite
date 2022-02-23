@@ -2,6 +2,10 @@ body{
     background-color: #fff;
 }
 
+h2{
+    text-align: center;
+}
+
 a{
     text-decoration: none;
     color: #333333;
