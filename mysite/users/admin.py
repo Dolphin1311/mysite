@@ -6,11 +6,10 @@ class PersonInline(admin.TabularInline):
     model = Person
 
 
+@admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ("id", "email", "last_login", "date_joined", "is_active")
     inlines = [
         PersonInline,
     ]
 
-
-admin.site.register(User, UserAdmin)
