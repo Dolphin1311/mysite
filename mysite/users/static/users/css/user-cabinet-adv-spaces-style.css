@@ -4,6 +4,7 @@ body{
 
 h2{
     text-align: center;
+    font-size: 34px;
 }
 
 a{
@@ -14,10 +15,6 @@ a{
 img{
     width: 290px;
     height: 190px;
-}
-
-h2{
-    font-size: 34px;
 }
 
 .adv-spaces-item{

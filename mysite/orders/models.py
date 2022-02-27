@@ -31,3 +31,6 @@ class Order(models.Model):
         related_name="client",
         verbose_name="Client id",
     )
+
+    def __str__(self):
+        return f"Status: {self.is_confirmed}, owner: {self.owner}, client: {self.client}"

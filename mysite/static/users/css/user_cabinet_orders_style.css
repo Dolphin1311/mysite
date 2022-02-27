@@ -1,0 +1,53 @@
+a{
+    text-decoration: none;
+}
+
+h2{
+    font-size: 34px;
+}
+
+h3{
+    font-size: 26px;
+    font-weight: 400;
+}
+
+p{
+    margin: 0;
+}
+
+.orders-item{
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.orders-item-left{
+    display: flex;
+    flex-direction: column;
+}
+
+.orders-item-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color: green;
+}
+
+.input[type="submit"]{
+
+}
+
+#price{
+    float: right;
+}

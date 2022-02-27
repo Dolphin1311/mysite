@@ -30,3 +30,8 @@ class OrderItemForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class FilterOrdersForm(forms.Form):
+    end_user = forms.ChoiceField(choices=(("client", "You client"), ("owner", "You owner")))
+    status = forms.ChoiceField(choices=((True, "Confirmed"), (False, "Not confirmed")))

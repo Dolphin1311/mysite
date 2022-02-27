@@ -5,6 +5,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse_lazy
 from django.views.generic import ListView
+from django.views.generic.edit import FormMixin
+
+from orders.forms import FilterOrdersForm
+from orders.models import Order
 from .forms import UserForm, PersonForm, LoginForm
 from advertisements.models import AdvertisingSpace
 
@@ -55,10 +59,30 @@ def logout_view(request):
     return redirect("login")
 
 
-class UserCabinetAdvSpacesView(ListView, LoginRequiredMixin):
+class UserCabinetAdvSpacesListView(ListView, LoginRequiredMixin):
+    model = AdvertisingSpace
     template_name = "users/user_cabinet_adv_spaces.html"
     context_object_name = "adv_spaces"
 
     def get_queryset(self):
         # get all adv spaces for current logged in user
         return AdvertisingSpace.objects.filter(user=self.request.user)
+
+
+class UserCabinetOrdersListView(ListView, LoginRequiredMixin, FormMixin):
+    model = Order
+    template_name = "users/user_cabinet_orders.html"
+    context_object_name = "orders"
+    form_class = FilterOrdersForm
+
+    # get filtered orders by settings from form_class
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        orders = Order.objects.all()
+        if form.is_valid():
+            if form.cleaned_data["end_user"] == "owner":
+                orders = Order.objects.filter(is_confirmed=form.cleaned_data["status"], owner=self.request.user)
+            elif form.cleaned_data["end_user"] == "client":
+                orders = Order.objects.filter(is_confirmed=form.cleaned_data["status"], client=self.request.user)
+
+        return render(request, self.template_name, {"orders": orders, "form": form})

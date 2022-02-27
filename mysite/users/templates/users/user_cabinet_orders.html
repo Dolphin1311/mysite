@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load users_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/filter_form_style.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/user_cabinet_orders_style.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/user-cabinet-navigation-style.css' %}">
+{% endblock %}
+
+{% block content %}
+{% show_cabinet_navigation 1 %}
+<div class="filter">
+    <div class="wrapper">
+        <div class="filter-items">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" value="Show">
+            </form>
+        </div>
+    </div>
+</div>
+{% if orders %}
+<div class="orders">
+    <div class="wrapper">
+        <div class="orders-items">
+            {% for order in orders %}
+                <div class="orders-item">
+                    <div class="orders-item-left">
+                        <h3><a href="{{ order.order_item.advertising_space.get_absolute_url }}">
+                            {{ order.order_item.advertising_space.title }}
+                        </a></h3>
+                        <p>Order client: {{ order.client.email }}</p>
+                        <p>Rent period: {{ order.order_item.date_from|date:"d-m-Y" }} - {{ order.order_item.date_to|date:"d-m-Y" }}</p>
+                    </div>
+                    <div class="orders-item-right">
+                        <h3 id="price">{{ order.order_item.advertising_space.price }}</h3>
+                        <div class="orders-item-right-down">
+                            {% if order.owner == user %}
+                                {% if %}
+                            <input type="button" value="Accept" id="accept">
+                            <input type="button" value="Decline" id="decline">
+                            {% elif order.client == user %}
+                                {% if order.is_confirmed %}
+                                    <p class="green">Order is confirmed</p>
+                                {% else %}
+                                    <p class="red">Order is not confirmed</p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<h2>You have no orders yet.</h2>
+{% endif %}
+{% endblock %}

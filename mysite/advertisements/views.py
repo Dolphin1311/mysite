@@ -93,7 +93,7 @@ class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
         context["adv_space_images_formset"] = AdvertisingSpaceImagesFormSet(
             instance=self.object
         )
-        context["adv_space_form"] = AdvertisingSpaceForm(
+        context["adv_space_form"] = self.form_class(
             initial=self.object_initial_data, instance=self.object
         )
         my_context = self.get_user_context(title="Edit advertising space")
@@ -123,7 +123,7 @@ class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["adv_space_form"] = AdvertisingSpaceForm(user=self.request.user)
+        context["adv_space_form"] = self.form_class(user=self.request.user)
         context["adv_space_images_formset"] = AdvertisingSpaceImagesFormSet()
         my_context = self.get_user_context(title="Add advertising space")
 
@@ -147,6 +147,6 @@ class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
         else:
             return render(
                 self.request,
-                "advertisements/create_advertising_space.html",
+                self.template_name,
                 {"adv_space_form": form, "adv_space_images_formset": images_formset},
             )

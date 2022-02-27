@@ -3,12 +3,12 @@
 {% load users_tags %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/user-cabinet-navigation-style.css'%}">
+<link rel="stylesheet" href="{% static 'users/css/user-cabinet-navigation-style.css'%}">
 <link rel="stylesheet" href="{% static 'users/css/user-cabinet-adv-spaces-style.css'%}">
 {% endblock %}
 
 {% block content %}
-{% show_cabinet_navigation %}
+{% show_cabinet_navigation 0 %}
 {% if adv_spaces %}
 <div class="adv-spaces">
     <div class="wrapper">
