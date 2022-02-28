@@ -1,36 +1,48 @@
-from django.shortcuts import render, redirect
-from django.views.generic import CreateView, ListView
-from .forms import OrderItemForm
-from .models import Order, OrderItem
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic import CreateView
+from .forms import OrderForm
+from .models import Order
 from advertisements.models import AdvertisingSpace
 
 
 class OrderCreateView(CreateView):
-    model = OrderItem
-    form_class = OrderItemForm
+    model = Order
+    form_class = OrderForm
     template_name = "orders/create_order.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["order_item_form"] = OrderItemForm(
-            adv_space=self._get_adv_space(self.kwargs.pop("adv_space_id"))
-        )
-        context["title"] = "Create order"
-
-        return context
-
     def post(self, request, *args, **kwargs):
-        adv_space = self._get_adv_space(self.kwargs.pop("adv_space_id"))
-        form = self.form_class(data=request.POST, adv_space=adv_space)
+        form = self.form_class(data=request.POST, **self.get_form_kwargs())
 
         if form.is_valid():
-            order_item = form.save()
-            order = Order.objects.create(
-                order_item=order_item, owner=adv_space.user, client=self.request.user
-            )
-            order.save()
+            form.save()
 
             return redirect("user_cabinet")
 
     def _get_adv_space(self, adv_space_id):
         return AdvertisingSpace.objects.get(pk=adv_space_id)
+
+    def get_form_kwargs(self):
+        return {
+            "adv_space": AdvertisingSpace.objects.get(
+                pk=self.kwargs.get("adv_space_id")
+            ),
+            "client": self.request.user,
+        }
+
+
+def accept_order_view(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    order.is_confirmed = True
+    order.owner_answer = True
+    order.save()
+
+    return redirect("user_orders")
+
+
+def decline_order_view(request, order_id):
+    order = get_object_or_404(Order, pk=order_id)
+    order.is_confirmed = False
+    order.owner_answer = True
+    order.save()
+
+    return redirect("user_orders")

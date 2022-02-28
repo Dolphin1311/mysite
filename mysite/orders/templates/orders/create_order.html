@@ -16,22 +16,22 @@
                 <h3>General information</h3>
                 <div class="form-item-container">
                     <label for="{{ order_item_form.date_from.id_for_label }}">
-                        {{ order_item_form.date_from.label }}
+                        {{ form.date_from.label }}
                     </label>
-                    {{ order_item_form.date_from }}
-                    {{ order_item_form.date_from.error|escape }}
+                    {{ form.date_from }}
+                    {{ form.date_from.error|escape }}
 
                     <label for="{{ order_item_form.date_to.id_for_label }}">
-                        {{ order_item_form.date_to.label }}
+                        {{ form.date_to.label }}
                     </label>
-                    {{ order_item_form.date_to }}
-                    {{ order_item_form.date_to.error|escape }}
+                    {{ form.date_to }}
+                    {{ form.date_to.error|escape }}
 
                     <label for="{{ order_item_form.price.id_for_label }}">
-                        {{ order_item_form.price.label }}
+                        {{ form.price.label }}
                     </label>
-                    {{ order_item_form.price }}
-                    {{ order_item_form.price.error|escape }}
+                    {{ form.price }}
+                    {{ form.price.error|escape }}
                 </div>
 
                 <div class="button-holder">

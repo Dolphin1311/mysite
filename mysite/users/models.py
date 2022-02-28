@@ -80,7 +80,9 @@ class Person(models.Model):
     first_name = models.CharField(max_length=255, verbose_name="First name")
     last_name = models.CharField(max_length=255, verbose_name="Last name")
     phone = PhoneNumberField(unique=True, verbose_name="Phone")
-    date_birthday = models.DateField(verbose_name="Date of birth", validators=[no_future_date])
+    date_birthday = models.DateField(
+        verbose_name="Date of birth", validators=[no_future_date]
+    )
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

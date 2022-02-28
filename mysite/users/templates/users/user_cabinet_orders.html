@@ -30,19 +30,24 @@
             {% for order in orders %}
                 <div class="orders-item">
                     <div class="orders-item-left">
-                        <h3><a href="{{ order.order_item.advertising_space.get_absolute_url }}">
-                            {{ order.order_item.advertising_space.title }}
+                        <h3><a href="{{ order.advertising_space.get_absolute_url }}">
+                            {{ order.advertising_space.title }}
                         </a></h3>
                         <p>Order client: {{ order.client.email }}</p>
-                        <p>Rent period: {{ order.order_item.date_from|date:"d-m-Y" }} - {{ order.order_item.date_to|date:"d-m-Y" }}</p>
+                        <p>Rent period: {{ order.date_from|date:"d-m-Y" }} - {{ order.order_item.date_to|date:"d-m-Y" }}</p>
                     </div>
                     <div class="orders-item-right">
-                        <h3 id="price">{{ order.order_item.advertising_space.price }}</h3>
+                        <h3 id="price">{{ order.advertising_space.price }}</h3>
                         <div class="orders-item-right-down">
-                            {% if order.owner == user %}
-                                {% if %}
-                            <input type="button" value="Accept" id="accept">
-                            <input type="button" value="Decline" id="decline">
+                            {% if order.advertising_space.user == user %}
+                                {% if not order.owner_answer %}
+                                    <a type="button" href="{% url 'accept_order' order.pk %}">Accept</a>
+                                    <a type="button" href="{% url 'decline_order' order.pk %}">Decline</a>
+                                {% elif order.is_confirmed %}
+                                    <p class="green">You confirmed this order</p>
+                                {% else %}
+                                    <p class="red">You decline this order</p>
+                                {% endif %}
                             {% elif order.client == user %}
                                 {% if order.is_confirmed %}
                                     <p class="green">Order is confirmed</p>

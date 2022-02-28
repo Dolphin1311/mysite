@@ -31,7 +31,9 @@ class LoginForm(AuthenticationForm):
         password = self.cleaned_data.get("password")
 
         if username is not None and password:
-            self.user_cache = authenticate(self.request, email=username, password=password)
+            self.user_cache = authenticate(
+                self.request, email=username, password=password
+            )
             if self.user_cache is None:
                 raise self.get_invalid_login_error()
             else:

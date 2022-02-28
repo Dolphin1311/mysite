@@ -78,8 +78,11 @@ class AdvertisingSpace(models.Model):
         return slug
 
     def get_image(self):
-        """ Return first image from AdvertisingSpaceImage model of selected object """
+        """Return first image from AdvertisingSpaceImage model of selected object"""
         return self.images.first()
+
+    def __str__(self):
+        return f"User: {self.user}, title: {self.title}"
 
 
 class AdvertisingSpaceImage(models.Model):
@@ -96,7 +99,7 @@ class AdvertisingSpaceImage(models.Model):
 
 @receiver(post_delete, sender=AdvertisingSpaceImage)
 def post_delete_image(sender, instance, **kwargs):
-    """ Delete image file on delete AdvertisingSpaceImage model object"""
+    """Delete image file on delete AdvertisingSpaceImage model object"""
     if instance.image:
         if os.path.isfile(instance.image.path):
             os.remove(instance.image.path)
@@ -104,7 +107,7 @@ def post_delete_image(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=AdvertisingSpaceImage)
 def pre_delete_image_on_update(sender, instance, **kwargs):
-    """ Delete old image file on update AdvertisingSpaceImage model object """
+    """Delete old image file on update AdvertisingSpaceImage model object"""
     if not instance.pk:
         return False
 

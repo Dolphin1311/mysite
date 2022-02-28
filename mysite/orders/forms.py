@@ -1,15 +1,17 @@
 from django import forms
-from .models import OrderItem
+from .models import Order
 
 
-class OrderItemForm(forms.ModelForm):
+class OrderForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        if kwargs.get("adv_space"):
+        if kwargs.get("adv_space"):  # get advertising space for order
             self._adv_space = kwargs.pop("adv_space")
-        super(OrderItemForm, self).__init__(*args, **kwargs)
+        if kwargs.get("client"):  # get client for order
+            self._client = kwargs.pop("client")
+        super(OrderForm, self).__init__(*args, **kwargs)
 
     class Meta:
-        model = OrderItem
+        model = Order
         fields = ["date_from", "date_to", "price"]
         labels = {
             "date_from": "Date from",
@@ -23,8 +25,9 @@ class OrderItemForm(forms.ModelForm):
         }
 
     def save(self, commit=True):
-        instance = super(OrderItemForm, self).save(commit=False)
+        instance = super(OrderForm, self).save(commit=False)
         instance.advertising_space = self._adv_space
+        instance.client = self._client
 
         if commit:
             instance.save()
@@ -33,5 +36,7 @@ class OrderItemForm(forms.ModelForm):
 
 
 class FilterOrdersForm(forms.Form):
-    end_user = forms.ChoiceField(choices=(("client", "You client"), ("owner", "You owner")))
+    end_user = forms.ChoiceField(
+        choices=(("client", "You client"), ("owner", "You owner"))
+    )
     status = forms.ChoiceField(choices=((True, "Confirmed"), (False, "Not confirmed")))

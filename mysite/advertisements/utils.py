@@ -13,7 +13,7 @@ class DataMixin:
 
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
-    """ Create random string only with lowercase letters and digits with selected size """
+    """Create random string only with lowercase letters and digits with selected size"""
     return "".join(random.choice(chars) for _ in range(size))
 
 

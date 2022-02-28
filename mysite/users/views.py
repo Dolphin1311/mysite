@@ -1,8 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.edit import FormMixin
@@ -81,8 +80,13 @@ class UserCabinetOrdersListView(ListView, LoginRequiredMixin, FormMixin):
         orders = Order.objects.all()
         if form.is_valid():
             if form.cleaned_data["end_user"] == "owner":
-                orders = Order.objects.filter(is_confirmed=form.cleaned_data["status"], owner=self.request.user)
+                orders = Order.objects.filter(
+                    is_confirmed=form.cleaned_data["status"],
+                    advertising_space__user=self.request.user,
+                )
             elif form.cleaned_data["end_user"] == "client":
-                orders = Order.objects.filter(is_confirmed=form.cleaned_data["status"], client=self.request.user)
+                orders = Order.objects.filter(
+                    is_confirmed=form.cleaned_data["status"], client=self.request.user
+                )
 
         return render(request, self.template_name, {"orders": orders, "form": form})
