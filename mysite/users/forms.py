@@ -1,10 +1,16 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import User, Person
+from .models import User, Person, UserType
 
 
 class UserForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields[
+            "user_type"
+        ].queryset = UserType.objects.all()
+
     class Meta:
         model = User
         fields = ["email", "user_type"]

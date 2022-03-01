@@ -10,7 +10,7 @@ from users.models import UserType
 
 class TestViews(TestCase):
     def setUp(self):
-        # set user object
+        # create user
         user_model = get_user_model()
         user_type = UserType.objects.create(name="test user")
         self.user = user_model.objects.create(
@@ -36,7 +36,7 @@ class TestViews(TestCase):
             advertising_space_category=self.adv_space_category,
         )
         self.post_data = {
-            "title": "test title updated",
+            "title": "test title created",
             "description": "test desc",
             "car_model": "test model",
             "prod_year": 2000,
@@ -104,15 +104,16 @@ class TestViews(TestCase):
         self.assertIn("adv_space_images_formset", response.context_data)
 
     def test_adv_space_create_POST(self):
-        self.client.force_login(user=self.user)  # login user
         request = self.request_factory.post(
             self.create_url, data=self.post_data, format="multipart"
         )
         request.user = self.user
         response = AdvSpaceCreateView.as_view()(request)
         response.client = self.client
+        adv_space = AdvertisingSpace.objects.get(title="test title created")
 
-        self.assertRedirects(response, reverse("user_cabinet"))
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(adv_space.user, self.user)
 
     def test_adv_space_update_GET(self):
         response = self.client.get(self.update_url)

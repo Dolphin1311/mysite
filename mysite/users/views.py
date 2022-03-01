@@ -16,7 +16,7 @@ def signup_view(request):
     if request.method == "POST":
         user_form = UserForm(request.POST)
         person_form = PersonForm(request.POST)
-
+        print(user_form.errors, person_form.errors)
         if all([user_form.is_valid(), person_form.is_valid()]):
             user = user_form.save()
             person = person_form.save(commit=False)
@@ -24,7 +24,7 @@ def signup_view(request):
             person.save()
             login(request, user)
 
-            return redirect("home")
+            return redirect("user_cabinet")
         else:
             return render(
                 request,

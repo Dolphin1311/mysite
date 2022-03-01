@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils import timezone
 from .utils import no_future_date
@@ -14,7 +15,6 @@ class UserManager(BaseUserManager):
     def _create_user(self, email, password, user_type, **extra_fields):
         values = [email]
         field_value_map = dict(zip(self.model.REQUIRED_FIELDS, values))
-
         # check if all fields are set
         for field_name, value in field_value_map.items():
             if not value:
@@ -35,7 +35,11 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, user_type, **extra_fields)
 
     def create_superuser(self, email, password=None, **extra_fields):
-        user_type = UserType.objects.get(name="admin")  # get admin user type
+        try:
+            user_type = UserType.objects.get(name="admin")  # get admin user type
+        except ObjectDoesNotExist:
+            user_type = UserType.objects.create(name="admin")
+
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
