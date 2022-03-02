@@ -10,28 +10,23 @@
 <div class="catalog">
     <div class="wrapper">
         <div class="catalog-items">
+            {% for adv_space in adv_spaces %}
             <div class="catalog-item">
-                <a href="" class="catalog-item-link"><span></span></a>
-                <img src="{% static 'advertisements/image/car.svg' %}" alt="car">
+                <a href="{{ adv_space.get_absolute_url }}" class="catalog-item-link"><span></span></a>
+                {% if adv_space.get_image.image %}
+                <img src="{{ MEDIA_URL }}{{ adv_space.get_image.image }}" alt="">
+                {% else %}
+                <img src="{% static 'image/no-img.png' %}" alt="">
+                {% endif %}
                 <div class="catalog-item-right">
                     <div class="catalog-item-right-head">
-                        <h3>Title</h3>
-                        <h3>Price</h3>
+                        <h3>{{ adv_space.title }}</h3>
+                        <h3>{{ adv_space.price }}</h3>
                     </div>
-                    <p>Description</p>
+                    <p>{{ adv_space.description }}</p>
                 </div>
             </div>
-        </div>
-        <div class="catalog-item">
-            <a href="" class="catalog-item-link"><span></span></a>
-            <img src="{% static 'advertisements/image/car.svg' %}" alt="car">
-            <div class="catalog-item-right">
-                <div class="catalog-item-right-head">
-                    <h3>Title</h3>
-                    <h3>Price</h3>
-                </div>
-                <p>Description</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

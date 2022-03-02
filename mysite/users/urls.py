@@ -5,6 +5,7 @@ from .views import (
     UserCabinetAdvSpacesListView,
     UserLoginView,
     UserCabinetOrdersListView,
+    UserCabinetUpdatePersonalDataView
 )
 
 urlpatterns = [
@@ -13,7 +14,5 @@ urlpatterns = [
     path("login/", UserLoginView.as_view(), name="login"),
     path("logout/", logout_view, name="logout"),
     path("orders/", UserCabinetOrdersListView.as_view(), name="user_orders"),
-    # change here
-    path("data/", logout_view, name="user_data"),
-    path("change-password/", logout_view, name="user_change_pass"),
+    path("data/", UserCabinetUpdatePersonalDataView.as_view(), name="user_data")
 ]

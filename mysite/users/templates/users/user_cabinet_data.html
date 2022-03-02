@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load users_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/user-cabinet-navigation-style.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/user_cabinet_personal_data_style.css' %}">
+{% endblock %}
+
+{% block content %}
+{% show_cabinet_navigation 2 %}
+<div class="form">
+    <div class="wrapper">
+        <div class="form-items">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in user_form %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <div class="errorlist">{{ error|escape }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if person_form %}
+                    {% for field in person_form %}
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="errorlist">{{ error|escape }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <div class="button-holder">
+                    <input type="submit" value="Update personal data">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

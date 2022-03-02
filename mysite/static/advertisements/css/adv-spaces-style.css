@@ -8,6 +8,11 @@ a{
     color: #333333;
 }
 
+img{
+    width: 290px;
+    height: 190px;
+}
+
 .wrapper{
     width: 1140px;
     margin: 0 auto;

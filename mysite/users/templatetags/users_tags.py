@@ -8,8 +8,7 @@ def show_cabinet_navigation(nav_selected=0):
     cabinet_navigation = [
         {"title": "Advertising Spaces", "url": "user_cabinet"},
         {"title": "Orders", "url": "user_orders"},
-        {"title": "Personal data", "url": "user_data"},
-        {"title": "Change password", "url": "user_change_pass"},
+        {"title": "Personal data", "url": "user_data"}
     ]
 
     return {"cabinet_nav": cabinet_navigation, "cabinet_nav_selected": nav_selected}
