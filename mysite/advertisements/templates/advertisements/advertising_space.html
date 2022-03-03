@@ -53,9 +53,6 @@
                             <h3 class="price">{{ adv_space.price }}</h3>
                             <div class="description">{{ adv_space.description }}</div>
                             <div class="general-info">
-                                <div class="user-type">
-                                    <span>{{ adv_space.user.user_type }}</span>
-                                </div>
                                 <div class="category">
                                     <span>Category: {{ adv_space.advertising_space_category }}</span>
                                 </div>
@@ -87,16 +84,14 @@
                                 <div class="user-image">
                                     <img src="{% static 'image/user-icon.png' %}" alt="">
                                 </div>
-                                {% if user.user_type.name == 'person' %}
                                 <div class="user-info">
-                                    <h3 class="user-name">{{ person.first_name }} {{ person.last_name }}</h3>
+                                    <h3 class="user-name">{{ user.email }}</h3>
                                     <div class="user-date-enter">On AdvSpaces from {{ user.date_joined|date:"d-m-Y" }}
                                     </div>
                                     <div class="user-last-login">
                                         Last login {{ user.last_login|date:"d-m-Y" }} {{ user.last_login|time:"H:i" }}
                                     </div>
                                 </div>
-                                {% endif %}
                             </div>
                         </div>
                     </div>

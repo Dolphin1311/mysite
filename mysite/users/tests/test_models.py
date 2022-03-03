@@ -1,15 +1,11 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from users.models import UserType
 
 
 class TestModels(TestCase):
-    def setUp(self):
-        self.user_type = UserType.objects.create(name="Test user type")
-
     def test_create_user(self):
         user_model = get_user_model()
-        user = user_model.objects.create_user(email="test_email@mail.com", password="testPassw0rd1", user_type=self.user_type)
+        user = user_model.objects.create_user(email="test_email@mail.com", password="testPassw0rd1")
         self.assertEqual(user.email, "test_email@mail.com")
         self.assertTrue(user.is_active)
         self.assertFalse(user.is_staff)
