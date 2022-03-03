@@ -1,0 +1,81 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+}
+
+h2{
+    text-align: center;
+    font-size: 34px;
+}
+
+a{
+    text-decoration: none;
+    color: #333333;
+}
+
+img{
+    width: 290px;
+    height: 190px;
+}
+
+.wrapper{
+    width: 1140px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.filter{
+    margin-top: 50px;
+}
+
+.catalog{
+    margin-top: 50px;
+}
+
+.catalog-item{
+    padding: 15px;
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+.catalog-item-link span{
+    /* making div clickable for other links in div -> z-index > 1 */
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    left: 0;
+
+    z-index: 1;
+}
+
+.catalog-item-right{
+    flex: 1 1 auto;
+}
+
+.catalog-item-right-head{
+    display: flex;
+    justify-content: space-between;
+}
+
+.catalog-item-right p{
+    margin-top: 0;
+}
+
+.button-holder{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.button-holder a{
+    font-size: 22px;
+    border: none;
+    padding: 15px 30px;
+    color: white;
+    background-color: #C887E3;
+    border-radius: 50px;
+    font-weight: 700;
+}
+

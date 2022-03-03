@@ -1,0 +1,24 @@
+select{
+    font-size: 22px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.filter-items{
+    margin-bottom: 50px;
+}
+
+.filter-items form{
+    display: flex;
+    gap: 10px;
+}
+
+
+input[type="submit"]{
+    background-color: #C887E3;
+    color: #FFF;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+}

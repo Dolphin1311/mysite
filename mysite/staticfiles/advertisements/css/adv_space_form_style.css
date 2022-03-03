@@ -1,0 +1,15 @@
+#title, #description{
+    width: 700px;
+}
+
+#email, #model{
+    width: 500px;
+}
+
+#phone, #type{
+    width: 300px;
+}
+
+#year, #price, #place, #category{
+    width: 160px;
+}
