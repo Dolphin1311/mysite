@@ -4,14 +4,6 @@ import os
 import hashlib
 
 
-class DataMixin:
-    @staticmethod
-    def get_user_context(**kwargs):
-        context = kwargs
-
-        return context
-
-
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     """Create random string only with lowercase letters and digits with selected size"""
     return "".join(random.choice(chars) for _ in range(size))

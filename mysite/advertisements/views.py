@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -11,24 +10,16 @@ from django.views.generic import (
     DeleteView,
 )
 from django.views.generic.edit import FormMixin
-from .utils import DataMixin
 from .forms import AdvertisingSpaceForm, AdvertisingSpaceImagesFormSet, FilterAdvSpacesForm
 from .models import AdvertisingSpace
 from users.models import Person
 
 
-class HomeView(DataMixin, TemplateView):
+class HomeView(TemplateView):
     template_name = "advertisements/index.html"
 
-    # use DataMixin class and load to template custom context data
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        my_context = self.get_user_context(title="Main page")
 
-        return context | my_context
-
-
-class AdvSpaceListView(ListView, DataMixin, FormMixin):
+class AdvSpaceListView(ListView, FormMixin):
     template_name = "advertisements/advertising_spaces.html"
     model = AdvertisingSpace
     context_object_name = "adv_spaces"
@@ -46,17 +37,11 @@ class AdvSpaceListView(ListView, DataMixin, FormMixin):
 
         return render(request, self.template_name, {"adv_spaces": adv_spaces, "form": form})
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        my_context = self.get_user_context(title="Advertising Spaces")
-
-        return context | my_context
-
     def get_queryset(self):
         return AdvertisingSpace.objects.filter(is_published=True)
 
 
-class AdvSpaceDetailView(DetailView, DataMixin):
+class AdvSpaceDetailView(DetailView):
     model = AdvertisingSpace
     context_object_name = "adv_space"
     template_name = "advertisements/advertising_space.html"
@@ -64,14 +49,14 @@ class AdvSpaceDetailView(DetailView, DataMixin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        my_context = self.get_user_context(title=self.object.title)
+
         # check if it is an anonymous user or logged-in user
         if not self.request.user.is_anonymous:
             # check user_type
             if self.request.user.user_type.name == "person":
-                my_context["person"] = Person.objects.get(user=self.request.user)
+                context["person"] = Person.objects.get(user=self.request.user)
 
-        return context | my_context
+        return context
 
 
 class AdvSpaceDeleteView(DeleteView):
@@ -83,7 +68,7 @@ class AdvSpaceDeleteView(DeleteView):
         return self.post(*args, **kwargs)
 
 
-class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
+class AdvSpaceUpdateView(UpdateView, LoginRequiredMixin):
     model = AdvertisingSpace
     form_class = AdvertisingSpaceForm
     template_name = "advertisements/update_advertising_space.html"
@@ -111,9 +96,8 @@ class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
         context["adv_space_form"] = self.form_class(
             initial=self.object_initial_data, instance=self.object
         )
-        my_context = self.get_user_context(title="Edit advertising space")
 
-        return context | my_context
+        return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -131,7 +115,7 @@ class AdvSpaceUpdateView(UpdateView, DataMixin, LoginRequiredMixin):
             return redirect("user_cabinet")
 
 
-class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
+class AdvSpaceCreateView(CreateView, LoginRequiredMixin):
     model = AdvertisingSpace
     form_class = AdvertisingSpaceForm
     template_name = "advertisements/create_advertising_space.html"
@@ -140,9 +124,8 @@ class AdvSpaceCreateView(CreateView, DataMixin, LoginRequiredMixin):
         context = super().get_context_data(**kwargs)
         context["adv_space_form"] = self.form_class(user=self.request.user)
         context["adv_space_images_formset"] = AdvertisingSpaceImagesFormSet()
-        my_context = self.get_user_context(title="Add advertising space")
 
-        return my_context | context
+        return context
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST, user=request.user)
