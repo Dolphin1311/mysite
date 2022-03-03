@@ -19,8 +19,12 @@ img{
     position: relative;
 }
 
+.filter{
+    margin-top: 50px;
+}
+
 .catalog{
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .catalog-item{

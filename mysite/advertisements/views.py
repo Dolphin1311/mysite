@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -9,8 +10,9 @@ from django.views.generic import (
     CreateView,
     DeleteView,
 )
+from django.views.generic.edit import FormMixin
 from .utils import DataMixin
-from .forms import AdvertisingSpaceForm, AdvertisingSpaceImagesFormSet
+from .forms import AdvertisingSpaceForm, AdvertisingSpaceImagesFormSet, FilterAdvSpacesForm
 from .models import AdvertisingSpace
 from users.models import Person
 
@@ -26,10 +28,23 @@ class HomeView(DataMixin, TemplateView):
         return context | my_context
 
 
-class AdvSpaceListView(ListView, DataMixin):
+class AdvSpaceListView(ListView, DataMixin, FormMixin):
     template_name = "advertisements/advertising_spaces.html"
     model = AdvertisingSpace
     context_object_name = "adv_spaces"
+    form_class = FilterAdvSpacesForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        adv_spaces = AdvertisingSpace.objects.all()
+        if form.is_valid():
+            adv_spaces = AdvertisingSpace.objects.filter(
+                advertising_space_category=form.cleaned_data["category"],
+                price__gte=float(form.cleaned_data["price_from"]),
+                price__lte=float(form.cleaned_data["price_to"])
+            )
+
+        return render(request, self.template_name, {"adv_spaces": adv_spaces, "form": form})
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -4,9 +4,23 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'advertisements/css/adv-spaces-style.css' %}"/>
+<link rel="stylesheet" href="{% static 'css/filter_form_style.css' %}">
 {% endblock %}
 
 {% block content %}
+<div class="filter">
+    <div class="wrapper">
+        <div class="filter-items">
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{ field }}
+                {% endfor %}
+                <input type="submit" value="Show">
+            </form>
+        </div>
+    </div>
+</div>
 <div class="catalog">
     <div class="wrapper">
         <div class="catalog-items">
@@ -24,6 +38,7 @@
                         <h3>{{ adv_space.price }}</h3>
                     </div>
                     <p>{{ adv_space.description }}</p>
+                    <p>User: {{ adv_space.user.email }}</p>
                 </div>
             </div>
             {% endfor %}

@@ -90,3 +90,16 @@ class AdvertisingSpaceForm(forms.ModelForm):
 AdvertisingSpaceImagesFormSet = inlineformset_factory(
     AdvertisingSpace, AdvertisingSpaceImage, fields=["image"], extra=8, max_num=8
 )
+
+
+class FilterAdvSpacesForm(forms.Form):
+    category = forms.ModelChoiceField(queryset=AdvertisingSpaceCategory.objects.all())
+    price_from = forms.DecimalField(min_value=0.01, decimal_places=2)
+    price_to = forms.DecimalField(min_value=0.01, decimal_places=2)
+
+    class Meta:
+        labels = {
+            "category": "Category",
+            "price_from": "Price from",
+            "price_to": "Price to"
+        }
