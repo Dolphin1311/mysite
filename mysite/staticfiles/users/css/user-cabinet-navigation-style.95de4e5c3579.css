@@ -1,0 +1,39 @@
+.user-cabinet-navigation{
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background: linear-gradient(90deg, rgba(200,135,227,1) 0%, rgba(241,137,137,1) 100%);
+}
+
+.cabinet-nav{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.cabinet-nav a, .cabinet-nav span{
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.cabinet-nav a:after{
+    display: block;
+    content: "";
+    height: 1px;
+    width: 0%;
+    background-color: #fff;
+    transition: width 0.4s ease-in-out;
+}
+
+.cabinet-nav a:hover:after, .cabinet-nav a:focus:after {
+    width: 100%;
+}
+
+.underline{
+    border-bottom: 1px white solid;
+}

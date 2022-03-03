@@ -12,7 +12,6 @@ from django.views.generic import (
 from django.views.generic.edit import FormMixin
 from .forms import AdvertisingSpaceForm, AdvertisingSpaceImagesFormSet, FilterAdvSpacesForm
 from .models import AdvertisingSpace
-from users.models import Person
 
 
 class HomeView(TemplateView):
@@ -46,17 +45,6 @@ class AdvSpaceDetailView(DetailView):
     context_object_name = "adv_space"
     template_name = "advertisements/advertising_space.html"
     slug_url_kwarg = "adv_space_slug"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        # check if it is an anonymous user or logged-in user
-        if not self.request.user.is_anonymous:
-            # check user_type
-            if self.request.user.user_type.name == "person":
-                context["person"] = Person.objects.get(user=self.request.user)
-
-        return context
 
 
 class AdvSpaceDeleteView(DeleteView):

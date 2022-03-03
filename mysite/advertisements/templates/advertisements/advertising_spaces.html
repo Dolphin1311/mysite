@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+{% if adv_spaces %}
 <div class="filter">
     <div class="wrapper">
         <div class="filter-items">
@@ -44,5 +45,11 @@
             {% endfor %}
         </div>
     </div>
+</div>
+{% else %}
+<h2>There is no advertising spaces yet.</h2>
+{% endif %}
+<div class="button-holder">
+    <a href="{% url 'add_adv_space' %}" type="button">Add advertising space</a>
 </div>
 {% endblock %}

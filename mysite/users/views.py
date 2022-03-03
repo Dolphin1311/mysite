@@ -4,47 +4,33 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView
-from django.views.generic.edit import FormMixin, UpdateView
+from django.views.generic.edit import FormMixin, CreateView
 
 from orders.forms import FilterOrdersForm
 from orders.models import Order
-from .forms import UserForm, PersonForm, LoginForm
+from .forms import UserForm, LoginForm
 from advertisements.models import AdvertisingSpace
-from .models import User, Person
+from .models import User
 
 
-def signup_view(request):
-    if request.method == "POST":
-        user_form = UserForm(request.POST)
-        person_form = PersonForm(request.POST)
-        print(user_form.errors, person_form.errors)
-        if all([user_form.is_valid(), person_form.is_valid()]):
-            user = user_form.save()
-            person = person_form.save(commit=False)
-            person.user = user
-            person.save()
+class UserSignupView(CreateView):
+    form_class = UserForm
+    template_name = "users/user_registration.html"
+    next_page = reverse_lazy("user_cabinet")
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            user = form.save()
             login(request, user)
 
             return redirect("user_cabinet")
-        else:
-            return render(
-                request,
-                "users/user_registration.html",
-                {
-                    "user_form": user_form,
-                    "person_form": person_form,
-                    "title": "Sign up",
-                },
-            )
-    else:
-        user_form = UserForm()
-        person_form = PersonForm()
 
-    return render(
-        request,
-        "users/user_registration.html",
-        {"user_form": user_form, "person_form": person_form, "title": "Sign up"},
-    )
+        return render(
+            request,
+            "users/user_registration.html",
+            {"form": form, "title": "Sign up"},
+        )
 
 
 class UserLoginView(LoginView):
@@ -93,25 +79,16 @@ class UserCabinetOrdersListView(ListView, LoginRequiredMixin, FormMixin):
         return render(request, self.template_name, {"orders": orders, "form": form})
 
 
-class UserCabinetUpdatePersonalDataView(TemplateView, LoginRequiredMixin):
+class UserCabinetUpdatePersonalDataView(TemplateView, LoginRequiredMixin, FormMixin):
     model = User
     form_class = UserForm
     template_name = "users/user_cabinet_data.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["user_form"] = self.form_class(instance=self.request.user)
-        context["person_form"] = PersonForm(instance=Person.objects.get(user=self.request.user))
-
-        return context
-
     def post(self, request, *args, **kwargs):
         form = self.form_class(data=request.POST, instance=self.request.user)
-        person_form = PersonForm(data=request.POST, instance=Person.objects.get(user=self.request.user))
 
-        if all([form.is_valid(), person_form.is_valid()]):
+        if form.is_valid():
             form.save()
-            person_form.save()
 
             return redirect("login")
         else:
@@ -119,7 +96,9 @@ class UserCabinetUpdatePersonalDataView(TemplateView, LoginRequiredMixin):
                 request,
                 self.template_name,
                 context={
-                    "user_form": form,
-                    "person_form": person_form
+                    "form": form,
                 }
             )
+
+    def get_form_kwargs(self):
+        return {"instance": self.request.user}

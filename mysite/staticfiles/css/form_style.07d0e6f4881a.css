@@ -1,0 +1,52 @@
+h2{
+    font-size: 34px;
+}
+
+h3{
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+label{
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+textarea{
+    resize: none
+}
+
+input:not([type="file"]):not([type="submit"]), select, textarea{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.button-holder{
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.form-item-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+input[type='submit']{
+    font-size: 22px;
+    margin-top: 27px;
+    border-radius: 20px;
+    border: none;
+    background-color: #C887E3;
+    font-weight: 700;
+    color: white;
+    padding: 15px 30px;
+    align-self: center;
+    cursor: pointer;
+}

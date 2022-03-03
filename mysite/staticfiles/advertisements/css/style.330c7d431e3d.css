@@ -1,0 +1,312 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+}
+
+a{
+    text-decoration: none;
+    color: #333333;
+}
+
+.wrapper{
+    width: 1140px;
+    margin: 0 auto;
+
+    position: relative;
+}
+
+h2{
+    font-size: 36px;
+    margin: 0;
+}
+
+.banner{
+    height: 750px;
+    background: linear-gradient(90deg, rgba(200,135,227,1) 0%, rgba(241,137,137,1) 100%);
+}
+
+.banner-items{
+    display: flex;
+}
+
+.banner-left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.banner-title{
+    margin-bottom: 0px;
+    margin-top: 169px;
+    font-size: 42px;
+    color: white;
+}
+
+.banner-text{
+    font-size: 28px;
+    color: white;
+    margin: 47px 0;
+}
+
+.banner-items a{
+    font-size: 20px;
+    background-color: white;
+    border-radius: 50px;
+    padding: 18px 43px;
+    margin-bottom: 172px;
+    flex: 0 0 auto;
+}
+
+.banner-right{
+    position: relative;
+}
+
+.banner-image{
+    /* position: absolute; */
+    /* background-image: url("../image/banner-image.c4812a2c600e.png"); */
+    /* display: block; */
+    /* width: 650px; */
+    /* height: 600px; */
+    /* background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center; */
+    /* margin-top: 50px; */
+
+
+
+    /* image props to center display */
+    /* if you need to change width of image you must change width of class wrapper  */
+    position: absolute;
+    right: 0%;
+     top: 50%;
+    transform: translateY(-50%);
+
+    width: 60%;
+}
+
+.triggers{
+    height: 435px;
+}
+
+.triggers-items{
+    display: flex;
+    flex-direction: column;
+}
+
+.triggers-title{
+    margin-top: 80px;
+    margin-bottom: 80px;
+    align-self: center;
+}
+
+.triggers-elems{
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: space-between;
+}
+
+.triggers-elem{
+    display: flex;
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+
+    width: 30%;
+}
+
+.triggers-elem-title{
+    font-size: 20px;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+.triggers-elem-text{
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    line-height: 125%;
+}
+
+.triggers-elem-desc{
+    font-size: 16px;
+    /* text-align: justify; */
+    display: block;
+    width: 95%;
+}
+
+
+.triggers-image{
+    width: 75px;
+    height: 75px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+/* .triggers-elem-01-image{
+    background-image: url("../image/trigger-1-icon.b0b7160be90e.png");
+}
+
+.triggers-elem-02-image{
+    background-image: url("../image/trigger-2-icon.a0b24470ef7f.png");
+}
+
+.triggers-elem-03-image{
+    background-image: url("../image/trigger-3-icon.4fa85e463d22.png");
+} */
+
+
+.catalog{
+    height: 1120px;
+    background-color: #FDF2CA;
+}
+
+.catalog-title{
+    padding-top: 110px;
+    margin-bottom: 70px;
+}
+
+.catalog-buttons{
+    display: flex;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.catalog-buttons button{
+    border-radius: 50px;
+    padding: 16px 84px;
+    font-size: 24px;
+    margin-right: 40px;
+    border: none;
+}
+
+.catalog-button{
+    background-color: white;
+    border: 1px solid black;
+}
+
+.catalog-button-selected{
+    background-color: #C887E3;
+    text-align: center;
+    color: white;
+    font-weight: 700;
+}
+
+.catalog-cards{
+    display: flex;
+    margin: 0 -52px 50px -52px;
+}
+
+.catalog-card{
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 400px;
+    height: 550px;
+    margin: 25px 52px;
+
+    position: relative;
+}
+
+.catalog-card-image{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.catalog-card-items{
+    display: flex;
+    flex-direction: column;
+    margin: 70px 30px 52px 50px;
+}
+
+.catalog-card-image{
+    margin-bottom: 50px;
+}
+
+.catalog-card-type-car-image {
+    position: absolute;
+    right: 6%;
+}
+
+.catalog-card-title{
+    margin-bottom: 15px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.catalog-card-desc{
+    margin-bottom: 45px;
+    font-size: 18px;
+}
+
+.catalog-card-button{
+    align-self: center;
+    background-color: #C887E3;
+    border-radius: 50px;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    padding: 8px 28px;
+}
+
+.catalog-buttons-slider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glider-dots{
+    margin: 0 15px;
+}
+
+.catalog-buttons-slider span{
+    cursor: pointer;
+    width: 55px;
+    height: 55px;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.catalog-button-prev{
+    background-image: url("../image/left-arrow.7337b495d88f.png");
+}
+
+.catalog-button-next{
+    background-image: url("../image/right-arrow.9d2cfcb5ee9d.png");
+}
+
+.about{
+    height: 900px;
+}
+
+.about-items{
+    display: flex;
+}
+
+.about-right{
+    display: flex;
+    flex-direction: column;
+}
+
+.about-image{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-image: url("../image/about-image.7074ed96492c.png");
+    width: 800px;
+    height: 600px;
+}
+
+.about-left{
+}
+
+.about-title{
+
+}
+
+.about-desc{
+    font-size: 24px;
+}

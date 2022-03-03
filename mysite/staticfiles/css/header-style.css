@@ -1,0 +1,120 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header{
+    height: 100px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* scrolling header */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.wrapper{
+    width: 1140px;
+    margin: 0 auto;
+
+    position: relative;
+}
+
+.header a{
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    transition: 0.2s ease;
+}
+
+.header a:hover{
+    color: #C887E3;
+}
+
+.header-items{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo-image{
+    display: block;
+    width: 60px;
+    height: 60px;
+    background-image: url(../image/Logo.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 15px;
+}
+
+.logo-text{
+    font-size: 18px;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.nav{
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+}
+
+.nav li{
+    padding: 0 16px;
+}
+
+.account{
+    display: flex;
+    align-items: center;
+}
+
+.account-image{
+    width: 50px;
+    height: 50px;
+}
+
+.account a{
+    padding: 0 10px;
+}
+
+.login-buttons{
+    display: flex;
+    align-items: center;
+}
+
+.login-buttons a{
+    font-size: 20px;
+    transition: 0.2s ease;
+}
+
+#sign-in{
+    padding: 0 20px;
+}
+
+#sign-in:hover{
+    color: #C887E3;
+}
+
+#sign-up{
+    margin-left: 20px;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    background-color: #C887E3;
+}
+
+#sing-up:hover{
+    box-shadow: #b248df 0px 7px 29px 0px;
+    background-color: white;
+
+}

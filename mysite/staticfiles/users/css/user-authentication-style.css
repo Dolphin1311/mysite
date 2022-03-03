@@ -1,0 +1,29 @@
+body{
+    background: linear-gradient(90deg, rgba(200,135,227,1) 0%, rgba(241,137,137,1) 100%);
+}
+
+h2{
+    margin: 0 0 25px 0;
+}
+
+input:not([type="submit"]), select{
+    width: 420px;
+}
+
+.form-items{
+    margin: 0 auto;
+    margin-top: 100px;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 30px 65px;
+    align-items: center;
+    background-color: #fff;
+}
+
+.form-items form{
+    display: flex;
+    flex-direction: column;
+}
