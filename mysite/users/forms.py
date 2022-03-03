@@ -7,9 +7,9 @@ from .models import User
 class UserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["email", "user_type"]
+        fields = ["email"]
         widgets = {"password": forms.PasswordInput()}
-        labels = {"email": "E-mail", "user_type": "User type"}
+        labels = {"email": "E-mail"}
 
 
 class LoginForm(AuthenticationForm):

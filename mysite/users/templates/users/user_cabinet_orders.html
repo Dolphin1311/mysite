@@ -10,6 +10,7 @@
 
 {% block content %}
 {% show_cabinet_navigation 1 %}
+{% if orders %}
 <div class="filter">
     <div class="wrapper">
         <div class="filter-items">
@@ -23,7 +24,6 @@
         </div>
     </div>
 </div>
-{% if orders %}
 <div class="orders">
     <div class="wrapper">
         <div class="orders-items">

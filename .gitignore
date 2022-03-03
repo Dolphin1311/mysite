@@ -11,6 +11,7 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+migrations
 workspace.xml.orig
 
 
@@ -378,3 +379,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,django,intellij
+/mysite/users/migrations/
