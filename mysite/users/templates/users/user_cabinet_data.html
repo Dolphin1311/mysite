@@ -15,7 +15,7 @@
         <div class="form-items">
             <form method="post">
                 {% csrf_token %}
-                {% for field in user_form %}
+                {% for field in form %}
                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {{ field }}
                     {% if field.errors %}
@@ -24,18 +24,6 @@
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
-
-                {% if person_form %}
-                    {% for field in person_form %}
-                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                        {{ field }}
-                        {% if field.errors %}
-                            {% for error in field.errors %}
-                                <div class="errorlist">{{ error|escape }}</div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
                 <div class="button-holder">
                     <input type="submit" value="Update personal data">
                 </div>

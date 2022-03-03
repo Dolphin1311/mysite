@@ -14,8 +14,7 @@
             <h2>Registration</h2>
             <form method="post">
                 {% csrf_token %}
-                <!--Form for data connected with User model-->
-                {% for field in user_form %}
+                {% for field in form %}
                     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {{ field }}
 
@@ -28,19 +27,6 @@
 
                 {% endfor %}
 
-                <!--Form for data connected with Person model-->
-                {% for field in person_form %}
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}
-
-                    <!--Show errors-->
-                    {% if field.errors %}
-                        {% for error in field.errors %}
-                            {{ error|escape }}
-                        {% endfor %}
-                    {% endif %}
-
-                {% endfor %}
                 <input type="submit" value="Sign up">
             </form>
         </div>
