@@ -4,40 +4,33 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView
-from django.views.generic.edit import FormMixin, UpdateView
+from django.views.generic.edit import FormMixin, CreateView
 
 from orders.forms import FilterOrdersForm
 from orders.models import Order
 from .forms import UserForm, LoginForm
 from advertisements.models import AdvertisingSpace
-from .models import User, Person
+from .models import User
 
 
-def signup_view(request):
-    if request.method == "POST":
-        user_form = UserForm(request.POST)
-        if user_form.is_valid():
-            user = user_form.save()
+class UserSignupView(CreateView):
+    form_class = UserForm
+    template_name = "users/user_registration.html"
+    next_page = reverse_lazy("user_cabinet")
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            user = form.save()
             login(request, user)
 
             return redirect("user_cabinet")
-        else:
-            return render(
-                request,
-                "users/user_registration.html",
-                {
-                    "user_form": user_form,
-                    "title": "Sign up",
-                },
-            )
-    else:
-        user_form = UserForm()
 
-    return render(
-        request,
-        "users/user_registration.html",
-        {"user_form": user_form, "title": "Sign up"},
-    )
+        return render(
+            request,
+            "users/user_registration.html",
+            {"form": form, "title": "Sign up"},
+        )
 
 
 class UserLoginView(LoginView):
@@ -103,7 +96,7 @@ class UserCabinetUpdatePersonalDataView(TemplateView, LoginRequiredMixin, FormMi
                 request,
                 self.template_name,
                 context={
-                    "user_form": form,
+                    "form": form,
                 }
             )
 
