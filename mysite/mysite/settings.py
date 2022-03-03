@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ SECRET_KEY = "django-insecure-nklyfc%=r8bzfx3u)y$b2ng7vb0hg%w2o!!aq(v+n39(ie^%sj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*",]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -39,7 +40,6 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "orders.apps.OrdersConfig",
     "advertisements.apps.AdvertisementsConfig",
-    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
@@ -50,10 +50,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = "mysite.urls"
 
@@ -97,10 +94,6 @@ DATABASES = {
         "POST": "",
     }
 }
-
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -149,3 +142,5 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_URL = "/user/login/"
+
+django_heroku.settings(locals())
