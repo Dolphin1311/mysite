@@ -5,16 +5,14 @@ from django.db.models import ObjectDoesNotExist
 from advertisements.models import AdvertisingSpace, AdvertisingSpaceCategory
 from advertisements.tests import helper_utils
 from advertisements.views import AdvSpaceCreateView
-from users.models import UserType
 
 
 class TestViews(TestCase):
     def setUp(self):
         # create user
         user_model = get_user_model()
-        user_type = UserType.objects.create(name="test user")
         self.user = user_model.objects.create(
-            email="test_email@email.com", password="test_Pass1234", user_type=user_type
+            email="test_email@email.com", password="test_Pass1234"
         )
 
         # set advertising space object

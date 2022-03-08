@@ -3,16 +3,14 @@ from django.contrib.auth import get_user_model
 from advertisements.models import AdvertisingSpaceCategory, AdvertisingSpace
 from advertisements.forms import AdvertisingSpaceForm, AdvertisingSpaceImagesFormSet
 from advertisements.tests import helper_utils
-from users.models import UserType
 
 
 class TestForms(TestCase):
     def setUp(self):
         # set user object
         user_model = get_user_model()
-        user_type = UserType.objects.create(name="test user")
         self.user = user_model.objects.create(
-            email="test_email@email.com", password="test_Pass1234", user_type=user_type
+            email="test_email@email.com", password="test_Pass1234"
         )
 
         # set advertising space category object

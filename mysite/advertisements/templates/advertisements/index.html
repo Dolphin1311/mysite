@@ -20,7 +20,7 @@
                     We helps people and companies<br/>to cooperate in questions of
                     finding<br/>and placing advertisings
                 </p>
-                <a href="#" type="button">Begin work with us</a>
+                <a href="{% url 'add_adv_space' %}" type="button">Begin work with us</a>
             </div>
             <img src="{% static 'advertisements/image/banner-image.png' %}" class="banner-image" alt="banner image "/>
         </div>
@@ -75,72 +75,20 @@
             </div>
             <div class="glider-contain">
                 <div class="catalog-cards glider">
+                    {% for adv_space in adv_spaces %}
                     <div class="catalog-card">
-                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image"
-                             alt=""/>
                         <div class="catalog-card-items">
-                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image"
-                                 alt="car image"/>
-                            <span class="catalog-card-title">Title</span>
-                            <span class="catalog-card-desc">Description</span>
-                            <a href="#" type="button" class="catalog-card-button">Show</a>
+                            {% if adv_space.get_image.image %}
+                                <img src="{{ MEDIA_URL }}{{ adv_space.get_image.image }}" alt="">
+                            {% else %}
+                                <img src="{% static 'image/no-img.png' %}" alt="">
+                            {% endif %}
+                            <span class="catalog-card-title">{{ adv_space.title|truncatechars:15 }}</span>
+                            <span class="catalog-card-desc">Price: {{ adv_space.price }}</span>
+                            <a href="{{ adv_space.get_absolute_url }}" type="button" class="catalog-card-button">Show</a>
                         </div>
                     </div>
-                    <div class="catalog-card">
-                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image"
-                             alt=""/>
-                        <div class="catalog-card-items">
-                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image"
-                                 alt="car image"/>
-                            <span class="catalog-card-title">Title</span>
-                            <span class="catalog-card-desc">Description</span>
-                            <a href="#" type="button" class="catalog-card-button">Show</a>
-                        </div>
-                    </div>
-                    <div class="catalog-card">
-                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image"
-                             alt=""/>
-                        <div class="catalog-card-items">
-                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image"
-                                 alt="car image"/>
-                            <span class="catalog-card-title">Title</span>
-                            <span class="catalog-card-desc">Description</span>
-                            <a href="#" type="button" class="catalog-card-button">Show</a>
-                        </div>
-                    </div>
-                    <div class="catalog-card">
-                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image"
-                             alt=""/>
-                        <div class="catalog-card-items">
-                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image"
-                                 alt="car image"/>
-                            <span class="catalog-card-title">Title</span>
-                            <span class="catalog-card-desc">Description</span>
-                            <a href="#" type="button" class="catalog-card-button">Show</a>
-                        </div>
-                    </div>
-                    <div class="catalog-card">
-                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image"
-                             alt=""/>
-                        <div class="catalog-card-items">
-                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image"
-                                 alt="car image"/>
-                            <span class="catalog-card-title">Title</span>
-                            <span class="catalog-card-desc">Description</span>
-                            <a href="#" type="button" class="catalog-card-button">Show</a>
-                        </div>
-                    </div>
-                    <div class="catalog-card">
-                        <img src="{% static 'advertisements/image/type_car.svg' %}" class="catalog-card-type-car-image"
-                             alt=""/>
-                        <div class="catalog-card-items">
-                            <img src="{% static 'advertisements/image/car.svg' %}" class="catalog-card-image"
-                                 alt="car image"/>
-                            <span class="catalog-card-title">Title</span>
-                            <span class="catalog-card-desc">Description</span>
-                            <a href="#" type="button" class="catalog-card-button">Show</a>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="catalog-buttons-slider">

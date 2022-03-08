@@ -46,6 +46,7 @@ class TestViews(TestCase):
         user = User.objects.get(email="test_register_email@mail.com")
 
         self.assertTrue(response.status_code, 302)
+        self.assertTrue(isinstance(user, User))
 
     def test_logout(self):
         response = self.client.get(self.logout_url)

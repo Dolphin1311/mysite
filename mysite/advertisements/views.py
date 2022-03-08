@@ -17,6 +17,12 @@ from .models import AdvertisingSpace
 class HomeView(TemplateView):
     template_name = "advertisements/index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["adv_spaces"] = AdvertisingSpace.objects.filter(is_published=True)
+
+        return context
+
 
 class AdvSpaceListView(ListView, FormMixin):
     template_name = "advertisements/advertising_spaces.html"

@@ -11,15 +11,13 @@ from advertisements.models import (
     AdvertisingSpaceImage,
 )
 from advertisements.tests import helper_utils
-from users.models import UserType
 
 
 class TestModels(TestCase):
     def setUp(self):
         user_model = get_user_model()
-        user_type = UserType.objects.create(name="test user")
         self.user = user_model.objects.create(
-            email="test_email@email.com", password="test_Pass1234", user_type=user_type
+            email="test_email@email.com", password="test_Pass1234"
         )
 
     def create_advertising_space(self):
